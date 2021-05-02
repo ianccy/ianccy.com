@@ -1,0 +1,8 @@
+{
+  "main.js": "render-page.js",
+  "main.js.map": "render-page.js.map",
+  "vendors~polyfills-core-js.js": "vendors~polyfills-core-js.render-page.js",
+  "vendors~polyfills-core-js.js.map": "vendors~polyfills-core-js.render-page.js.map",
+  "vendors~polyfills-dom.js": "vendors~polyfills-dom.render-page.js",
+  "vendors~polyfills-dom.js.map": "vendors~polyfills-dom.render-page.js.map"
+}
