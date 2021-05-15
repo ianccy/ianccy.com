@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Ian Chu]]></title><description><![CDATA[我目前是前端工程師，曾有網路行銷相關工作經驗，這裡會有工作實戰經驗分享，擅長javascript、css、seo、google analytics等。]]></description><link>https://ianccy.com</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 15 May 2021 08:03:16 GMT</lastBuildDate><item><title><![CDATA[Critical Rendering Path 關鍵渲染路徑優化]]></title><description><![CDATA[CSS 常被認為簡單好學，我對它看法是易學但難精通，以前都只想過實現各種 UI、效果，但沒認真考慮過效能，怎樣的寫法最適合這個情境。假設你有針對 google page speed、lighthouse…]]></description><link>https://ianccy.com/2021-02-cssperformance/</link><guid isPermaLink="false">https://ianccy.com/2021-02-cssperformance/</guid><pubDate>Thu, 11 Feb 2021 05:30:44 GMT</pubDate><content:encoded>&lt;p&gt;CSS 常被認為簡單好學，我對它看法是易學但難精通，以前都只想過實現各種 UI、效果，但沒認真考慮過效能，怎樣的寫法最適合這個情境。假設你有針對 google page speed、lighthouse 優化過，應該會特別有感觸，該如何才能讓網頁載入更快。&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Ian Chu]]></title><description><![CDATA[我目前是前端工程師，曾有網路行銷相關工作經驗，這裡會有工作實戰經驗分享，擅長javascript、css、seo、google analytics等。]]></description><link>https://ianccy.com</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 15 May 2021 08:11:42 GMT</lastBuildDate><item><title><![CDATA[Critical Rendering Path 關鍵渲染路徑優化]]></title><description><![CDATA[CSS 常被認為簡單好學，我對它看法是易學但難精通，以前都只想過實現各種 UI、效果，但沒認真考慮過效能，怎樣的寫法最適合這個情境。假設你有針對 google page speed、lighthouse…]]></description><link>https://ianccy.com/2021-02-cssperformance/</link><guid isPermaLink="false">https://ianccy.com/2021-02-cssperformance/</guid><pubDate>Thu, 11 Feb 2021 05:30:44 GMT</pubDate><content:encoded>&lt;p&gt;CSS 常被認為簡單好學，我對它看法是易學但難精通，以前都只想過實現各種 UI、效果，但沒認真考慮過效能，怎樣的寫法最適合這個情境。假設你有針對 google page speed、lighthouse 優化過，應該會特別有感觸，該如何才能讓網頁載入更快。&lt;/p&gt;
 &lt;p&gt;接下來討論如何讓畫面渲染載入更快，以及一些最佳化使用方式。&lt;/p&gt;
 &lt;h2 id=&quot;網頁渲染邏輯&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E7%B6%B2%E9%A0%81%E6%B8%B2%E6%9F%93%E9%82%8F%E8%BC%AF&quot; aria-label=&quot;網頁渲染邏輯 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;網頁渲染邏輯&lt;/h2&gt;
 &lt;p&gt;首先介紹最基礎的 painting，瀏覽器的畫面產生，需要有幾個步驟，先是由上至下掃一遍 html，擷取內容後，先產生 HTML DOM tree，再來產生 CSSOM tree，&lt;/p&gt;
@@ -4075,7 +4075,7 @@ However, it’s dangerous to have missing nodes on the server render as this mig
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;會需要用到兩個 lifeCycle，第一個是 componentDidMount react 元件 render 後調用，另一個則是 componentWillUnmount 在元件被移除後會調用。&lt;/p&gt;
 &lt;p&gt;再來在 componentDidMount 上加入要渲染元素的節點，讓這個 component render 後調用 appendChild，讓 dom 依附渲染上去。如果要移除渲染的話，則是控制 component 移除觸發 componentWillUnmount，再調用 removeChild 就完成了移除。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// create component
 class Portal extends React.Component {
   constructor(props) {
@@ -4113,7 +4113,7 @@ class Portal extends React.Component {
 &lt;iframe src=&quot;https://csb-4w42r7p69x-gtgmeeadnb.now.sh/&quot; width=&quot;100%&quot; height=&quot;550&quot;&gt;&lt;/iframe&gt;
 &lt;h2 id=&quot;portals-open-window-example&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#portals-open-window-example&quot; aria-label=&quot;portals open window example permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Portals open window example&lt;/h2&gt;
 &lt;p&gt;Portals 也可以打印到 window open 頁面的節點上。這邊範例是使用了 open window，再將元件透過 document.body.appendChild 渲染到開啟的視窗上。這邊是看到 medium 的範例，是利用 setInterval 每秒執行一次 setState，處理 小視窗 更新 parent 的視窗，有試驗過 postMessage 沒效果。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;class Portal extends React.Component {
   constructor(props) {
     super(props);
@@ -4152,7 +4152,7 @@ class Portal extends React.Component {
 &lt;ul&gt;
 &lt;li&gt;imgur jquery ajax sample&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;var form = new FormData();
 form.append(&amp;quot;image&amp;quot;, &amp;quot;R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7&amp;quot;);
 
@@ -4177,7 +4177,7 @@ $.ajax(settings).done(function (response) {
 &lt;h2 id=&quot;傳統-input-上傳&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E5%82%B3%E7%B5%B1-input-%E4%B8%8A%E5%82%B3&quot; aria-label=&quot;傳統 input 上傳 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;傳統 input 上傳&lt;/h2&gt;
 &lt;p&gt;先簡易的傳統的點擊 input 上傳檔案，首先創建 input tag，type 選擇 file，再來監聽這個 input 有沒有變化，如果他有變化的話，代表獲取到檔案上傳，我們就要轉出這個檔案。&lt;/p&gt;
 &lt;p&gt;對了，官網範例是用 jquery ajax，為了方便我們直接拿來用，記得要引入 jquery library。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;...
 &amp;lt;body&amp;gt;
   &amp;lt;input type=&amp;quot;file&amp;quot; accept=&amp;quot;image/*&amp;quot; id=&amp;quot;imageUpload&amp;quot; /&amp;gt;
@@ -4199,7 +4199,7 @@ $.ajax(settings).done(function (response) {
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;接到檔案後，直接用官網的 sample，調用 ajax post api，headers 帶 Authorization 用產生的 client id，以檔案作為參數。&lt;/p&gt;
 &lt;p&gt;完成上傳後，api 會回傳 json 的 string type，所以接到 api 回傳後，要用 JSON.parse 轉成 json type，再取出 link 圖片的網址。這樣就完成了 imgur 的 api 串接。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;...
     function upload(data) {
       var form = new FormData();
@@ -4237,7 +4237,7 @@ $.ajax(settings).done(function (response) {
 &lt;p&gt;製作上傳進度條，就需要監聽上傳檔案的進度，在 jquey ajax 在增加 option xhr，延展 jquery 具有 xhr 特性，在使用 xhr 監聽 upload 事件，取得目前上傳檔案的 size，在除以整個檔案後取的比例，再將這個比例帶進 progress bar value，這樣就完成了上傳進度條。&lt;/p&gt;
 &lt;p&gt;提醒 fetch 無法使用進度條監聽事件，axios、原生 xmlhttprequest 都有方法實作進度條。&lt;/p&gt;
 &lt;p&gt;實作方法 : &lt;a href=&quot;https://github.com/axios/axios#request-config&quot; title=&quot;axios onUploadProgress&quot;&gt;axios onUploadProgress&lt;/a&gt;、&lt;a href=&quot;https://developer.mozilla.org/zh-TW/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest#%E7%9B%A3%E8%A6%96%E9%80%B2%E5%BA%A6&quot; title=&quot;xmlhttprequest mdn progress bar&quot;&gt;xmlhttprequest mdn progress bar&lt;/a&gt;&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;  // add progress bar element
   &amp;lt;progress id=&amp;quot;progress&amp;quot; style=&amp;quot;display:none&amp;quot; value=&amp;quot;0&amp;quot; max=&amp;quot;100&amp;quot;&amp;gt;&amp;lt;/progress&amp;gt;
   &amp;lt;img id=&amp;quot;imagePreview&amp;quot; onload=&amp;quot;hideProgress()&amp;quot;&amp;gt;
@@ -4300,7 +4300,7 @@ drop 於一個元素或文字選取區塊被放置至一個有效的放置目標
 &lt;h3 id=&quot;外部檔案拖拉&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E5%A4%96%E9%83%A8%E6%AA%94%E6%A1%88%E6%8B%96%E6%8B%89&quot; aria-label=&quot;外部檔案拖拉 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;外部檔案拖拉&lt;/h3&gt;
 &lt;p&gt;如果是外部檔案拖拉進的話，依序觸發 dragenter =&gt; dragover =&gt; drop，這幾個動作要取消預設的事件 event.preventDefault()，防止拖拉開啟檔案。可以用 event.dataTransfer.files 來接受拖拉的檔案。&lt;/p&gt;
 &lt;p&gt;下面範例用 FileReader 來轉換檔案成 base64 格式，在打印到 img src 上顯示圖片。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;div id=&amp;quot;dragZone&amp;quot;&amp;gt;
 &amp;lt;img src=&amp;quot;https://fakeimg.pl/450x100/?text=Drop_your_Image&amp;quot;&amp;gt;
 &amp;lt;/div&amp;gt;
@@ -4345,7 +4345,7 @@ dragZone.addEventListener(&amp;#39;drop&amp;#39;,function(e){
 &lt;ul&gt;
 &lt;li&gt;修改先前檔案&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;  // add container zone and hide input
   &amp;lt;div id=&amp;quot;dragZone&amp;quot;&amp;gt;
     拖拉上傳 Drop Upload
@@ -4694,7 +4694,7 @@ dataLayer.push({event:{eventName}})，會依照 dataLayer 中 event 觸發。&lt
 &lt;ul&gt;
 &lt;li&gt;javascript function return - 回傳留言欄位的內容&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;function(){
   return document.getElementById(&amp;#39;commentValue&amp;#39;).value
 }&lt;/code&gt;
@@ -4994,7 +4994,7 @@ npm init
 npm install --save express&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;接下來要開始建立 node.js server&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// open package.json &amp;amp; add npm start
 ...
   &amp;quot;scripts&amp;quot;: {
@@ -5009,7 +5009,7 @@ touch index.js&lt;/code&gt;
 &lt;h2 id=&quot;建立-nodejs-server&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E5%BB%BA%E7%AB%8B-nodejs-server&quot; aria-label=&quot;建立 nodejs server permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;建立 nodejs server&lt;/h2&gt;
 &lt;p&gt; 以 index.js 作為 node.js server 的起始點，首先引入 express，執行使用 express，這邊先設定好 Port 是 3000，再來建立 get 的 route，路徑是/comments。儲存後執行 npm start，在網址輸入 &lt;a href=&quot;http://localhost:3000/%EF%BC%8C%E9%80%99%E6%99%82%E5%80%99%E6%9C%83%E7%9C%8B%E5%88%B0%E7%95%AB%E9%9D%A2%E9%A1%AF%E7%A4%BA&quot;&gt;http://localhost:3000/，這時候會看到畫面顯示&lt;/a&gt; Hello world。&lt;/p&gt;
 &lt;h4 id=&quot;indexjs&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#indexjs&quot; aria-label=&quot;indexjs permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;/index.js&lt;/h4&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;const express = require(&amp;#39;express&amp;#39;);
 const app = express();
 
@@ -5024,7 +5024,7 @@ app.listen(port, function () {
 })&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h4 id=&quot;indexhtml&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#indexhtml&quot; aria-label=&quot;indexhtml permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;index.html&lt;/h4&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;
 &amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
 &amp;lt;head&amp;gt;
@@ -5097,7 +5097,7 @@ app.listen(port, function () {
           &lt;code slot=&quot;code&quot;&gt;npm install --save mongodb&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;index.js 增加內容&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// modify index.js
 ...
 const MongoClient = require(&amp;#39;mongodb&amp;#39;).MongoClient;
@@ -5173,7 +5173,7 @@ MongoClient.connect(url, function(err, db) {
           &lt;code slot=&quot;code&quot;&gt;npm install body-parser --save&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h4 id=&quot;indexjs-1&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#indexjs-1&quot; aria-label=&quot;indexjs 1 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;index.js&lt;/h4&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;...
 const bodyParser = require(&amp;#39;body-parser&amp;#39;);
 
@@ -5200,7 +5200,7 @@ MongoClient.connect(url, (err, client) =&amp;gt; {
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;修改完成後重新 npm start，打開 localhost:3000，打開瀏覽器 devtool，在 console.log 貼上這段 fetch post，成功的話會接收到回傳資料，哇嗚，這樣就完成了儲存的 API!!&lt;/p&gt;
 &lt;h4 id=&quot;javascript-fetch-post&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#javascript-fetch-post&quot; aria-label=&quot;javascript fetch post permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;javascript fetch post&lt;/h4&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;fetch(&amp;#39;http://localhost:3000/comments&amp;#39;, {
   method: &amp;#39;post&amp;#39;,
   headers: {
@@ -5219,7 +5219,7 @@ MongoClient.connect(url, (err, client) =&amp;gt; {
 &lt;p&gt;我們前面成功的建立了儲存的 api，之後的邏輯都大同小異，接收 request，再依照請求方式跟 mongoDB 連接資料。我們這邊的 get api 會拿整個 comments 的資料，如果看不懂 collection.find()，可以看一下 w3c 的 mongoDB 語法教學，非常簡單易懂。&lt;/p&gt;
 &lt;p&gt;增加完成後，一樣重新啟動，再來載入 &lt;a href=&quot;http://localhost:3000/comments%EF%BC%8C%E5%B0%B1%E7%9C%8B%E5%88%B0%E6%88%91%E5%80%91%E5%89%9B%E5%89%9B%E5%84%B2%E5%AD%98%E9%80%B2%E5%8E%BB%E7%9A%84%E6%89%80%E6%9C%89%E8%B3%87%E6%96%99%E4%BA%86%E3%80%82%1C&quot;&gt;http://localhost:3000/comments，就看到我們剛剛儲存進去的所有資料了。&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&quot;indexjs-2&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#indexjs-2&quot; aria-label=&quot;indexjs 2 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;index.js&lt;/h4&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;...
 
 app.get(&amp;#39;/comments&amp;#39;, (req, res) =&amp;gt; {
@@ -5235,7 +5235,7 @@ app.get(&amp;#39;/comments&amp;#39;, (req, res) =&amp;gt; {
 &lt;p&gt;這邊就建立一個 delete 的網址路徑，我們利用網址:id 來帶參數，方便我們好維運 api。mongoDB 刪除用的是 remove function，假設要用 mongoDB 預設的_id 當作查詢刪除，會多需要使用 ObjectID 處理 value，但如果你是自己用其他物件來查詢，就不用使用 ObjectID。&lt;/p&gt;
 &lt;p&gt;這邊就不提供 fetch 測試了，推薦使用 postman 測試請求方式，又簡單又快又方便。&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop&quot; title=&quot;postman chrome tool&quot;&gt;postman chrome tool&lt;/a&gt;&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;const ObjectID = require(&amp;#39;mongodb&amp;#39;).ObjectID;
 
 app.delete(&amp;#39;/comments/:id&amp;#39;, (req, res) =&amp;gt; {
@@ -5902,7 +5902,7 @@ source 屬性記錄調用 window.postMessage() 方法的窗口信息。&lt;/code
 &lt;iframe src=&quot;https://work.ianccy.com/postmessage/send.html&quot; width=&quot;100%&quot; height=&quot;300px&quot; frameborder=&quot;0&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
 &lt;p&gt;Source : &lt;a href=&quot;https://work.ianccy.com/postmessage/send.html&quot; target=&quot;_blank&quot;&gt;Open Window Demo Page&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;send.html&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;
 ...
   &amp;lt;h1 class=&amp;quot;cover-heading&amp;quot;&amp;gt;HTML send Post Message demo sample.&amp;lt;/h1&amp;gt;
@@ -5940,7 +5940,7 @@ source 屬性記錄調用 window.postMessage() 方法的窗口信息。&lt;/code
 &amp;lt;/html&amp;gt;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;recevie.html&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;
 ...
     &amp;lt;p class=&amp;quot;lead&amp;quot;&amp;gt;
@@ -5972,7 +5972,7 @@ source 屬性記錄調用 window.postMessage() 方法的窗口信息。&lt;/code
 &lt;iframe id=&quot;addIframe&quot; src=&quot;https://work.ianccy.com/postmessage/embed.html&quot; width=&quot;100%&quot; height=&quot;200px&quot;&gt;&lt;/iframe&gt;
 &lt;p&gt;Source : &lt;a href=&quot;https://work.ianccy.com/postmessage/iframe.html&quot; target=&quot;_blank&quot;&gt;Iframe Demo Page&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;iframe.html&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;...
   &amp;lt;script&amp;gt;
       // 接受傳遞訊息 變化iframe height
@@ -5986,7 +5986,7 @@ source 屬性記錄調用 window.postMessage() 方法的窗口信息。&lt;/code
 ...&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;embed.html&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;...
     &amp;lt;script&amp;gt;
         document.getElementById(&amp;#39;postWindow&amp;#39;).addEventListener(&amp;#39;click&amp;#39;, function (e) {
@@ -6992,7 +6992,7 @@ componentWillMount、componentWillReceiveProps、componentWillUpdate 並且 reac
 &lt;p&gt;Mounting 會在元件被建立時被執行。&lt;/p&gt;
 &lt;h4 id=&quot;constructor-&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#constructor-&quot; aria-label=&quot;constructor  permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;constructor() :&lt;/h4&gt;
 &lt;p&gt;這是 es6 的 class 語法糖，可以說是建構並初始化物件，這邊會繼承 React.Component，假設你元件要使用到 props，就必須這樣寫 super(props)來繼承父類別。這階段簡單說就是開始建立這個物件。如果你沒有要定義 state、或是在這邊綁定 method (另可以選用 arrow function 綁定 method)，就不需要用到 constructor。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// get parents props
 constructor(props) {
   super(props);
