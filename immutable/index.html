@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Immutable 對於 React 重要性",
         "datePublished": "April 29, 2020",
-        "dateModified": "2021-04-03T11:16:59.788Z",
+        "dateModified": "2021-05-15T08:28:17.700Z",
         "description": "React 有提到 state 的更新，都必須要是 immutable，當你有使用到 useState 或是 pureComponent、shouldComponentUpdate，你就會發現問題。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -143,7 +143,7 @@ void function() {
 <ul>
 <li>string immutable</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">let str = &#39;Hello, you!!&#39;;
 let ianHello = str;
 ianHello += &#39;ian&#39;
@@ -156,7 +156,7 @@ console.log(ianHello); // Hello, you!!ian</code>
 <ul>
 <li>array mutable</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">let names = [&#39;ian&#39;];
 let copyName = names;
 copyName.push(&#39;peter&#39;);
@@ -175,7 +175,7 @@ console.log(copyName); // [ian, peter]</code>
 <ul>
 <li>mutable setState</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">const value = ref.current.value;
 names.push(value);
 setNames(names);</code>
@@ -184,7 +184,7 @@ setNames(names);</code>
 <ul>
 <li>immutable setState</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">setNames(names =&gt; [...names, value])</code>
         </deckgo-highlight-code>
 <p><a href="https://reactjs.org/docs/optimizing-performance.html#the-power-of-not-mutating-data" title="react optimizing-performance">react optimizing-performance</a></p>

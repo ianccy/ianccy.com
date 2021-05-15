@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Google analytics 事件追蹤、轉換目標設定教學 ga event",
         "datePublished": "April 25, 2018",
-        "dateModified": "2021-05-02T13:20:22.266Z",
+        "dateModified": "2021-05-15T08:22:48.553Z",
         "description": "Google analytics很重要的事件追蹤，可以使用ga提供的方法ga('send', 'event', xx.xx.xx)來產生事件，成功產生事件後，就可以再把這個事件設定為轉換目標，就可以做到註冊會員、填表等等追蹤了。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -149,7 +149,7 @@ void function() {
 </ul>
 <br/>
 簡單介紹一下在寫啥米
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">  //當使用者觸發 會發送 類別:導覽清單 ,動作:點擊 ,標籤:註冊會員 , 價值:200
   ga(&#39;send&#39;, {
     hitType: &#39;event&#39;,
@@ -163,7 +163,7 @@ void function() {
         </deckgo-highlight-code>
 <br/>
 <p>寫好了 event 的參數之後，再來是要如何才能觸發，我們預期使用者點擊註冊跟登入會員按鈕，執行 ga 的事件紀錄。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">  // 登入註冊會員按鈕
 
   // 1.html onclick 設定方法

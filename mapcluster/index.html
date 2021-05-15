@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Google Map marker cluster 標記使用教學",
         "datePublished": "December 11, 2017",
-        "dateModified": "2021-04-03T11:16:59.775Z",
+        "dateModified": "2021-05-15T08:22:38.518Z",
         "description": "google map下多個marker，再搭配marker的event來互動，以下是打開infowindow的運用。markerwithlabel讓我們更簡單設計不同的marker，例如讓他帶自訂的image，再來是重點 markercluster，它讓我們可以解決marker過多，同時重疊的問題。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -143,7 +143,7 @@ void function() {
 <h2 id="google-map-搭配內建-marker-infowindow" style="position:relative;"><a href="#google-map-%E6%90%AD%E9%85%8D%E5%85%A7%E5%BB%BA-marker-infowindow" aria-label="google map 搭配內建 marker infowindow permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>google map 搭配內建 marker infowindow</h2>
 <p>首先先運用比較常用到的功能，google map 下多個 marker，再搭配 marker 的 event 來互動，以下是打開 infowindow 的運用。</p>
 <p>簡單創建多筆經緯度資料，呈現的是搭計程車到地點的價格。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">//我只標出比較重要部分，其他就codepen點開來看唄
   var marker = new google.maps.Marker({
     position: {lat: item.lat, lng: item.lng},
@@ -169,7 +169,7 @@ ps.可以利用指定某個 marker markerArr[i].setOptions({data=“/change/imag
 <p>感謝 google 大大，其實 googlemap 官方 github 有整理滿多 library <a href="https://github.com/googlemaps/v3-utility-library" title="google map library">google map library</a>，建議下載使用，因為滿多工具 demo 頁面都呈現 404…。</p>
 <p>這邊要用的是<a href="https://github.com/googlemaps/v3-utility-library/tree/master/markerwithlabel" title="google map library">markerwithlabel</a> 還有 <a href="https://github.com/googlemaps/v3-utility-library/tree/master/markerclusterer" title="google map library">markercluster</a>這兩個 library，markerwithlabel 讓我們更簡單設計不同的 marker，例如讓他帶自訂的 image，再來是重點 markercluster，它讓我們可以解決 marker 過多，同時重疊的問題。</p>
 <p>首先處理單一個 marker 用的是 MarkerWithLabel，原本呼叫 google.maps.Marker 改成 MarkerWithLabel，然後就搞定了，非常快速簡單，他可以用的 event 滿多的，基本上都可以處理 marker 的互動，甚至也可以像一般的 marker 設定物件上去。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">//更多變數請點選說明文件，基本上可以用class 搭配 css操作，或是labelStyle 處理icon style
   var marker = new MarkerWithLabel({
     draggable: false,
@@ -188,11 +188,11 @@ ps.可以利用指定某個 marker markerArr[i].setOptions({data=“/change/imag
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 <p>最後是使用 markercluster 工具，這工具目前還有另一版 markerclusterplus，這邊就只用來一般版來操作。</p>
 <p>markercluster 主要是處理 marker 下完後，call function 渲染畫面，快速的判斷每個 marker 之間是否接近到某個程度，在創造出屬性這區塊的聚合 marker，簡單的就是</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">下 marker -&gt; markerArr.markercluster({})</code>
         </deckgo-highlight-code>
 <p>建立 Cluster 的方法，這個版本無法帶入 className，需要打開.js 檔案，直接在 style.push 區塊修改，我這邊有修改 background-repeat:no-repeat。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">//arr 是剛剛marker的 array 需要建立帶入 其餘是內建option
   markerCluster = new MarkerClusterer(map, arr, {
     gridSize: 50,
@@ -203,7 +203,7 @@ ps.可以利用指定某個 marker markerArr[i].setOptions({data=“/change/imag
   });</code>
         </deckgo-highlight-code>
 <p>這邊是客製化 Cluster icon 的方法，這個 function 會抓到這個建立中的 cluster 內包含的 marker，會用陣列帶進來，這時候我們就跑迴圈，將 marker 內的資料帶出來，在看你想呈現的方式處理，我這邊是計算裡面的平均價格（這範例下方有 click event 寫法，不過我直接寫進 codepen 導致跑不動)。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">// 稍微修改 cluster.js的檔案  讓聚合變得更客製化
 MarkerClusterer.prototype.calculator_ = function(markers, numStyles) {
     //省略

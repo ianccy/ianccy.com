@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "SEO 301、302轉址Redirect，canonical tag重複內容處理",
         "datePublished": "December 19, 2018",
-        "dateModified": "2021-04-03T11:16:59.782Z",
+        "dateModified": "2021-05-15T08:25:16.925Z",
         "description": "轉址的概念，大概是宣告這個頁面要搬家到另一個頁面的意思，依照不同後端語言，各有不同的轉址寫法，但邏輯上都是一樣的，大概分為 301、302、307。若是有重複性內容處理的問題，那你就需要使用canonical處理。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -200,7 +200,7 @@ void function() {
 <li>307 狀態瑪表示暫時導向新位置，但是保持使用者請求方式不變</li>
 </ul>
 <p>Node.js express 301 語法</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">res.redirect(301, &#39;http://example.com&#39;);</code>
         </deckgo-highlight-code>
 <p><a href="https://support.google.com/webmasters/answer/93633?hl=zh-Hant" title="google 301 rediect 介紹">google 301 rediect 介紹</a></p>
@@ -220,13 +220,13 @@ void function() {
 <ul>
 <li>網址為 <a href="https://example.com/apple?user=ianchuu">https://example.com/apple?user=ianchuu</a></li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">&lt;link rel=&quot;canonical&quot; href=&quot;https://example.com/apple&quot; /&gt;</code>
         </deckgo-highlight-code>
 <ul>
 <li>google 重複性內容處理</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">如果您有某一個網頁可透過多個網址存取，或是不同網頁上存在相似的內容 (例如同時有行動版和桌面版網頁)，Google 會將這些網頁視為相同網頁的重複版本，從中選出一個網址做為「標準」版本並檢索該網址，其他網址則會被視為「重複」網址，檢索頻率會比較低。</code>
         </deckgo-highlight-code>
 <p><a href="https://support.google.com/webmasters/answer/139066?visit_id=636808323796527838-1214345128&#x26;rd=1" title="google 整合重複的網址">google 整合重複的網址</a></p>

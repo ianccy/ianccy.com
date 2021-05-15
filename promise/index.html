@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Javascript Promise example 簡易實作模擬",
         "datePublished": "February 18, 2019",
-        "dateModified": "2021-04-03T11:16:59.783Z",
+        "dateModified": "2021-05-15T08:25:56.836Z",
         "description": "接下來會用 promise 處理 callback hell，還有建立一個簡易的 promise，幫助我們理解promise。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -194,7 +194,7 @@ void function() {
 <ul>
 <li>promise 三種狀態</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">擱置（pending）：初始狀態，不是 fulfilled 與 rejected。
 實現（fulfilled）：表示操作成功地完成。
 拒絕（rejected）：表示操作失敗了。</code>
@@ -204,7 +204,7 @@ void function() {
 <ul>
 <li>非同步 function 範例</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">// declare arrow function return Promise
 // ** new Promise to inherit Promise instance **
 const getData = (url) =&gt; new Promise((resolve, reject) =&gt; {
@@ -256,7 +256,7 @@ getData(&#39;https://jsonplaceholder.typicode.com/todos/1&#39;)
 <ul>
 <li>add more callback</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">...
 getData(&#39;https://jsonplaceholder.typicode.com/todos/1&#39;)
   .then(res =&gt; {
@@ -308,7 +308,7 @@ const appendItem = (res) =&gt; {
 <ul>
 <li>Promise native prototype</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">Promise {&lt;pending&gt;}
   __proto__: Promise
   catch: ƒ catch()
@@ -326,7 +326,7 @@ const appendItem = (res) =&gt; {
 <ul>
 <li>build promise</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">class promise {
   constructor(callback){
     // promise status
@@ -366,7 +366,7 @@ const appendItem = (res) =&gt; {
 <ul>
 <li>加上 then catch 接受回傳值</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">...
   // then will let user call to check status
   then = (success, failed) =&gt; {

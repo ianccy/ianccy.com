@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "GA跨網域追蹤 google analytics cross-domain tracking",
         "datePublished": "August 04, 2019",
-        "dateModified": "2021-05-02T13:20:22.266Z",
+        "dateModified": "2021-05-15T08:27:24.312Z",
         "description": "如果你有多個網站服務，每個服務又是各自在不同網域上，就會遇到一個棘手的問題，無法確切的追蹤使用者數據。google analytics有提供跨網域追蹤，讓我們解決這個問題，後面就來嘗試跨網域追蹤設定。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -147,7 +147,7 @@ void function() {
 <ul>
 <li>example.com 修改追蹤碼</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">  ga(&#39;create&#39;, &#39;UA-XXXXXXX-Y&#39;, &#39;example.com&#39;);
   對這段程式碼進行下列變更 (紅色粗體文字是需要變更的部分)：
 
@@ -158,7 +158,7 @@ void function() {
 <ul>
 <li>buyservice.com 修改追蹤碼</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">  ga(&#39;create&#39;, &#39;UA-XXXXXXX-Y&#39;, &#39;auto&#39;, {&#39;allowLinker&#39;: true});
   ga(&#39;require&#39;, &#39;linker&#39;);
   ga(&#39;linker:autoLink&#39;, [&#39;example.com&#39;] );</code>

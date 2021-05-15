@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "React Life Cycle 生命週期更新版，父子元件執行順序",
         "datePublished": "July 27, 2018",
-        "dateModified": "2021-04-03T11:16:59.778Z",
+        "dateModified": "2021-05-15T08:14:04.647Z",
         "description": "開發上用到React，而其中最重要的莫過於是生命週期lifeCycle，可以在每個元件渲染的過程，加入需要的處理，例如載入完元件後非同步抓取資料，更新props觸發處理事件等等。接下來介紹一下新版本的life Cycle。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -187,7 +187,7 @@ componentWillMount、componentWillReceiveProps、componentWillUpdate 並且 reac
 <p>Mounting 會在元件被建立時被執行。</p>
 <h4 id="constructor-" style="position:relative;"><a href="#constructor-" aria-label="constructor  permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>constructor() :</h4>
 <p>這是 es6 的 class 語法糖，可以說是建構並初始化物件，這邊會繼承 React.Component，假設你元件要使用到 props，就必須這樣寫 super(props)來繼承父類別。這階段簡單說就是開始建立這個物件。如果你沒有要定義 state、或是在這邊綁定 method (另可以選用 arrow function 綁定 method)，就不需要用到 constructor。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">// get parents props
 constructor(props) {
   super(props);
@@ -200,7 +200,7 @@ constructor(props) {
 <p>get­Derived­State­From­Props 主要是對比到 componentWillReceiveProps，get­Derived­State­From­Props 帶有兩個參數 nextProps, prevState，更新後的 props，先前的 state，這個 method 會在初始 render 調用，還有父元件重新 render，也會調用到。</p>
 <p>還有當你使用了 get­Derived­State­From­Props，要更新 state 就需要回傳物件，如果不更新就必須回傳 null。</p>
 <p>PS.當你使用 get­Derived­State­From­Props，也同時使用 componentWillMount，WillMount 會不執行，並且 console 會傳出警告，另外就算改用 UNSAFE_componentWillMount 也不會執行。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">class ExampleComponent extends React.Component {
   // Initialize state in constructor,
   state = {
@@ -228,7 +228,7 @@ by officical react</code>
 <p>執行 setState、更新父元件傳遞的 props，都會執行 render()，假設 shouldComponentUpdate()回傳 false，則是阻止 render 執行。使用 render 必須回傳 react element(JSX、createClass、react 元件)、或 Fragment、Portals(可以綁定 render 到其他 Dom root)、如果不回傳內容則回傳 boolean、或是 null。</p>
 <p><a href="https://reactjs.org/docs/portals.html" title="Portals">Portals</a></p>
 <p>然後使用 render 盡量保持 pure，例如盡量少在這邊額外處理 props 以及 state，在外面處理保持 render 內乾淨。(這點我也沒做到…)</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">class App extends React.Component {
   filterProps = () =&gt; {
     const { personList } = this.props
@@ -271,7 +271,7 @@ by officical react</code>
 <h4 id="componentdidupdateprevprops-prevstate-snapshot" style="position:relative;"><a href="#componentdidupdateprevprops-prevstate-snapshot" aria-label="componentdidupdateprevprops prevstate snapshot permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>componentDidUpdate(prevProps, prevState, snapshot)</h4>
 <p>Updating 階段最後一個執行，在畫面渲染更新後調用，新版本的還多加 getSnapshotBeforeUpdate 傳遞的參數。</p>
 <p>在這邊可以處理 call api 動作，或是 setState，促使重新更新，但提醒記得要判斷執行時機，否則一樣會進入無限迴圈。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">componentDidUpdate(prevProps) {
     if (this.props.name !== prevProps.name) {
         updateUser(this.props.id);

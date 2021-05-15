@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Google Analytics 工作階段介紹、定義",
         "datePublished": "July 30, 2018",
-        "dateModified": "2021-05-02T13:20:22.266Z",
+        "dateModified": "2021-05-15T08:23:36.526Z",
         "description": "ga工作階段簡單講就是當使用者進入網站，那一刻起就算一個工作階段，沒有所謂使用者進來一跳出，沒有計算到工作階段，他跟網頁停留時間邏輯不一樣，不是依靠節點相減計算的。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -142,7 +142,7 @@ void function() {
 <h2 id="工作階段定義" style="position:relative;"><a href="#%E5%B7%A5%E4%BD%9C%E9%9A%8E%E6%AE%B5%E5%AE%9A%E7%BE%A9" aria-label="工作階段定義 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>工作階段定義</h2>
 <p>官方定義是『 工作階段代表指定期間內在網站上發生的多項使用者互動；舉例來說，一個工作階段可能包含多個網頁瀏覽、事件、社交互動和電子商務交易』，簡單講就是當使用者進入網站，那一刻起就算一個工作階段，沒有所謂使用者進來一跳出，沒有計算到工作階段，他跟網頁停留時間邏輯不一樣，不是依靠節點相減計算的。</p>
 <h2 id="一般正常流程" style="position:relative;"><a href="#%E4%B8%80%E8%88%AC%E6%AD%A3%E5%B8%B8%E6%B5%81%E7%A8%8B" aria-label="一般正常流程 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>一般正常流程</h2>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">使用者輸入 https://ianccy.com =&gt;
 
 載入網頁 (計算為一個工作階段) =&gt;
@@ -155,7 +155,7 @@ wow 文章太長拉 離開
         </deckgo-highlight-code>
 <p>在複雜一點解釋就是使用者在你網頁中同一頁停留 30 分鐘 (ga 預設 30 分鐘)以內，都算是一個工作階段，如果超過 30 分鐘，那會再加一個工作階段。</p>
 <h2 id="使用者停留過久流程" style="position:relative;"><a href="#%E4%BD%BF%E7%94%A8%E8%80%85%E5%81%9C%E7%95%99%E9%81%8E%E4%B9%85%E6%B5%81%E7%A8%8B" aria-label="使用者停留過久流程 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用者停留過久流程</h2>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">使用者輸入 https://tw.yahoo.com/ =&gt;
 
 進入首頁 (計算為一個工作階段) 時間 7/30 20:00 =&gt;

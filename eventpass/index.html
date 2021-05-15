@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "JavaScript Capture Bubble DOM事件獲取&冒泡",
         "datePublished": "March 21, 2019",
-        "dateModified": "2021-04-03T11:16:59.784Z",
+        "dateModified": "2021-05-15T08:26:12.188Z",
         "description": "JavaScript處理DOM事件上的獲取和冒泡，實務上滿常用到的觀念，可以透過這方式解決一些麻煩問題，例如popup視窗的關閉、內外層DOM互動關係，另外事件獲取、冒泡也幾乎是面試必考題。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -141,7 +141,7 @@ void function() {
 --->
 <h2 id="dom-一般事件綁定" style="position:relative;"><a href="#dom-%E4%B8%80%E8%88%AC%E4%BA%8B%E4%BB%B6%E7%B6%81%E5%AE%9A" aria-label="dom 一般事件綁定 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>DOM 一般事件綁定</h2>
 <p>下面的例子，我 container 先綁定 click 事件，再綁定 first，各自彈出自己的 id 名稱，那哪個會先 alert 出來。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">&lt;div id=&quot;container&quot;&gt;container
   &lt;ul id=&quot;list&quot;&gt;ist
     &lt;li id=&quot;first&quot;&gt;number 1&lt;/li&gt;
@@ -163,7 +163,7 @@ document.getElementById(&#39;first&#39;).addEventListener(&#39;click&#39;,functi
 <p>我們可以在 addEventListener(‘click’,function(){}, <code class="language-text">true</code>)，來決定 useCapture 參數的 boolean，預設沒帶會是設為 false，當 usecaptue 為 true 時，事件觸發會先經由 DOM tree 一路往子層到目標為止，之後再冒泡上去父層，這樣一個完整的流程就是事件獲取與冒泡。</p>
 <p>最重要就是我們有辦法阻止事件獲取冒泡的傳遞，利用 event.stopPropagation function，就可以阻止事件往後傳遞。</p>
 <p>另外 event 還有提供物件 eventPhase，會回傳 0~4 的數值，讓我們可以清楚知道這個事件到什麼階段。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">eventPhase: 0 沒有事件
 eventPhase: 1 獲取階段，會以物件父層一直到最高開始執行，最頂端會是Window，
               再來Document，Html，一直到目標為止。
@@ -220,7 +220,7 @@ eventPhase: 3 冒泡階段，會由目標物件的第一層父層開始，一路
   <figcaption class="gatsby-resp-image-figcaption">JavaScript dompass</figcaption>
   </figure>
       </p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">// get All elements
 const nodeList= [...document.querySelectorAll(&#39;*&#39;)];
 
@@ -243,7 +243,7 @@ nodeList.forEach(elem =&gt;{
 <p>這邊我們用最經典的 popup 例子，需求是要點擊按鈕 click 會讓 popup 顯示的，但在這邊我們希望 popup 內部點擊不會關閉 popup，但是點外部隨便空間會關閉 popup。</p>
 <p>首先監聽 body 點擊會關閉 popup，再來監聽 openPop 按鈕點擊讓 popup 打開，這邊還多下了 <code class="language-text">e.stopPropagation()</code>;，防止我點擊 popup 打開觸發 body 點擊被關閉，因為這樣可以中斷點擊 popup 往上冒泡觸發 body 事件。</p>
 <p>再來是 popup 本身需要能點選內部內容，同樣我們也對 popup 使用 e.stopPropagation(); ，讓我們可以點擊 popup 裡面的內容、按鈕。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">&lt;button id=&quot;openPop&quot;&gt;open popup&lt;/button&gt;
 &lt;div id=&quot;text&quot;&gt;&lt;/div&gt; // fake wording
 &lt;div id=&quot;popup&quot; class=&quot;&quot;&gt;

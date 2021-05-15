@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "結構化資料SEO 優化顯示搜尋結果",
         "datePublished": "November 25, 2018",
-        "dateModified": "2021-05-02T13:20:22.266Z",
+        "dateModified": "2021-05-15T08:25:05.337Z",
         "description": "當你網站有依照規範使用結構化資料，最重要、也最有回饋感的是，會直接讓網站在搜尋結果顯示更不一樣，間接地幫助提高網站點擊率，也有助於搜尋引擎理解網站的內容。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -149,7 +149,7 @@ void function() {
 <ul>
 <li>JSON-LD Course 範例</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">&lt;script type=&quot;application/ld+json&quot;&gt;
 {
   &quot;@context&quot;: &quot;http://schema.org/&quot;,
@@ -170,7 +170,7 @@ void function() {
 <ul>
 <li>RDFa Course 範例</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">&lt;body vocab=&quot;http://schema.org/&quot;&gt;
 &lt;main typeof=&quot;Course&quot;&gt;
   &lt;h1 property=&quot;name&quot;&gt;The Data Scientist&#39;s Toolbox&lt;/h1&gt;
@@ -195,7 +195,7 @@ void function() {
 <ul>
 <li>JSON-LD breadcrumb</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">&lt;script type=&quot;application/ld+json&quot;&gt;
 {
   &quot;@context&quot;: &quot;http://schema.org&quot;,
@@ -212,7 +212,7 @@ void function() {
     &quot;@type&quot;: &quot;ListItem&quot;,
     &quot;position&quot;: 2,
     &quot;name&quot;: &quot;Google Analytics 工作階段介紹、定義&quot;,
-    &quot;item&quot;: &quot;https://ianccy.com/2018/07/30/gasession/index.html&quot;
+    &quot;item&quot;: &quot;https://ianccy.com/gasession/&quot;
   }]
 }
 &lt;/script&gt;</code>
@@ -320,7 +320,7 @@ void function() {
       </p>
 <h2 id="搜尋結果錨點-非-structured-data" style="position:relative;"><a href="#%E6%90%9C%E5%B0%8B%E7%B5%90%E6%9E%9C%E9%8C%A8%E9%BB%9E-%E9%9D%9E-structured-data" aria-label="搜尋結果錨點 非 structured data permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>搜尋結果錨點 (非 structured data)</h2>
 <p>最後再提供一個最近特別用到修改，下方的搜尋結果出現頁面內的錨點，原本 blog 頁面架構就有用 id 錨點)，查閱結構化資料過後發現，並沒有錨點可以使用的功能，於是我針對搜尋結果有出現錨點的頁面都看過一次 html。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">&lt;h2 id=&quot;#錨點名稱&quot;&gt;{{content}}&lt;/h2&gt;</code>
         </deckgo-highlight-code>
 <p>發現都有相同概念，就是要當你搜尋結果要出現錨點，頁面上就必須要有實體連結可以點過去。於是我就做了頁面左邊的那個點擊 scroll 區塊，大約過了一週後搜尋結果就開始出現錨點。雖然常常一下只顯示麵包屑，一下又只顯示錨點…。</p>
@@ -376,7 +376,7 @@ void function() {
 <ul>
 <li>目錄範例</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">&lt;div class=&quot;toc-article&quot; id=&quot;toc&quot;&gt;
   &lt;div class=&quot;toc-title&quot;&gt;文章目錄&lt;/div&gt;
   &lt;ol class=&quot;toc&quot;&gt;

@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "React Higher Order Components 初探觀念",
         "datePublished": "May 08, 2018",
-        "dateModified": "2021-04-03T11:16:59.777Z",
+        "dateModified": "2021-05-15T08:22:57.666Z",
         "description": "介紹關於使用stateless component時，常會搭配使用的Higher Order Components，之前有看到「高階組件」這區塊，被他名字誤會了，實際上一點也不高階，他就只是一個function 函式，接受參數元件然後回傳全新元件，簡易的範例如下。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -141,7 +141,7 @@ void function() {
 <!--- ![react](../images/react.png "react") --->
 <h2 id="stateless-component" style="position:relative;"><a href="#stateless-component" aria-label="stateless component permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>stateless component</h2>
 <p>ps.以下混雜使用 es6 解構、展開運算子(Spread Operator)寫法，在 react 中處理大量 props 很方便。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">//stateless component  預設props會作為參數
 function NameCard(props){
   return &lt;h2&gt;Hello,{props.name}&lt;/h2&gt;
@@ -161,7 +161,7 @@ ReactDOM.render(element, document.getElementById(&#39;root&#39;));</code>
 [範例連結 ](https://codepen.io/chu1228/pen/vjpRrW?editors=0010 "範例連結")
 <h2 id="hoc-component" style="position:relative;"><a href="#hoc-component" aria-label="hoc component permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>HOC component</h2>
 <p>ps.es6 arrow function 產生 return function 邏輯</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">const Wrapper = (a) =&gt; (b)=&gt;{
 	console.log(a,b)
 }
@@ -174,7 +174,7 @@ var Wrapper = function Wrapper(a) {
 };</code>
         </deckgo-highlight-code>
 <p>接下來就改使用 return function 來傳遞額外資料</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">//建立 Person 元件
 function Person(props) {
   const {name,age,status} = props;

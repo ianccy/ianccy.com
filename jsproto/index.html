@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "JavaScript Prototype 繼承、原型鏈 Prototype chain",
         "datePublished": "August 25, 2018",
-        "dateModified": "2021-04-03T11:16:59.779Z",
+        "dateModified": "2021-05-15T08:23:51.051Z",
         "description": "JavaScript沒有類的特性(class-based)，跟Java不一樣，雖然說ES6 有class但它只是語法糖，每個JavaScript都具備有prototype，只是分為公開、私有差異，而JavaScript就用prototype來處理繼承(prototype-based)，特性是延展性高。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -140,7 +140,7 @@ void function() {
 <!--- ![JavaScript](../images/JavaScript-logo.png "JavaScript") --->
 <h2 id="javascript-prototype-介紹" style="position:relative;"><a href="#javascript-prototype-%E4%BB%8B%E7%B4%B9" aria-label="javascript prototype 介紹 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JavaScript ProtoType 介紹</h2>
 <p>JavaScript 沒有類的特性(class-based)，跟 Java 不一樣，雖然說 ES6 有 class 但它只是語法糖，每個 JavaScript 都具備有 prototype，只是分為公開、私有差異，而 JavaScript 就用 prototype 來處理繼承(prototype-based)，特性是延展性高。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">// 使用解構復值作為參數  並且預設沒傳值預設給予字串
 function Family({m = &#39;no person&#39;,w = &#39;no person&#39;, c = &#39;no child&#39;} = {}){
   this.father = m;
@@ -217,7 +217,7 @@ console.log(paul);
   </figure>
       </p>
 <p>接下來擴充一下 Family，增加一個 function。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">// 增加一個 hi function
 Family.prototype.hi = function(){
   console.log(`Family&#39;s child is ${this.chidren}. Family&#39;s father is ${this.father}`);
@@ -283,7 +283,7 @@ paul.hi();
   </figure>
       </p>
 <p>簡單的範例</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">var Person = function () {
   this.name = `chu`;
 }
@@ -359,7 +359,7 @@ console.log(ian.name, ian.age, ian.gender); // chu 18 male
       </p>
 <p>突然提到 prototype，主要是在 React 開發時，時常用到 ES6 class，才知道 class 背後處理了非常關於 prototype 繼承的細節。才知道 prototype 的概念形影不離。</p>
 <p>例如一個簡單的 class 如下</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">class Person {
   constructor(name){
     this.name = name

@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "lazy loading image 延後載入畫面外圖片",
         "datePublished": "April 25, 2019",
-        "dateModified": "2021-05-02T13:20:22.266Z",
+        "dateModified": "2021-05-15T08:29:07.968Z",
         "description": "分享一點最近處理lazyload心得，lazy loading image 對網站是很合理的處理優化，使用者沒看到的區塊本來就不需要浪費網路載入。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -155,7 +155,7 @@ void function() {
 <h3 id="intersection-observer" style="position:relative;"><a href="#intersection-observer" aria-label="intersection observer permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Intersection observer</h3>
 <p>IntersectionObserver 是新的瀏覽器 api，主要處理 element 與 viewport 之間處理，當目標與 element 交會則會處理互動，效能相對於傳統做法相對好。</p>
 <p>Google article: <a href="https://developers.google.com/web/updates/2019/02/intersectionobserver-v2" title="Trust is Good, Observation is Better—Intersection Observer v2">Trust is Good, Observation is Better—Intersection Observer v2</a></p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">var observer = new IntersectionObserver(callback[, options]);</code>
         </deckgo-highlight-code>
 <p>上面的參數 callback 是當 viewport 與 element 交會時會觸發，options 則是可以使用 <code class="language-text">root</code>、<code class="language-text">rootMargin</code>、<code class="language-text">threshold</code>。</p>
@@ -171,7 +171,7 @@ void function() {
 <p>頁面範例: <a href="https://codepen.io/chu1228/pen/VNqaNQ" title="codepen">codepen demo</a></p>
 <h3 id="chrome-原生支援" style="position:relative;"><a href="#chrome-%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8F%B4" aria-label="chrome 原生支援 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Chrome 原生支援</h3>
 <p>chrome version 75 才會 release 的功能，現在可以先手動開啟設定，chrome 網址列輸入<code class="language-text">chrome://flags/#enable-lazy-image-loading</code>，右邊選項改為 enabled。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">&lt;img loading=&#39;lazy&#39; src=&#39;https://placekitten.com/400/400&#39; width=&#39;400&#39; height=&#39;400&#39; alt=&#39;&#39;&gt;</code>
         </deckgo-highlight-code>
 <p>頁面範例: <a href="https://mathiasbynens.be/demo/img-loading-lazy" title="chrome lazyload demo">chrome lazyload demo</a></p>
@@ -239,7 +239,7 @@ void function() {
 <ul>
 <li>Source code</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">document.addEventListener(&quot;DOMContentLoaded&quot;, function() {
   var lazyImages = [].slice.call(document.querySelectorAll(&quot;img.lazyload&quot;));
 
@@ -272,7 +272,7 @@ void function() {
         </deckgo-highlight-code>
 <p>頁面範例: <a href="https://codepen.io/chu1228/pen/BEgaKZ?editors=1010" title="codepen">codepen demo</a></p>
 <p>另外還可以加上 onload listener 讓載入圖片過程，保持 lazyload 灰色區塊。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">lazyImage.src = lazyImage.dataset.src;
 lazyImage.onload = function(){
     lazyImage.classList.remove(&quot;lazyload&quot;);
@@ -286,7 +286,7 @@ lazyImage.onload = function(){
 <p>這在實作上必須倚賴 javascript，或後端用其他工具產生，例如說圖片上傳過程後端會另外 call api，取得圖片的比例。</p>
 <p>這邊先只討論 javascript，利用 Image API 也可以輕鬆做到，下面的方法就可以拿到圖片的 ratio，setRatio 則是可以當作儲存圖片的方法，當使用者上傳圖片，會再經過 getImageRatio，再帶入 save data function 利用 callback，當取得圖片比例再提供 ratio 給後端儲存。</p>
 <p>這方法需要一個前提條件，一種是圖片寬度再 container 下需要寬滿版，因為 padding-top 推出來的高度，是相對於 container 寬度乘出來的。有些人會利用 div container img 概念處理，只要變化 container 寬度，一樣可以兼容 lazyload，medium 就是這樣處理的。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">function getImageRatio(url, callback) {
     var img = new Image();
     img.onload = function() {
@@ -301,7 +301,7 @@ getImageRatio(&#39;https://ianccy.com/images/rabbit.png&#39;, setRatio);</code>
         </deckgo-highlight-code>
 <h2 id="seo-額外處理" style="position:relative;"><a href="#seo-%E9%A1%8D%E5%A4%96%E8%99%95%E7%90%86" aria-label="seo 額外處理 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>seo 額外處理</h2>
 <p>雖然 googlebot 可以執行 javascript，但是其他爬蟲不一定可以，所以要特別標明出 noscript 的 img html。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascripts"  >
           <code slot="code">&lt;img class=&quot;lazyload&quot; data-ratio=&quot;51.24481327800829&quot; data-src=&quot;https://ianccy.com/images/rabbit.png&quot; alt=&quot;rabbit&quot;&gt;
 &lt;noscript&gt;&lt;img src=&quot;https://ianccy.com/images/rabbit.png&quot; alt=&quot;rabbit&quot; /&gt;&lt;/noscript&gt;</code>
         </deckgo-highlight-code>

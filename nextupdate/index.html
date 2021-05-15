@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Update Next.js 7、react 16 error and bug",
         "datePublished": "December 09, 2018",
-        "dateModified": "2021-04-03T11:16:59.782Z",
+        "dateModified": "2021-05-15T08:25:09.058Z",
         "description": "前陣子公司專案從next3更新到7、react也從15更新到16，希望能加快開發或佈署的速度，順便分享一下踩到了哪些的地雷。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -158,7 +158,7 @@ void function() {
 <p>這是 react 16 再處理 server side 到 client side render 畫面的邏輯修改，為了增加 render 效能，react 拋棄的比對 server side to client html 比對，官方建議 server side 跟 client side 的 html 要盡量保持一致。如果要有不一樣的話，建議在 componentDidMount setState 處理畫面更新。</p>
 <p>發現部分的 html 畫卡在 server side render layout，修復方法就利用 server side 跟 client side 用不同的 key 值，讓 react 比對 node 做更新。但是如果要更新 dangerouslySetInnerHTML 用 key 方法也沒用，目前 hotfix 作法是兩邊用不同的 html tag 強更新，之後會改為 componentDisMount 更新。</p>
 <h3 id="react-16-官方宣告" style="position:relative;"><a href="#react-16-%E5%AE%98%E6%96%B9%E5%AE%A3%E5%91%8A" aria-label="react 16 官方宣告 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>react 16 官方宣告</h3>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">In general, we don’t recommend that you render different content on the client versus the server, but it can be useful in some cases (e.g. timestamps).
 However, it’s dangerous to have missing nodes on the server render as this might cause sibling nodes to be created with incorrect attributes.</code>
         </deckgo-highlight-code>

@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Google Analytics 自訂UserId 追蹤數據",
         "datePublished": "June 15, 2019",
-        "dateModified": "2021-05-02T13:20:22.266Z",
+        "dateModified": "2021-05-15T08:26:47.153Z",
         "description": "分享一個google analytics滿好用的功能，設定User Id，可以讓你直接在報表上找出這個使用者的flow，包括停留時間等等詳細數據，假設你搭配會員系統給予id的話，你也能夠跨裝置的追蹤數據。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -289,7 +289,7 @@ void function() {
 <p>這邊千萬千萬要記得要打開 UserId 的設定，否則你報表看不到客製化的 UserId 數據。我在這邊卡了 2 小時，查網路還找不到如何顯示的教學…。</p>
 <h2 id="針對使用者設定-userid" style="position:relative;"><a href="#%E9%87%9D%E5%B0%8D%E4%BD%BF%E7%94%A8%E8%80%85%E8%A8%AD%E5%AE%9A-userid" aria-label="針對使用者設定 userid permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>針對使用者設定 UserId</h2>
 <p>接下來就需要定義使用者的 UserId，這邊有時候會用會員編號，不要使用敏感性個資去設定即可，能讓你在報表識別出這個人是誰就可以。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">// 全域網站代碼的追蹤程式碼 (gtag.js)：
 gtag(&#39;set&#39;, {&#39;user_id&#39;: &#39;USER_ID&#39;}); // 使用已登入的 user_id 設定 User ID。
 

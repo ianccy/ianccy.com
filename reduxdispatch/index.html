@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Redux multiple dispatch，batch redux-thunk",
         "datePublished": "November 30, 2019",
-        "dateModified": "2021-04-03T11:16:59.787Z",
+        "dateModified": "2021-05-15T08:27:58.421Z",
         "description": "redux 核心流程 dispatch action => reducer => store，當你用 redux 運行多個 dispatch 時，每一個 dispatch 都會獨立更新下去的，如果你的更新資料又彼此關聯，就可能會發生錯誤。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -142,7 +142,7 @@ void function() {
 <ul>
 <li>多個 dispatch 更新</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">function initINFO (){
   fetch(`API_URL/getCommentList`)
     .then(res =&gt; res.json)
@@ -164,7 +164,7 @@ void function() {
 <ul>
 <li>batch 使用方法</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">import { batch } from &#39;react-redux&#39;
 function myThunk() {
     return (dispatch, getState) =&gt; {

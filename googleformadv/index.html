@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Google Sheet RESTful API 試算表表單",
         "datePublished": "May 11, 2019",
-        "dateModified": "2021-05-02T13:20:22.266Z",
+        "dateModified": "2021-05-15T08:26:43.687Z",
         "description": "分享如何建立app script api管理讀取、更新excel表單資料，簡單講就是API的CRUD，並且製作一個可以用的簡單畫面，串接api更新訂單狀態。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -141,7 +141,7 @@ void function() {
 <p>完成畫面: <a href="https://work.ianccy.com/friedQuery.html" title="鹹酥雞查詢訂單">鹹酥雞查詢訂單</a></p>
 <!--- ![google sheetapiquery](../images/sheetapiquery.png "google sheetapiquery") --->
 <ul>
-<li>前文章連結 : <a href="https://ianccy.com/2018/02/08/googleformapi/index.html" title="Google sheet 試算表表單串接api">Google sheet 試算表表單串接 api </a></li>
+<li>前文章連結 : <a href="https://ianccy.com/googleformapi/" title="Google sheet 試算表表單串接api">Google sheet 試算表表單串接 api </a></li>
 <li>Google 官方文件 <a href="https://developers.google.com/apps-script/reference/spreadsheet/sheet" title="google sheet api">spreadsheet method</a></li>
 <li><a href="https://work.ianccy.com/%E7%82%B8%E9%9B%9E%E8%A8%82%E8%B3%BC" title="鹹酥雞訂購 範例網頁">鹹酥雞訂購 範例網頁</a>、<a href="https://docs.google.com/spreadsheets/d/1JbXssixJaqTL_BMgnmOiMxLyAZm0jOkw173VdewqO9c/edit#gid=0" title="鹹酥雞訂購 Excel">鹹酥雞訂購 Excel</a></li>
 </ul>
@@ -151,7 +151,7 @@ void function() {
 <p>這邊改用 doPost，首先起手一樣用 getSheets 先取得我們的 tab，使用 getSheetValues 來拿到整包資料。拿到的資料會是陣列，我們可以跑迴圈來找出每一筆的 name、phone，有沒有在陣列內，有的話才要增加到回傳的陣列。最後回傳資料會是一包陣列裡面會是{data: [ ], index: x}，index 方便我們後續做更新的操作。</p>
 <p><code class="language-text">getSheetValues(startRow, startColumn, numRows, numColumns)</code></p>
 <p>ps.儲存發布記得要再新增版本，這邊我卡了 1 小時…。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">function doPost(e) {
   var params = e.parameter;
   var name = params.name;
@@ -234,7 +234,7 @@ void function() {
 <p>客人送出訂單後，可能需要取消訂單，這時候就需要對資料更新了。我們可以搭配查詢 api，讓客人看到自己的訂單，再對訂單更新狀態。我們用前面做好的 doPost function，直接擴展增加更新的功能。</p>
 <p>增加 action，作為查詢、刪除的判斷，再稍微整理一下拆分共用的邏輯，把執行部分打包成 function。建立 updateData，專門更新訂單的狀態，我們取得 index，直接查詢這個 row 的資料，拿請求的 name、phone 直接比對是否符合，符合的話才讓使用者可以更新訂單狀態。</p>
 <p>另外我們定義處理狀態 0 代表訂單取消，1 代表完成訂單。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">function doPost(e) {
   var params = e.parameter;
   var name = params.name;
@@ -282,7 +282,7 @@ function updateData(Sheet, name, phone, status, index){
 <p>這樣就完成了查詢、更新訂單的 api 了，剩下就是網頁前端部分，網頁需求是讓使用者輸入姓名、電話查詢訂單，或是查詢後可以取消訂單。</p>
 <p>前端主要的 function 就這些，主要就是查詢拉資料，更新 List 清單，點擊取消訂單的按鈕，請求 API 更新狀態等等。</p>
 <p>前端畫面比起 API 來說，就比較單純這邊不多贅述了。要用 vanilla javascript、jquey、或 react、vue，看你喜歡都可以做到一樣功能。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">      &lt;div class=&quot;col-lg-12 text-center&quot;&gt;
         &lt;h1 class=&quot;mt-5&quot;&gt;查詢訂單&lt;/h1&gt;
         &lt;div class=&quot;form-group col-xs-12&quot;&gt;

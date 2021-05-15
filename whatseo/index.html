@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "SEO優化 google教學guideline介紹",
         "datePublished": "January 28, 2018",
-        "dateModified": "2021-04-03T11:16:59.775Z",
+        "dateModified": "2021-05-15T08:22:41.578Z",
         "description": "決定排名的是複雜的演算法，所以要讓程式容易辨認內容，你網頁要能被google robot爬到內容，盡量避免用javascript產生內容(要的話請用SSR 或是PSR)，不要整個網頁都用圖片，google不會理你圖片裡面寫啥米(能爬得懂也不理)，記得要利用圖片搭上文字做定位排版。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -166,7 +166,7 @@ void function() {
 <h2 id="rwd-手機版網頁" style="position:relative;"><a href="#rwd-%E6%89%8B%E6%A9%9F%E7%89%88%E7%B6%B2%E9%A0%81" aria-label="rwd 手機版網頁 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>rwd 手機版網頁</h2>
 <p>google 在 15 年 宣告手機版搜尋獨立計算排名，<a href="https://webmaster-tcn.googleblog.com/2015/02/blog-post.html" title="rwd announce">rwd 排名宣告</a>，意味著網站要能兼容手機變得非常重要，手機版網頁有幾種實作，最簡單的是響應式設計，依靠 css media query 針對螢幕來變換寬度，另一種是手機版網頁，實際上存在兩個頁面，一個 for 桌機另一個 for mobile，這記得要互相宣告。</p>
 <p>方法如下</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">//桌機版網頁標記
 &lt;link rel=&quot;alternate&quot; media=&quot;only screen and (max-width: 640px)&quot;  href=&quot;http://手機版URL&quot;&gt;
 //行動版網頁

@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Node.js、Express、MySQL串接資料庫，Heroku部署環境",
         "datePublished": "June 17, 2018",
-        "dateModified": "2021-04-03T11:16:59.778Z",
+        "dateModified": "2021-05-15T08:23:30.260Z",
         "description": "在這個前後端分離的時代，多半會再開一台Node.js的server給前端處理router，這邊就要來使用Node.js搭配express以及MySQL來建立簡單的網站router。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -142,7 +142,7 @@ void function() {
 <!--- ![node.js](../images/node.png "node.js") --->
 <h2 id="express-建立-router" style="position:relative;"><a href="#express-%E5%BB%BA%E7%AB%8B-router" aria-label="express 建立 router permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>express 建立 router</h2>
 <p>1.首先建立資料夾、建立 package.json</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">// create folder and movein create package.json
 mkdir node-express
 cd node-express
@@ -152,7 +152,7 @@ npm init -y
 npm install express --save</code>
         </deckgo-highlight-code>
 <p>2.建立 app.js</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">// use express method
 var express = require(&#39;express&#39;);
 var app = express();
@@ -179,7 +179,7 @@ if(port === 3000){
 <a href="http://expressjs.com/zh-tw/4x/api.html#app.METHOD" title="express METHOD">express METHOD</a></p>
 <p>3.執行 app.js、打開 <a href="http://localhost:3000/">http://localhost:3000/</a><br>
 打開 command 輸入 node app.js 執行檔案</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">node app.js</code>
         </deckgo-highlight-code>
 <p>
@@ -234,7 +234,7 @@ if(port === 3000){
 成功看到了 Hello world，這樣就建立了一個很簡易的 node server。但這邊印出來的 hello world，只是純粹字串，不具備 html 架構。</p>
 <p>4.建立對應 html 檔案搭配動態 router</p>
 <p>這邊用到的是 ejs template，方便我們之後取用 node.js 傳遞的資料。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">// install ejs
 npm install ejs-locals --save</code>
         </deckgo-highlight-code>
@@ -287,7 +287,7 @@ npm install ejs-locals --save</code>
   <figcaption class="gatsby-resp-image-figcaption">file structure</figcaption>
   </figure>
       </p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">// create ejs
 var engine = require(&#39;ejs-locals&#39;);
 app.engine(&#39;ejs&#39;,engine);
@@ -359,7 +359,7 @@ app.get(&#39;/about&#39;, function(req, res){
 <p>再來讓我們試著串接 MySQL，做一個完整的後端服務。如果你的電腦沒有安裝 MySQL，要記得先安裝好，<a href="https://dev.mysql.com/doc/refman/5.7/en/osx-installation-pkg.html" title="mac 安裝 mysql 教學">mac 安裝 mysql 教學</a>、<a href="https://jerrynest.io/windows-mysql-installer/" title="windwos 安裝 mysql 教學">windwos 安裝 mysql 教學</a>。<br>
 ps.mysql 記得安裝 5.7 以下版本，剛剛跑一遍下載到 8.0.x 版本的，sequel pro 連接出一堆問題，也許是不支援新版的。</p>
 <p>1.安裝 MySQL for node.js</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">// install MySQL tool
 npm install mysql --save</code>
         </deckgo-highlight-code>
@@ -415,7 +415,7 @@ npm install mysql --save</code>
   </figure>
       <br>
 在剛剛建立的 app.js 上面建立</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">...
 var mysql      = require(&#39;mysql&#39;);
 
@@ -435,7 +435,7 @@ connection.query(&#39;select * from MyGuests&#39;, function(err, rows, fields) {
         </deckgo-highlight-code>
 <p>執行 node app.js 會看到印出資料，這樣就成功地在 express 連接到 MySQL 了，接下來就要把這個資料加到 express 的 router 中，讓我們在頁面中可以使用資料</p>
 <p>3.把剛剛 sql 的資料設定到 about page</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">// create object
 var data = {};
 connection.query(&#39;select * from MyGuests&#39;, function(err, rows, fields) {
@@ -454,7 +454,7 @@ app.get(&#39;/about&#39;, function(req, res){
 });</code>
         </deckgo-highlight-code>
 <p>4.修改 about.ejs 使用設定的 data</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">    &lt;h2&gt;Name:&lt;%- data.id %&gt;&lt;/h2&gt;
     &lt;h2&gt;firstname:&lt;%- data.firstname %&gt;&lt;/h2&gt;
     &lt;h2&gt;lastname:&lt;%- data.lastname %&gt;&lt;/h2&gt;
@@ -516,7 +516,7 @@ app.get(&#39;/about&#39;, function(req, res){
 <p>再來把剛剛寫好的 node.js 部署到網路上面，heroku 有免費使用的方案，所以這邊使用的是 heroku。</p>
 <p>首先要安裝 heroku cli，再來註冊帳號，在專案內的 package.json 加入”start”: “node app.js”，新增檔案 Procfile。</p>
 <p><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction" title="heroku node deploy 教學">heroku node deploy 教學</a></p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">// file package.json
 
   &quot;engines&quot;: {
@@ -531,7 +531,7 @@ app.get(&#39;/about&#39;, function(req, res){
 web: node app.js</code>
         </deckgo-highlight-code>
 <p>開始準備部署作業</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">//login account
 heroku login
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Ian Chu]]></title><description><![CDATA[我目前是前端工程師，曾有網路行銷相關工作經驗，這裡會有工作實戰經驗分享，擅長javascript、css、seo、google analytics等。]]></description><link>https://ianccy.com</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 15 May 2021 08:11:42 GMT</lastBuildDate><item><title><![CDATA[Critical Rendering Path 關鍵渲染路徑優化]]></title><description><![CDATA[CSS 常被認為簡單好學，我對它看法是易學但難精通，以前都只想過實現各種 UI、效果，但沒認真考慮過效能，怎樣的寫法最適合這個情境。假設你有針對 google page speed、lighthouse…]]></description><link>https://ianccy.com/2021-02-cssperformance/</link><guid isPermaLink="false">https://ianccy.com/2021-02-cssperformance/</guid><pubDate>Thu, 11 Feb 2021 05:30:44 GMT</pubDate><content:encoded>&lt;p&gt;CSS 常被認為簡單好學，我對它看法是易學但難精通，以前都只想過實現各種 UI、效果，但沒認真考慮過效能，怎樣的寫法最適合這個情境。假設你有針對 google page speed、lighthouse 優化過，應該會特別有感觸，該如何才能讓網頁載入更快。&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Ian Chu]]></title><description><![CDATA[我目前是前端工程師，曾有網路行銷相關工作經驗，這裡會有工作實戰經驗分享，擅長javascript、css、seo、google analytics等。]]></description><link>https://ianccy.com</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 15 May 2021 08:29:24 GMT</lastBuildDate><item><title><![CDATA[Critical Rendering Path 關鍵渲染路徑優化]]></title><description><![CDATA[CSS 常被認為簡單好學，我對它看法是易學但難精通，以前都只想過實現各種 UI、效果，但沒認真考慮過效能，怎樣的寫法最適合這個情境。假設你有針對 google page speed、lighthouse…]]></description><link>https://ianccy.com/2021-02-cssperformance/</link><guid isPermaLink="false">https://ianccy.com/2021-02-cssperformance/</guid><pubDate>Thu, 11 Feb 2021 05:30:44 GMT</pubDate><content:encoded>&lt;p&gt;CSS 常被認為簡單好學，我對它看法是易學但難精通，以前都只想過實現各種 UI、效果，但沒認真考慮過效能，怎樣的寫法最適合這個情境。假設你有針對 google page speed、lighthouse 優化過，應該會特別有感觸，該如何才能讓網頁載入更快。&lt;/p&gt;
 &lt;p&gt;接下來討論如何讓畫面渲染載入更快，以及一些最佳化使用方式。&lt;/p&gt;
 &lt;h2 id=&quot;網頁渲染邏輯&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E7%B6%B2%E9%A0%81%E6%B8%B2%E6%9F%93%E9%82%8F%E8%BC%AF&quot; aria-label=&quot;網頁渲染邏輯 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;網頁渲染邏輯&lt;/h2&gt;
 &lt;p&gt;首先介紹最基礎的 painting，瀏覽器的畫面產生，需要有幾個步驟，先是由上至下掃一遍 html，擷取內容後，先產生 HTML DOM tree，再來產生 CSSOM tree，&lt;/p&gt;
@@ -154,7 +154,7 @@
 &lt;p&gt;還有提醒我一下我自己，保持好奇心。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[JavaScript Closure 你一定有用過的閉包]]></title><description><![CDATA[JavsScript 的 closure (閉包) 是什麼？ 假設你有在寫 javascript 的話，你可能每天都在用，但你只是沒特別查覺而已。 Clousre 在 MDN 上解釋為 這個解釋是我看過比較簡單直白的。 而我自己對 closure…]]></description><link>https://ianccy.com/2020-06-closure/</link><guid isPermaLink="false">https://ianccy.com/2020-06-closure/</guid><pubDate>Sat, 27 Jun 2020 12:20:35 GMT</pubDate><content:encoded>&lt;p&gt;JavsScript 的 closure (閉包) 是什麼？ 假設你有在寫 javascript 的話，你可能每天都在用，但你只是沒特別查覺而已。&lt;/p&gt;
 &lt;!--- ![javascript closure](../images/closure.png &quot;javascript closure&quot;) ---&gt;
 &lt;p&gt;Clousre 在 MDN 上解釋為&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;A closure is the combination of a function bundled together (enclosed)
 with references to its surrounding state (the lexical environment).&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
@@ -166,7 +166,7 @@ with references to its surrounding state (the lexical environment).&lt;/code&gt;
 &lt;ul&gt;
 &lt;li&gt;封裝 lexical environment ( 作用域環境 )&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;var a = { name: &amp;#39;ian&amp;#39; };
 function getValueA(){
     return a;
@@ -182,7 +182,7 @@ console.log(getValueA()); // 2&lt;/code&gt;
 &lt;ul&gt;
 &lt;li&gt;javascript 記憶體回收&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;「沒有其他任何物件參考它」。如果一個物件不在被任何物件參考，它將被視為可回收記憶體的垃圾。&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;MDN: &lt;a href=&quot;https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Memory_Management&quot; title=&quot;記憶體生命週期&quot;&gt;記憶體生命週期&lt;/a&gt;&lt;/p&gt;
@@ -191,7 +191,7 @@ console.log(getValueA()); // 2&lt;/code&gt;
 &lt;ul&gt;
 &lt;li&gt;經典 (&lt;del&gt;面試&lt;/del&gt;) 問題&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;for (var i = 0; i &amp;lt; 3; i++) {
     setTimeout(function(){
         console.log(i)
@@ -205,7 +205,7 @@ console.log(getValueA()); // 2&lt;/code&gt;
 &lt;p&gt;MDN: &lt;a href=&quot;https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/EventLoop&quot; title=&quot;Event Loop&quot;&gt;Event Loop&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;settimeout-解法&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#settimeout-%E8%A7%A3%E6%B3%95&quot; aria-label=&quot;settimeout 解法 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;setTimeout 解法&lt;/h3&gt;
 &lt;p&gt;還是簡單講一下，其中簡單的方法是 var 改用 let，讓每次 let 的作用域被包覆所以記憶起來。另一個就是利用記憶體封裝概念 ，同樣原理也與 let 差不多，利用 function logI(i) 傳入變數，來讓 i 當下的值被封裝。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;for (var i = 0; i &amp;lt; 3; i++) {
     function logI(i) {
         setTimeout(function() {
@@ -219,7 +219,7 @@ console.log(getValueA()); // 2&lt;/code&gt;
 // 2&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;如果你將 logI function 的 argument 拿掉，又會出現三次的 3，因為沒有封裝變數 i。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;...
     function logI() {
         setTimeout(function() {
@@ -242,7 +242,7 @@ console.log(getValueA()); // 2&lt;/code&gt;
 &lt;ul&gt;
 &lt;li&gt;string immutable&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;let str = &amp;#39;Hello, you!!&amp;#39;;
 let ianHello = str;
 ianHello += &amp;#39;ian&amp;#39;
@@ -255,7 +255,7 @@ console.log(ianHello); // Hello, you!!ian&lt;/code&gt;
 &lt;ul&gt;
 &lt;li&gt;array mutable&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;let names = [&amp;#39;ian&amp;#39;];
 let copyName = names;
 copyName.push(&amp;#39;peter&amp;#39;);
@@ -274,7 +274,7 @@ console.log(copyName); // [ian, peter]&lt;/code&gt;
 &lt;ul&gt;
 &lt;li&gt;mutable setState&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;const value = ref.current.value;
 names.push(value);
 setNames(names);&lt;/code&gt;
@@ -283,7 +283,7 @@ setNames(names);&lt;/code&gt;
 &lt;ul&gt;
 &lt;li&gt;immutable setState&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;setNames(names =&amp;gt; [...names, value])&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;&lt;a href=&quot;https://reactjs.org/docs/optimizing-performance.html#the-power-of-not-mutating-data&quot; title=&quot;react optimizing-performance&quot;&gt;react optimizing-performance&lt;/a&gt;&lt;/p&gt;
@@ -501,7 +501,7 @@ describe(&amp;quot;Login&amp;quot;, () =&amp;gt; {
 &lt;p&gt;提一下目前頁面會放置在對方網站上以 iframe 使用，用戶會點擊 iframe 內登入按鈕，轉導頁面，載入對應的登入 line、facebook 網頁等等，完成登入。&lt;/p&gt;
 &lt;!--- ![block cookie](../images/blockcookie.png &quot;block cookie&quot;) ---&gt;
 &lt;h3 id=&quot;桌機、手機版-登入流程&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E6%A1%8C%E6%A9%9F%E3%80%81%E6%89%8B%E6%A9%9F%E7%89%88-%E7%99%BB%E5%85%A5%E6%B5%81%E7%A8%8B&quot; aria-label=&quot;桌機、手機版 登入流程 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;桌機、手機版 登入流程&lt;/h3&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;Desktop:
 website (parent) =&amp;gt; click Login =&amp;gt; open window (child)
 =&amp;gt; login success =&amp;gt; postMessage to parent ( child close )
@@ -570,7 +570,7 @@ website (parent) =&amp;gt; click Login
 &lt;h2 id=&quot;block-third-party-cookie&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#block-third-party-cookie&quot; aria-label=&quot;block third party cookie permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Block third-party cookie&lt;/h2&gt;
 &lt;p&gt;IOS 11 開始預設開啟 prevent cross-site tracking 的設定，這會導致第三方 cookie 無法設置，例如 google analytics、facebook pixel 等等，另外也包括了 iframe 內部網頁，這符合我們的情境。&lt;/p&gt;
 &lt;p&gt;android 也同樣有這個設定，但目前沒有預設開啟。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;Privacy by default
 Safari’s key privacy features are enabled by default.
 For example, in iOS, Intelligent Tracking Prevention
@@ -597,7 +597,7 @@ and location are set to ask for permission before granting access.&lt;/code&gt;
 &lt;ul&gt;
 &lt;li&gt;多個 dispatch 更新&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;function initINFO (){
   fetch(`API_URL/getCommentList`)
     .then(res =&amp;gt; res.json)
@@ -619,7 +619,7 @@ and location are set to ask for permission before granting access.&lt;/code&gt;
 &lt;ul&gt;
 &lt;li&gt;batch 使用方法&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;import { batch } from &amp;#39;react-redux&amp;#39;
 function myThunk() {
     return (dispatch, getState) =&amp;gt; {
@@ -737,13 +737,13 @@ export default function(...middlewares) {
 &lt;p&gt;接下來就來針對 react hooks 做 component testing。&lt;/p&gt;
 &lt;h2 id=&quot;安裝測試工具-jest&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E5%AE%89%E8%A3%9D%E6%B8%AC%E8%A9%A6%E5%B7%A5%E5%85%B7-jest&quot; aria-label=&quot;安裝測試工具 jest permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;安裝測試工具 Jest&lt;/h2&gt;
 &lt;p&gt;Jest 是由 facebook 開源的工具，源自於 Jasmine 延伸開發，設定少、輕巧，官方文件非常清楚，提供斷言庫、mocking data 等，Jest 算是我們 test 的 runner，可以再搭配 enzyme、puppeteer 等等執行，讓 test 能更齊全。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;npm install --save-dev jest&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;ul&gt;
 &lt;li&gt;編輯 package.json&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;  &amp;quot;scripts&amp;quot;: {
     ...
     &amp;quot;test&amp;quot;: &amp;quot;jest&amp;quot;,
@@ -752,7 +752,7 @@ export default function(...middlewares) {
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;執行 Jest 會預設抓取 &lt;code class=&quot;language-text&quot;&gt;__tests__&lt;/code&gt; folder 內 js、ts 檔案，或是 fileName 有 spec、test 的 js ts 檔案 來跑測試， 假設你有用到 babel，或是其他 css 編譯工具，則需要設定 jest config。&lt;/p&gt;
 &lt;p&gt;規則預設&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;([ &amp;quot;**/__tests__/**/*.[jt]s?(x)&amp;quot;, &amp;quot;**/?(*.)+(spec|test).[jt]s?(x)&amp;quot; ])&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;官方文件: &lt;a href=&quot;https://jestjs.io/docs/en/getting-started&quot; title=&quot;Jest starter guide&quot;&gt;Jest starter guide&lt;/a&gt;&lt;/p&gt;
@@ -761,7 +761,7 @@ export default function(...middlewares) {
 &lt;ul&gt;
 &lt;li&gt;Jest 使用&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;describe(&amp;#39;Test sum&amp;#39;, () =&amp;gt; {
     test(&amp;#39;function return 0&amp;#39;, () =&amp;gt; {
         expect(sum(0)).toBe(0)
@@ -778,7 +778,7 @@ export default function(...middlewares) {
 &lt;p&gt;如果你元件經常要更新，可想而知你這份 snapshot testing 會經常需要更新，但如果穩定，就可以直接測試出 component 與資料不同的更新樣貌。&lt;/p&gt;
 &lt;p&gt;文件: &lt;a href=&quot;https://reactjs.org/docs/test-renderer.html#testrenderer&quot; title=&quot;react-test-renderer&quot;&gt;react-test-renderer&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;下面是簡單的元件，主要測試是觸發 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;span&amp;gt;&lt;/code&gt; 的 onClick 讓 state count 更新。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;function TodoView() {
   const inputEl = useRef(null);
   const [todoList, addTodo, deleteToDo] = useTodoList([], inputEl);
@@ -797,7 +797,7 @@ export default function(...middlewares) {
 &lt;ul&gt;
 &lt;li&gt;src/&lt;strong&gt;testSnap&lt;/strong&gt;/TodoView.test.js&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;import React from &amp;quot;react&amp;quot;;
 import { create, act } from &amp;quot;react-test-renderer&amp;quot;;
 import TodoView from &amp;#39;/container/TodoView&amp;#39;;
@@ -825,7 +825,7 @@ describe(&amp;quot;TodoView component&amp;quot;, () =&amp;gt; {
 &lt;ul&gt;
 &lt;li&gt;React 官方 test note&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;We recommend using React Testing Library which is designed to
 enable and encourage writing tests that use your components
 as the end users do.
@@ -840,7 +840,7 @@ React Components’ output.&lt;/code&gt;
 &lt;ul&gt;
 &lt;li&gt;TypeInInput Component&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;import React, { useState } from &amp;quot;react&amp;quot;;
 import { render, fireEvent } from &amp;quot;@testing-library/react&amp;quot;;
 
@@ -877,7 +877,7 @@ describe(&amp;quot;Test TypeInInput&amp;quot;, () =&amp;gt; {
 &lt;ul&gt;
 &lt;li&gt;babel.config.js&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;    [
       &amp;quot;@babel/preset-env&amp;quot;,
       {
@@ -890,7 +890,7 @@ describe(&amp;quot;Test TypeInInput&amp;quot;, () =&amp;gt; {
 &lt;p&gt;Fetch 接受 url、axios (模擬 api call) 兩個 prop。Component 內用到 state、useCallback、建立 function fetchData，&lt;/p&gt;
 &lt;p&gt;Component 預期狀態&lt;/p&gt;
 &lt;p&gt;useEffect 會在元件 render 傳入 url 以及 apiCall function，並執行 click element 觸發 fetchData 調用 apiCall 更新 state。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;import React, { useState, useCallback } from &amp;quot;react&amp;quot;;
 import axios from &amp;quot;axios&amp;quot;;
 import { render, fireEvent, waitForElement } from &amp;quot;@testing-library/react&amp;quot;;
@@ -945,7 +945,7 @@ test(&amp;quot;Fetch makes an API call and displays the greeting&amp;quot;, asyn
 &lt;ul&gt;
 &lt;li&gt;example.com 修改追蹤碼&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;  ga(&amp;#39;create&amp;#39;, &amp;#39;UA-XXXXXXX-Y&amp;#39;, &amp;#39;example.com&amp;#39;);
   對這段程式碼進行下列變更 (紅色粗體文字是需要變更的部分)：
 
@@ -956,7 +956,7 @@ test(&amp;quot;Fetch makes an API call and displays the greeting&amp;quot;, asyn
 &lt;ul&gt;
 &lt;li&gt;buyservice.com 修改追蹤碼&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;  ga(&amp;#39;create&amp;#39;, &amp;#39;UA-XXXXXXX-Y&amp;#39;, &amp;#39;auto&amp;#39;, {&amp;#39;allowLinker&amp;#39;: true});
   ga(&amp;#39;require&amp;#39;, &amp;#39;linker&amp;#39;);
   ga(&amp;#39;linker:autoLink&amp;#39;, [&amp;#39;example.com&amp;#39;] );&lt;/code&gt;
@@ -1260,7 +1260,7 @@ test(&amp;quot;Fetch makes an API call and displays the greeting&amp;quot;, asyn
 &lt;ul&gt;
 &lt;li&gt;Pass props Hell&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;Header islogin={islogin}/&amp;gt;
 // inside Header Element
   &amp;lt;Navbar islogin={islogin} /&amp;gt;
@@ -1281,7 +1281,7 @@ test(&amp;quot;Fetch makes an API call and displays the greeting&amp;quot;, asyn
 &lt;ul&gt;
 &lt;li&gt;React.createContext return object&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// React.createContext(defaultValue);
 const MyContext = React.createContext({isLogin: false});
 
@@ -1302,7 +1302,7 @@ __proto__: Object&lt;/code&gt;
 &lt;ul&gt;
 &lt;li&gt;當元件 rerender 會同時更新 Consumer 調用的元件&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// isLogin will forever new one
   render() {
     return (
@@ -1311,7 +1311,7 @@ __proto__: Object&lt;/code&gt;
 &lt;ul&gt;
 &lt;li&gt;傳遞的值保持同一參考 MyContext Provider&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;export const MyContext = React.createContext({ isLogin: false });
 
 export default class Container extends Component {
@@ -1327,7 +1327,7 @@ export default class Container extends Component {
         &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;consumer-提取-value&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#consumer-%E6%8F%90%E5%8F%96-value&quot; aria-label=&quot;consumer 提取 value permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Consumer 提取 value&lt;/h2&gt;
 &lt;p&gt;Consumer 元件可以獲取 context 資料，假設沒有最接近的 Provider 提供 value，Cosumer 會取到 createContext 的 defaultvalue。若有 Provider 提供值，則是會保持訂閱更新，也就是達到跨元件同步資料，並 update component。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;import React from &amp;quot;react&amp;quot;;
 import { MyContext } from &amp;quot;../Container&amp;quot;;
 
@@ -1351,7 +1351,7 @@ export default function Account() {
 &lt;iframe src=&quot;https://codesandbox.io/embed/happy-moon-ypeqm?fontsize=12,result&quot; width=&quot;100%&quot; height=&quot;400&quot;&gt;&lt;/iframe&gt;
 &lt;h2 id=&quot;contexttype-取值&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#contexttype-%E5%8F%96%E5%80%BC&quot; aria-label=&quot;contexttype 取值 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;contextType 取值&lt;/h2&gt;
 &lt;p&gt;contextType 是直接在 react 的 component 的 instance 再加上 context，所以只能用在 class Component，一個元件只能使用一個 context。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;import React, { Component } from &amp;quot;react&amp;quot;;
 import MyContext from &amp;quot;../context/MyContext&amp;quot;;
 
@@ -1372,7 +1372,7 @@ export default class Account extends Component {
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;我在這邊有遇到一個問題，在 Container component export context，並在 Account 引用 Container export 的 context 時，會發生我取不到值得問題，這是因為循環依賴的關係，在我們 Account 引用 Container 內的 MyContext 時，ES6 只會是 referrence MyContext undefined 狀態，實際在 Container 還尚未建立 createContext，這個 Account 又會再初始化階段就執行 MyContext，導致拿到 empty object。&lt;/p&gt;
 &lt;p&gt;解法就是獨立建 MyContext ，解除與 Container 關係，就可以避免掉循環依賴的問題。至於 Consumer 會沒有問題，因為 Consumer 是在 render 時才會調用參考，所以會拿到正確的值。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// Container File
 import Account from &amp;quot;./components/Account&amp;quot;;
 export const MyContext = React.createContext({
@@ -1412,12 +1412,12 @@ export default class Account extends Component {
 &lt;/ul&gt;
 &lt;h2 id=&quot;hooks-usecontext&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#hooks-usecontext&quot; aria-label=&quot;hooks usecontext permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Hooks useContext&lt;/h2&gt;
 &lt;p&gt;React Hooks 有可以直接調用 Context 的方法，useContext 與 Consumer 特性相似，當沒有 Provider 提供 value，就會以 defaultValue 為值，提醒有用到 useContext 的元件當 value 更新時皆會 rerender，rerender 效能不好的話，建議搭配 Memo 來做 memorize。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;const value = useContext(MyContext);&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;Preventing rerenders with React.memo and useContext hook.&lt;br&gt;
 &lt;a href=&quot;https://github.com/facebook/react/issues/15156#issuecomment-474590693&quot; title=&quot;Preventing rerenders with React.memo and useContext hook.&quot;&gt;Preventing rerenders with React.memo and useContext hook.&lt;/a&gt;&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;import React, { useContext, useMemo } from &amp;quot;react&amp;quot;;
 import MyContext from &amp;quot;../context/MyContext&amp;quot;;
 
@@ -1592,7 +1592,7 @@ export default function Account() {
 &lt;p&gt;這邊千萬千萬要記得要打開 UserId 的設定，否則你報表看不到客製化的 UserId 數據。我在這邊卡了 2 小時，查網路還找不到如何顯示的教學…。&lt;/p&gt;
 &lt;h2 id=&quot;針對使用者設定-userid&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E9%87%9D%E5%B0%8D%E4%BD%BF%E7%94%A8%E8%80%85%E8%A8%AD%E5%AE%9A-userid&quot; aria-label=&quot;針對使用者設定 userid permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;針對使用者設定 UserId&lt;/h2&gt;
 &lt;p&gt;接下來就需要定義使用者的 UserId，這邊有時候會用會員編號，不要使用敏感性個資去設定即可，能讓你在報表識別出這個人是誰就可以。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// 全域網站代碼的追蹤程式碼 (gtag.js)：
 gtag(&amp;#39;set&amp;#39;, {&amp;#39;user_id&amp;#39;: &amp;#39;USER_ID&amp;#39;}); // 使用已登入的 user_id 設定 User ID。
 
@@ -2251,7 +2251,7 @@ const deleteToDo = useCallback(
 &lt;p&gt;完成畫面: &lt;a href=&quot;https://work.ianccy.com/friedQuery.html&quot; title=&quot;鹹酥雞查詢訂單&quot;&gt;鹹酥雞查詢訂單&lt;/a&gt;&lt;/p&gt;
 &lt;!--- ![google sheetapiquery](../images/sheetapiquery.png &quot;google sheetapiquery&quot;) ---&gt;
 &lt;ul&gt;
-&lt;li&gt;前文章連結 : &lt;a href=&quot;https://ianccy.com/2018/02/08/googleformapi/index.html&quot; title=&quot;Google sheet 試算表表單串接api&quot;&gt;Google sheet 試算表表單串接 api &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;前文章連結 : &lt;a href=&quot;https://ianccy.com/googleformapi/&quot; title=&quot;Google sheet 試算表表單串接api&quot;&gt;Google sheet 試算表表單串接 api &lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Google 官方文件 &lt;a href=&quot;https://developers.google.com/apps-script/reference/spreadsheet/sheet&quot; title=&quot;google sheet api&quot;&gt;spreadsheet method&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://work.ianccy.com/%E7%82%B8%E9%9B%9E%E8%A8%82%E8%B3%BC&quot; title=&quot;鹹酥雞訂購 範例網頁&quot;&gt;鹹酥雞訂購 範例網頁&lt;/a&gt;、&lt;a href=&quot;https://docs.google.com/spreadsheets/d/1JbXssixJaqTL_BMgnmOiMxLyAZm0jOkw173VdewqO9c/edit#gid=0&quot; title=&quot;鹹酥雞訂購 Excel&quot;&gt;鹹酥雞訂購 Excel&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -2261,7 +2261,7 @@ const deleteToDo = useCallback(
 &lt;p&gt;這邊改用 doPost，首先起手一樣用 getSheets 先取得我們的 tab，使用 getSheetValues 來拿到整包資料。拿到的資料會是陣列，我們可以跑迴圈來找出每一筆的 name、phone，有沒有在陣列內，有的話才要增加到回傳的陣列。最後回傳資料會是一包陣列裡面會是{data: [ ], index: x}，index 方便我們後續做更新的操作。&lt;/p&gt;
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;getSheetValues(startRow, startColumn, numRows, numColumns)&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;ps.儲存發布記得要再新增版本，這邊我卡了 1 小時…。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;function doPost(e) {
   var params = e.parameter;
   var name = params.name;
@@ -2344,7 +2344,7 @@ const deleteToDo = useCallback(
 &lt;p&gt;客人送出訂單後，可能需要取消訂單，這時候就需要對資料更新了。我們可以搭配查詢 api，讓客人看到自己的訂單，再對訂單更新狀態。我們用前面做好的 doPost function，直接擴展增加更新的功能。&lt;/p&gt;
 &lt;p&gt;增加 action，作為查詢、刪除的判斷，再稍微整理一下拆分共用的邏輯，把執行部分打包成 function。建立 updateData，專門更新訂單的狀態，我們取得 index，直接查詢這個 row 的資料，拿請求的 name、phone 直接比對是否符合，符合的話才讓使用者可以更新訂單狀態。&lt;/p&gt;
 &lt;p&gt;另外我們定義處理狀態 0 代表訂單取消，1 代表完成訂單。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;function doPost(e) {
   var params = e.parameter;
   var name = params.name;
@@ -2392,7 +2392,7 @@ function updateData(Sheet, name, phone, status, index){
 &lt;p&gt;這樣就完成了查詢、更新訂單的 api 了，剩下就是網頁前端部分，網頁需求是讓使用者輸入姓名、電話查詢訂單，或是查詢後可以取消訂單。&lt;/p&gt;
 &lt;p&gt;前端主要的 function 就這些，主要就是查詢拉資料，更新 List 清單，點擊取消訂單的按鈕，請求 API 更新狀態等等。&lt;/p&gt;
 &lt;p&gt;前端畫面比起 API 來說，就比較單純這邊不多贅述了。要用 vanilla javascript、jquey、或 react、vue，看你喜歡都可以做到一樣功能。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;      &amp;lt;div class=&amp;quot;col-lg-12 text-center&amp;quot;&amp;gt;
         &amp;lt;h1 class=&amp;quot;mt-5&amp;quot;&amp;gt;查詢訂單&amp;lt;/h1&amp;gt;
         &amp;lt;div class=&amp;quot;form-group col-xs-12&amp;quot;&amp;gt;
@@ -2570,7 +2570,7 @@ function updateData(Sheet, name, phone, status, index){
 &lt;h3 id=&quot;intersection-observer&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#intersection-observer&quot; aria-label=&quot;intersection observer permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Intersection observer&lt;/h3&gt;
 &lt;p&gt;IntersectionObserver 是新的瀏覽器 api，主要處理 element 與 viewport 之間處理，當目標與 element 交會則會處理互動，效能相對於傳統做法相對好。&lt;/p&gt;
 &lt;p&gt;Google article: &lt;a href=&quot;https://developers.google.com/web/updates/2019/02/intersectionobserver-v2&quot; title=&quot;Trust is Good, Observation is Better—Intersection Observer v2&quot;&gt;Trust is Good, Observation is Better—Intersection Observer v2&lt;/a&gt;&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;var observer = new IntersectionObserver(callback[, options]);&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;上面的參數 callback 是當 viewport 與 element 交會時會觸發，options 則是可以使用 &lt;code class=&quot;language-text&quot;&gt;root&lt;/code&gt;、&lt;code class=&quot;language-text&quot;&gt;rootMargin&lt;/code&gt;、&lt;code class=&quot;language-text&quot;&gt;threshold&lt;/code&gt;。&lt;/p&gt;
@@ -2586,7 +2586,7 @@ function updateData(Sheet, name, phone, status, index){
 &lt;p&gt;頁面範例: &lt;a href=&quot;https://codepen.io/chu1228/pen/VNqaNQ&quot; title=&quot;codepen&quot;&gt;codepen demo&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;chrome-原生支援&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#chrome-%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8F%B4&quot; aria-label=&quot;chrome 原生支援 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Chrome 原生支援&lt;/h3&gt;
 &lt;p&gt;chrome version 75 才會 release 的功能，現在可以先手動開啟設定，chrome 網址列輸入&lt;code class=&quot;language-text&quot;&gt;chrome://flags/#enable-lazy-image-loading&lt;/code&gt;，右邊選項改為 enabled。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;img loading=&amp;#39;lazy&amp;#39; src=&amp;#39;https://placekitten.com/400/400&amp;#39; width=&amp;#39;400&amp;#39; height=&amp;#39;400&amp;#39; alt=&amp;#39;&amp;#39;&amp;gt;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;頁面範例: &lt;a href=&quot;https://mathiasbynens.be/demo/img-loading-lazy&quot; title=&quot;chrome lazyload demo&quot;&gt;chrome lazyload demo&lt;/a&gt;&lt;/p&gt;
@@ -2654,7 +2654,7 @@ function updateData(Sheet, name, phone, status, index){
 &lt;ul&gt;
 &lt;li&gt;Source code&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;document.addEventListener(&amp;quot;DOMContentLoaded&amp;quot;, function() {
   var lazyImages = [].slice.call(document.querySelectorAll(&amp;quot;img.lazyload&amp;quot;));
 
@@ -2687,7 +2687,7 @@ function updateData(Sheet, name, phone, status, index){
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;頁面範例: &lt;a href=&quot;https://codepen.io/chu1228/pen/BEgaKZ?editors=1010&quot; title=&quot;codepen&quot;&gt;codepen demo&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;另外還可以加上 onload listener 讓載入圖片過程，保持 lazyload 灰色區塊。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;lazyImage.src = lazyImage.dataset.src;
 lazyImage.onload = function(){
     lazyImage.classList.remove(&amp;quot;lazyload&amp;quot;);
@@ -2701,7 +2701,7 @@ lazyImage.onload = function(){
 &lt;p&gt;這在實作上必須倚賴 javascript，或後端用其他工具產生，例如說圖片上傳過程後端會另外 call api，取得圖片的比例。&lt;/p&gt;
 &lt;p&gt;這邊先只討論 javascript，利用 Image API 也可以輕鬆做到，下面的方法就可以拿到圖片的 ratio，setRatio 則是可以當作儲存圖片的方法，當使用者上傳圖片，會再經過 getImageRatio，再帶入 save data function 利用 callback，當取得圖片比例再提供 ratio 給後端儲存。&lt;/p&gt;
 &lt;p&gt;這方法需要一個前提條件，一種是圖片寬度再 container 下需要寬滿版，因為 padding-top 推出來的高度，是相對於 container 寬度乘出來的。有些人會利用 div container img 概念處理，只要變化 container 寬度，一樣可以兼容 lazyload，medium 就是這樣處理的。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;function getImageRatio(url, callback) {
     var img = new Image();
     img.onload = function() {
@@ -2716,7 +2716,7 @@ getImageRatio(&amp;#39;https://ianccy.com/images/rabbit.png&amp;#39;, setRatio);
         &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;seo-額外處理&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#seo-%E9%A1%8D%E5%A4%96%E8%99%95%E7%90%86&quot; aria-label=&quot;seo 額外處理 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;seo 額外處理&lt;/h2&gt;
 &lt;p&gt;雖然 googlebot 可以執行 javascript，但是其他爬蟲不一定可以，所以要特別標明出 noscript 的 img html。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascripts&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;img class=&amp;quot;lazyload&amp;quot; data-ratio=&amp;quot;51.24481327800829&amp;quot; data-src=&amp;quot;https://ianccy.com/images/rabbit.png&amp;quot; alt=&amp;quot;rabbit&amp;quot;&amp;gt;
 &amp;lt;noscript&amp;gt;&amp;lt;img src=&amp;quot;https://ianccy.com/images/rabbit.png&amp;quot; alt=&amp;quot;rabbit&amp;quot; /&amp;gt;&amp;lt;/noscript&amp;gt;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
@@ -2756,7 +2756,7 @@ getImageRatio(&amp;#39;https://ianccy.com/images/rabbit.png&amp;#39;, setRatio);
 ---&gt;
 &lt;h2 id=&quot;dom-一般事件綁定&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#dom-%E4%B8%80%E8%88%AC%E4%BA%8B%E4%BB%B6%E7%B6%81%E5%AE%9A&quot; aria-label=&quot;dom 一般事件綁定 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;DOM 一般事件綁定&lt;/h2&gt;
 &lt;p&gt;下面的例子，我 container 先綁定 click 事件，再綁定 first，各自彈出自己的 id 名稱，那哪個會先 alert 出來。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;div id=&amp;quot;container&amp;quot;&amp;gt;container
   &amp;lt;ul id=&amp;quot;list&amp;quot;&amp;gt;ist
     &amp;lt;li id=&amp;quot;first&amp;quot;&amp;gt;number 1&amp;lt;/li&amp;gt;
@@ -2778,7 +2778,7 @@ document.getElementById(&amp;#39;first&amp;#39;).addEventListener(&amp;#39;click
 &lt;p&gt;我們可以在 addEventListener(‘click’,function(){}, &lt;code class=&quot;language-text&quot;&gt;true&lt;/code&gt;)，來決定 useCapture 參數的 boolean，預設沒帶會是設為 false，當 usecaptue 為 true 時，事件觸發會先經由 DOM tree 一路往子層到目標為止，之後再冒泡上去父層，這樣一個完整的流程就是事件獲取與冒泡。&lt;/p&gt;
 &lt;p&gt;最重要就是我們有辦法阻止事件獲取冒泡的傳遞，利用 event.stopPropagation function，就可以阻止事件往後傳遞。&lt;/p&gt;
 &lt;p&gt;另外 event 還有提供物件 eventPhase，會回傳 0~4 的數值，讓我們可以清楚知道這個事件到什麼階段。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;eventPhase: 0 沒有事件
 eventPhase: 1 獲取階段，會以物件父層一直到最高開始執行，最頂端會是Window，
               再來Document，Html，一直到目標為止。
@@ -2835,7 +2835,7 @@ eventPhase: 3 冒泡階段，會由目標物件的第一層父層開始，一路
   &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;JavaScript dompass&lt;/figcaption&gt;
   &lt;/figure&gt;
       &lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// get All elements
 const nodeList= [...document.querySelectorAll(&amp;#39;*&amp;#39;)];
 
@@ -2858,7 +2858,7 @@ nodeList.forEach(elem =&amp;gt;{
 &lt;p&gt;這邊我們用最經典的 popup 例子，需求是要點擊按鈕 click 會讓 popup 顯示的，但在這邊我們希望 popup 內部點擊不會關閉 popup，但是點外部隨便空間會關閉 popup。&lt;/p&gt;
 &lt;p&gt;首先監聽 body 點擊會關閉 popup，再來監聽 openPop 按鈕點擊讓 popup 打開，這邊還多下了 &lt;code class=&quot;language-text&quot;&gt;e.stopPropagation()&lt;/code&gt;;，防止我點擊 popup 打開觸發 body 點擊被關閉，因為這樣可以中斷點擊 popup 往上冒泡觸發 body 事件。&lt;/p&gt;
 &lt;p&gt;再來是 popup 本身需要能點選內部內容，同樣我們也對 popup 使用 e.stopPropagation(); ，讓我們可以點擊 popup 裡面的內容、按鈕。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;button id=&amp;quot;openPop&amp;quot;&amp;gt;open popup&amp;lt;/button&amp;gt;
 &amp;lt;div id=&amp;quot;text&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; // fake wording
 &amp;lt;div id=&amp;quot;popup&amp;quot; class=&amp;quot;&amp;quot;&amp;gt;
@@ -3228,7 +3228,7 @@ function close () {
 &lt;ul&gt;
 &lt;li&gt;promise 三種狀態&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;擱置（pending）：初始狀態，不是 fulfilled 與 rejected。
 實現（fulfilled）：表示操作成功地完成。
 拒絕（rejected）：表示操作失敗了。&lt;/code&gt;
@@ -3238,7 +3238,7 @@ function close () {
 &lt;ul&gt;
 &lt;li&gt;非同步 function 範例&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// declare arrow function return Promise
 // ** new Promise to inherit Promise instance **
 const getData = (url) =&amp;gt; new Promise((resolve, reject) =&amp;gt; {
@@ -3290,7 +3290,7 @@ getData(&amp;#39;https://jsonplaceholder.typicode.com/todos/1&amp;#39;)
 &lt;ul&gt;
 &lt;li&gt;add more callback&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;...
 getData(&amp;#39;https://jsonplaceholder.typicode.com/todos/1&amp;#39;)
   .then(res =&amp;gt; {
@@ -3342,7 +3342,7 @@ const appendItem = (res) =&amp;gt; {
 &lt;ul&gt;
 &lt;li&gt;Promise native prototype&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;Promise {&amp;lt;pending&amp;gt;}
   __proto__: Promise
   catch: ƒ catch()
@@ -3360,7 +3360,7 @@ const appendItem = (res) =&amp;gt; {
 &lt;ul&gt;
 &lt;li&gt;build promise&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;class promise {
   constructor(callback){
     // promise status
@@ -3400,7 +3400,7 @@ const appendItem = (res) =&amp;gt; {
 &lt;ul&gt;
 &lt;li&gt;加上 then catch 接受回傳值&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;...
   // then will let user call to check status
   then = (success, failed) =&amp;gt; {
@@ -3434,7 +3434,7 @@ const appendItem = (res) =&amp;gt; {
 &lt;p&gt;使用 React 框架，但又需要讓爬蟲能索引得到 html，就需要轉為使用 server-side render，核心概念就是，原本 JavaScript 是用戶端執行產生內容，轉向依靠 server 來產生內容，請求 API 的部分也交由 server 端處理，直接在 server 端拿到畫面相關的資料，這樣爬蟲來索引的同時，就已經拿到了內容了。&lt;/p&gt;
 &lt;p&gt;接下來來試著架構出 React server-side render 的架構，會使用到 react 官方的 cli create-react-app，以及 node.js 作為 server。&lt;/p&gt;
 &lt;h3 id=&quot;使用-create-react-app-cli&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E4%BD%BF%E7%94%A8-create-react-app-cli&quot; aria-label=&quot;使用 create react app cli permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;使用 create-react-app cli&lt;/h3&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;npx create-react-app react-ssr
 cd react-ssr&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
@@ -3450,7 +3450,7 @@ cd react-ssr&lt;/code&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;純粹只是 client side render，就只要執行 npm run build，再來我們針對 build 出來的資源，用 express 來控制。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;const express = require(&amp;#39;express&amp;#39;);
 const app = express();
 const path = require(&amp;#39;path&amp;#39;);
@@ -3532,7 +3532,7 @@ mport。&lt;/li&gt;
 &lt;h2 id=&quot;indexjs-功能&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#indexjs-%E5%8A%9F%E8%83%BD&quot; aria-label=&quot;indexjs 功能 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;index.js 功能&lt;/h2&gt;
 &lt;p&gt;md5File 是為了讀取 image file name，搭配 ignoreStyles 使用，讓 server 讀取到 npm build 出來的 file name。這邊最黑魔法的是 babel/register，也是第一次看過這個用法，很輕鬆不需要 eject 就導入 babel 到 create react app 內。&lt;/p&gt;
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;npm install md5-file ignore-styles&lt;/code&gt;&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;const md5File = require(&amp;#39;md5-file&amp;#39;);
 const path = require(&amp;#39;path&amp;#39;);
 
@@ -3570,7 +3570,7 @@ require(&amp;#39;./server&amp;#39;);&lt;/code&gt;
 &lt;h2 id=&quot;serverjs-功能&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#serverjs-%E5%8A%9F%E8%83%BD&quot; aria-label=&quot;serverjs 功能 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;server.js 功能&lt;/h2&gt;
 &lt;p&gt;這邊主要就是處理 express 路由，static file 路徑，非常簡單的基本設定，比較特別的是用到 Loadable 來確保有 render component 有執行完成。&lt;/p&gt;
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;npm install react-loadable express&lt;/code&gt;&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;import express from &amp;#39;express&amp;#39;;
 import path from &amp;#39;path&amp;#39;;
 import Loadable from &amp;#39;react-loadable&amp;#39;;
@@ -3595,7 +3595,7 @@ Loadable.preloadAll().then(() =&amp;gt; {
 &lt;p&gt;這邊就是實際 render react，主要依賴 renderToString 來取得 react 執行後的 html，之後再將 react 的 html 組裝成完整頁面的資料。&lt;/p&gt;
 &lt;p&gt;這邊我有傳遞資料給 App wording，假設直接看 view-source:&lt;a href=&quot;http://localhost:4000/&quot;&gt;http://localhost:4000/&lt;/a&gt; 會看到 THIS IS Server Side Render ，但是 client side init 會瞬間不見，這邊可以讓你做一些 call api 後的資料傳遞，但這邊要記得要設定成某個變數名，讓 client 抓取這個變數。&lt;/p&gt;
 &lt;p&gt;ps.client 指的是使用者載入時。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;import path from &amp;#39;path&amp;#39;;
 import fs from &amp;#39;fs&amp;#39;;
 
@@ -3639,7 +3639,7 @@ const injectHTML = (data, { html, title, meta, body, state }) =&amp;gt; {
 &lt;ul&gt;
 &lt;li&gt;package.json&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;  &amp;quot;dependencies&amp;quot;: {
     &amp;quot;@babel/core&amp;quot;: &amp;quot;^7.1.2&amp;quot;,
     &amp;quot;@babel/plugin-syntax-dynamic-import&amp;quot;: &amp;quot;^7.0.0&amp;quot;,
@@ -3735,7 +3735,7 @@ const injectHTML = (data, { html, title, meta, body, state }) =&amp;gt; {
 &lt;li&gt;307 狀態瑪表示暫時導向新位置，但是保持使用者請求方式不變&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Node.js express 301 語法&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;res.redirect(301, &amp;#39;http://example.com&amp;#39;);&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;&lt;a href=&quot;https://support.google.com/webmasters/answer/93633?hl=zh-Hant&quot; title=&quot;google 301 rediect 介紹&quot;&gt;google 301 rediect 介紹&lt;/a&gt;&lt;/p&gt;
@@ -3755,13 +3755,13 @@ const injectHTML = (data, { html, title, meta, body, state }) =&amp;gt; {
 &lt;ul&gt;
 &lt;li&gt;網址為 &lt;a href=&quot;https://example.com/apple?user=ianchuu&quot;&gt;https://example.com/apple?user=ianchuu&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;link rel=&amp;quot;canonical&amp;quot; href=&amp;quot;https://example.com/apple&amp;quot; /&amp;gt;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;ul&gt;
 &lt;li&gt;google 重複性內容處理&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;如果您有某一個網頁可透過多個網址存取，或是不同網頁上存在相似的內容 (例如同時有行動版和桌面版網頁)，Google 會將這些網頁視為相同網頁的重複版本，從中選出一個網址做為「標準」版本並檢索該網址，其他網址則會被視為「重複」網址，檢索頻率會比較低。&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;&lt;a href=&quot;https://support.google.com/webmasters/answer/139066?visit_id=636808323796527838-1214345128&amp;#x26;rd=1&quot; title=&quot;google 整合重複的網址&quot;&gt;google 整合重複的網址&lt;/a&gt;&lt;/p&gt;
@@ -3791,7 +3791,7 @@ const injectHTML = (data, { html, title, meta, body, state }) =&amp;gt; {
 &lt;p&gt;這是 react 16 再處理 server side 到 client side render 畫面的邏輯修改，為了增加 render 效能，react 拋棄的比對 server side to client html 比對，官方建議 server side 跟 client side 的 html 要盡量保持一致。如果要有不一樣的話，建議在 componentDidMount setState 處理畫面更新。&lt;/p&gt;
 &lt;p&gt;發現部分的 html 畫卡在 server side render layout，修復方法就利用 server side 跟 client side 用不同的 key 值，讓 react 比對 node 做更新。但是如果要更新 dangerouslySetInnerHTML 用 key 方法也沒用，目前 hotfix 作法是兩邊用不同的 html tag 強更新，之後會改為 componentDisMount 更新。&lt;/p&gt;
 &lt;h3 id=&quot;react-16-官方宣告&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#react-16-%E5%AE%98%E6%96%B9%E5%AE%A3%E5%91%8A&quot; aria-label=&quot;react 16 官方宣告 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;react 16 官方宣告&lt;/h3&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;In general, we don’t recommend that you render different content on the client versus the server, but it can be useful in some cases (e.g. timestamps).
 However, it’s dangerous to have missing nodes on the server render as this might cause sibling nodes to be created with incorrect attributes.&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
@@ -3811,7 +3811,7 @@ However, it’s dangerous to have missing nodes on the server render as this mig
 &lt;ul&gt;
 &lt;li&gt;JSON-LD Course 範例&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;script type=&amp;quot;application/ld+json&amp;quot;&amp;gt;
 {
   &amp;quot;@context&amp;quot;: &amp;quot;http://schema.org/&amp;quot;,
@@ -3832,7 +3832,7 @@ However, it’s dangerous to have missing nodes on the server render as this mig
 &lt;ul&gt;
 &lt;li&gt;RDFa Course 範例&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;body vocab=&amp;quot;http://schema.org/&amp;quot;&amp;gt;
 &amp;lt;main typeof=&amp;quot;Course&amp;quot;&amp;gt;
   &amp;lt;h1 property=&amp;quot;name&amp;quot;&amp;gt;The Data Scientist&amp;#39;s Toolbox&amp;lt;/h1&amp;gt;
@@ -3857,7 +3857,7 @@ However, it’s dangerous to have missing nodes on the server render as this mig
 &lt;ul&gt;
 &lt;li&gt;JSON-LD breadcrumb&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;script type=&amp;quot;application/ld+json&amp;quot;&amp;gt;
 {
   &amp;quot;@context&amp;quot;: &amp;quot;http://schema.org&amp;quot;,
@@ -3874,7 +3874,7 @@ However, it’s dangerous to have missing nodes on the server render as this mig
     &amp;quot;@type&amp;quot;: &amp;quot;ListItem&amp;quot;,
     &amp;quot;position&amp;quot;: 2,
     &amp;quot;name&amp;quot;: &amp;quot;Google Analytics 工作階段介紹、定義&amp;quot;,
-    &amp;quot;item&amp;quot;: &amp;quot;https://ianccy.com/2018/07/30/gasession/index.html&amp;quot;
+    &amp;quot;item&amp;quot;: &amp;quot;https://ianccy.com/gasession/&amp;quot;
   }]
 }
 &amp;lt;/script&amp;gt;&lt;/code&gt;
@@ -3982,7 +3982,7 @@ However, it’s dangerous to have missing nodes on the server render as this mig
       &lt;/p&gt;
 &lt;h2 id=&quot;搜尋結果錨點-非-structured-data&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E6%90%9C%E5%B0%8B%E7%B5%90%E6%9E%9C%E9%8C%A8%E9%BB%9E-%E9%9D%9E-structured-data&quot; aria-label=&quot;搜尋結果錨點 非 structured data permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;搜尋結果錨點 (非 structured data)&lt;/h2&gt;
 &lt;p&gt;最後再提供一個最近特別用到修改，下方的搜尋結果出現頁面內的錨點，原本 blog 頁面架構就有用 id 錨點)，查閱結構化資料過後發現，並沒有錨點可以使用的功能，於是我針對搜尋結果有出現錨點的頁面都看過一次 html。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;h2 id=&amp;quot;#錨點名稱&amp;quot;&amp;gt;{{content}}&amp;lt;/h2&amp;gt;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;發現都有相同概念，就是要當你搜尋結果要出現錨點，頁面上就必須要有實體連結可以點過去。於是我就做了頁面左邊的那個點擊 scroll 區塊，大約過了一週後搜尋結果就開始出現錨點。雖然常常一下只顯示麵包屑，一下又只顯示錨點…。&lt;/p&gt;
@@ -4038,7 +4038,7 @@ However, it’s dangerous to have missing nodes on the server render as this mig
 &lt;ul&gt;
 &lt;li&gt;目錄範例&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;div class=&amp;quot;toc-article&amp;quot; id=&amp;quot;toc&amp;quot;&amp;gt;
   &amp;lt;div class=&amp;quot;toc-title&amp;quot;&amp;gt;文章目錄&amp;lt;/div&amp;gt;
   &amp;lt;ol class=&amp;quot;toc&amp;quot;&amp;gt;
@@ -4070,7 +4070,7 @@ However, it’s dangerous to have missing nodes on the server render as this mig
 &lt;!--- ![react](../images/react.png &quot;react&quot;) ---&gt;
 &lt;h2 id=&quot;react-portals-rule&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#react-portals-rule&quot; aria-label=&quot;react portals rule permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;React Portals rule&lt;/h2&gt;
 &lt;p&gt;要用 React Portals 必須遵照規定的格式 ReactDOM.createPortal(element,container)，第一個參數要傳遞需要渲染的物件，第二個參數 container，建立&lt;code class=&quot;language-text&quot;&gt;document.createElement(&amp;#39;div&amp;#39;)&lt;/code&gt; 作為 render 的 container。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;ReactDOM.createPortal(element,container)&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;會需要用到兩個 lifeCycle，第一個是 componentDidMount react 元件 render 後調用，另一個則是 componentWillUnmount 在元件被移除後會調用。&lt;/p&gt;
@@ -4078,32 +4078,29 @@ However, it’s dangerous to have missing nodes on the server render as this mig
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// create component
 class Portal extends React.Component {
-  constructor(props) {
-    super(props);
-    // create element as render container element
-    this.el = document.createElement(&amp;#39;div&amp;#39;);
-  }
+    constructor(props) {
+        super(props);
+        // create element as render container element
+        this.el = document.createElement(&amp;#39;div&amp;#39;);
+    }
 
-  componentDidMount() {
-    // select element to render
-    const elementId = document.getElementById(&amp;#39;elementId&amp;#39;);
-    elementId.appendChild(this.el);
-  }
+    componentDidMount() {
+        // select element to render
+        const elementId = document.getElementById(&amp;#39;elementId&amp;#39;);
+        elementId.appendChild(this.el);
+    }
 
-  componentWillUnmount() {
-    // select element to remove
-    const elementId = document.getElementById(&amp;#39;elementId&amp;#39;);
-    elementId.removeChild(this.el);
-  }
+    componentWillUnmount() {
+        // select element to remove
+        const elementId = document.getElementById(&amp;#39;elementId&amp;#39;);
+        elementId.removeChild(this.el);
+    }
 
-  render() {
-    // first argument as element or string or fragment
-    // second argument as render container
-    return ReactDOM.createPortal(
-      this.props.children,
-      this.el,
-    );
-  }
+    render() {
+        // first argument as element or string or fragment
+        // second argument as render container
+        return ReactDOM.createPortal(this.props.children, this.el);
+    }
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;portals-example&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#portals-example&quot; aria-label=&quot;portals example permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Portals example&lt;/h2&gt;
@@ -4115,27 +4112,24 @@ class Portal extends React.Component {
 &lt;p&gt;Portals 也可以打印到 window open 頁面的節點上。這邊範例是使用了 open window，再將元件透過 document.body.appendChild 渲染到開啟的視窗上。這邊是看到 medium 的範例，是利用 setInterval 每秒執行一次 setState，處理 小視窗 更新 parent 的視窗，有試驗過 postMessage 沒效果。&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;class Portal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.el = document.createElement(&amp;quot;div&amp;quot;);
-    this.Window = null;
-  }
+    constructor(props) {
+        super(props);
+        this.el = document.createElement(&amp;#39;div&amp;#39;);
+        this.Window = null;
+    }
 
-  componentDidMount() {
-    this.Window = window.open(&amp;quot;&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;width=800,height=500&amp;quot;);
-    this.Window.document.body.appendChild(this.el);
-  }
+    componentDidMount() {
+        this.Window = window.open(&amp;#39;&amp;#39;, &amp;#39;&amp;#39;, &amp;#39;width=800,height=500&amp;#39;);
+        this.Window.document.body.appendChild(this.el);
+    }
 
-  componentWillUnmount() {
-    this.Window.close();
-  }
+    componentWillUnmount() {
+        this.Window.close();
+    }
 
-  render() {
-    return ReactDOM.createPortal(
-      this.props.children,
-      this.el
-    );
-  }
+    render() {
+        return ReactDOM.createPortal(this.props.children, this.el);
+    }
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;&lt;a href=&quot;https://codesandbox.io/s/nr23kvm144&quot; title=&quot;Portals open window&quot;&gt;Portals open window Code &lt;/a&gt;&lt;/p&gt;
@@ -4154,24 +4148,24 @@ class Portal extends React.Component {
 &lt;/ul&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;var form = new FormData();
-form.append(&amp;quot;image&amp;quot;, &amp;quot;R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7&amp;quot;);
+form.append(&amp;#39;image&amp;#39;, &amp;#39;R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7&amp;#39;);
 
 var settings = {
-  &amp;quot;async&amp;quot;: true,
-  &amp;quot;crossDomain&amp;quot;: true,
-  &amp;quot;url&amp;quot;: &amp;quot;https://api.imgur.com/3/image&amp;quot;,
-  &amp;quot;method&amp;quot;: &amp;quot;POST&amp;quot;,
-  &amp;quot;headers&amp;quot;: {
-    &amp;quot;Authorization&amp;quot;: &amp;quot;Client-ID {{clientId}}&amp;quot;
-  },
-  &amp;quot;processData&amp;quot;: false,
-  &amp;quot;contentType&amp;quot;: false,
-  &amp;quot;mimeType&amp;quot;: &amp;quot;multipart/form-data&amp;quot;,
-  &amp;quot;data&amp;quot;: form
-}
+    async: true,
+    crossDomain: true,
+    url: &amp;#39;https://api.imgur.com/3/image&amp;#39;,
+    method: &amp;#39;POST&amp;#39;,
+    headers: {
+        Authorization: &amp;#39;Client-ID {{clientId}}&amp;#39;
+    },
+    processData: false,
+    contentType: false,
+    mimeType: &amp;#39;multipart/form-data&amp;#39;,
+    data: form
+};
 
-$.ajax(settings).done(function (response) {
-  console.log(response);
+$.ajax(settings).done(function(response) {
+    console.log(response);
 });&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;傳統-input-上傳&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E5%82%B3%E7%B5%B1-input-%E4%B8%8A%E5%82%B3&quot; aria-label=&quot;傳統 input 上傳 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;傳統 input 上傳&lt;/h2&gt;
@@ -4280,7 +4274,7 @@ function progress(e){
 &lt;ul&gt;
 &lt;li&gt;HTML drag API&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;drag 於一個元素或文字選取區塊被拖曳時觸發。
 dragend	於拖曳操作結束時觸發（如放開滑鼠按鍵或按下鍵盤的 escape 鍵。
 dragenter 於一個元素或文字選取區塊被拖曳移動進入一個有效的放置目標時觸發。
@@ -4380,10 +4374,10 @@ dragZone.addEventListener(&amp;#39;drop&amp;#39;,function(e){
 &lt;p&gt;實際寫一遍會發現其實並沒有太艱難，只是有滿多小細節要處理，包含拖拉事件、串接 api 檔案格式、進度條處理等等。這邊還沒寫邏輯還有圖片寬度高度、size 判斷等等。但擔心繼續寫下去會太長，等下一篇再來處理這些小細節吧。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Google Tag Manager(gtm)教學 觸發、代碼、變數設定介紹]]></title><description><![CDATA[之前有介紹過如何在 tag manager 安裝 ga 追蹤碼，埋設 tag manager 的追蹤碼到網頁後，再來開始進入 tag manager 設定，首先點選 觸發 建立好觸發邏輯，再進入 代碼 增加 ga…]]></description><link>https://ianccy.com/2018-10-tagteach/</link><guid isPermaLink="false">https://ianccy.com/2018-10-tagteach/</guid><pubDate>Tue, 16 Oct 2018 00:03:46 GMT</pubDate><content:encoded>&lt;p&gt;之前有介紹過如何在 tag manager 安裝 ga 追蹤碼，埋設 tag manager 的追蹤碼到網頁後，再來開始進入 tag manager 設定，首先點選 &lt;em&gt;觸發&lt;/em&gt; 建立好觸發邏輯，再進入 &lt;em&gt;代碼&lt;/em&gt; 增加 ga 追蹤碼，綁定設定好的觸發點，再點選提交上去，就完成設定了。&lt;/p&gt;
 &lt;p&gt;雖然上次有順手寫掉事件設定，但沒有特別介紹每個設定的邏輯，這次會帶更多細節。以 &lt;a href=&quot;https://work.ianccy.com/commentboard/&quot; title=&quot;留言板&quot;&gt;留言板&lt;/a&gt; 為範例。&lt;/p&gt;
 &lt;p&gt;假設我們要追蹤送出留言，建立一個事件，拿進 ga 當作轉換目標。&lt;/p&gt;
-&lt;p&gt;文章連結：&lt;a href=&quot;https://ianccy.com/2018/08/26/tagmanager/index.html&quot; title=&quot;tag manager 安裝追蹤碼&quot;&gt;tag manager 安裝追蹤碼&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;文章連結：&lt;a href=&quot;https://ianccy.com/tagmanager/&quot; title=&quot;tag manager 安裝追蹤碼&quot;&gt;tag manager 安裝追蹤碼&lt;/a&gt;&lt;/p&gt;
 &lt;!--- ![google tagmanager](../images/tagtool.png &quot;google tagmanager&quot;) ---&gt;
 &lt;h2 id=&quot;tag-manager-設定邏輯&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#tag-manager-%E8%A8%AD%E5%AE%9A%E9%82%8F%E8%BC%AF&quot; aria-label=&quot;tag manager 設定邏輯 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Tag manager 設定邏輯&lt;/h2&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;設定 trigger(觸發) =&amp;gt; 設定 tag(代碼) =&amp;gt; publish(提交)
 
 ps. 每個步驟中都可以使用變數&lt;/code&gt;
@@ -4491,7 +4485,7 @@ ps. 每個步驟中都可以使用變數&lt;/code&gt;
   &lt;/figure&gt;
       &lt;/p&gt;
 &lt;h4 id=&quot;按鈕-html&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E6%8C%89%E9%88%95-html&quot; aria-label=&quot;按鈕 html permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;按鈕 HTML&lt;/h4&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;button type=&amp;quot;button&amp;quot; id=&amp;quot;submitComment&amp;quot; class=&amp;quot;btn btn-secondary&amp;quot;&amp;gt;送出&amp;lt;/button&amp;gt;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;這時候會發現按鈕的 id &lt;code class=&quot;language-text&quot;&gt;submitComment&lt;/code&gt;，通常來說一個頁面的 id 只會存在一個，所以我們會用這個 id 被點擊來作為觸發點，如果你要用 className 也是沒問題，只要處理好判斷即可。&lt;/p&gt;
@@ -4813,7 +4807,7 @@ dataLayer.push({event:{eventName}})，會依照 dataLayer 中 event 觸發。&lt
 &lt;ul&gt;
 &lt;li&gt;代碼區塊使用自訂 html&lt;/li&gt;
 &lt;/ul&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;script&amp;gt;
   if (document.getElementsByClassName(&amp;#39;google-auto-placed&amp;#39;).length === 0) {
     dataLayer.push({
@@ -4984,7 +4978,7 @@ Free Heroku 會 sleep，太慢請 reload&lt;/p&gt;
 &lt;!--- ![node restful api](../images/nodeapi.png &quot;node restful api&quot;) ---&gt;
 &lt;h2 id=&quot;安裝-nodejs-express&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E5%AE%89%E8%A3%9D-nodejs-express&quot; aria-label=&quot;安裝 nodejs express permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;安裝 Node.js express&lt;/h2&gt;
 &lt;p&gt;首先先創建資料夾，npm init 安裝 package.json。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// create file
 mkdir nodeapi
 cd nodeapi
@@ -5093,7 +5087,7 @@ app.listen(port, function () {
   &lt;/figure&gt;
       &lt;/p&gt;
 &lt;p&gt;首先安裝 mongodb。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;npm install --save mongodb&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;index.js 增加內容&lt;/p&gt;
@@ -5169,7 +5163,7 @@ MongoClient.connect(url, function(err, db) {
       &lt;/p&gt;
 &lt;h2 id=&quot;post-api-創建資料&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#post-api-%E5%89%B5%E5%BB%BA%E8%B3%87%E6%96%99&quot; aria-label=&quot;post api 創建資料 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;POST Api 創建資料&lt;/h2&gt;
 &lt;p&gt;這邊要下載 body-parser 插件，要對資料格式處理，這邊要使用到是 JSON data。在 index.js 引入 body-parser，使用 bodyParser 對資料轉型別成 json type，建立 post 的 route，我們命名路徑為/comments。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;npm install body-parser --save&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h4 id=&quot;indexjs-1&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#indexjs-1&quot; aria-label=&quot;indexjs 1 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;index.js&lt;/h4&gt;
@@ -5251,7 +5245,7 @@ app.delete(&amp;#39;/comments/:id&amp;#39;, (req, res) =&amp;gt; {
 &lt;h2 id=&quot;update-api-更新資料&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#update-api-%E6%9B%B4%E6%96%B0%E8%B3%87%E6%96%99&quot; aria-label=&quot;update api 更新資料 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Update Api 更新資料&lt;/h2&gt;
 &lt;p&gt;建立 put 的 route，使用 updateOne 來更新資料，前面兩個參數要帶查詢、更新資料。&lt;/p&gt;
 &lt;p&gt;這樣就完成了 CRUD 的 API 了，下個步驟會建立簡單的畫面，在部署到 server 上，讓我們可以在畫面操作讀取、建立、更新、刪除資料。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascripts&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;app.put(&amp;#39;/comments/:id&amp;#39;, (req, res) =&amp;gt; {
     console.log(req.params.id, req.body);
     const newvalues = {$set: req.body};
@@ -5268,12 +5262,12 @@ app.delete(&amp;#39;/comments/:id&amp;#39;, (req, res) =&amp;gt; {
 &lt;h2 id=&quot;部署到-heroku&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E9%83%A8%E7%BD%B2%E5%88%B0-heroku&quot; aria-label=&quot;部署到 heroku permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;部署到 Heroku&lt;/h2&gt;
 &lt;p&gt;部署到 server 上，讓我們未來方便直接串接 api，提醒一下要到 heroku 設定 mLab 的連線，否則會連不到 mongoDB。&lt;br&gt;
 (這邊我也卡了 30 分鐘…，安裝 addons 也沒用，是執行下面的 command 才 run 起來)&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;heroku config:set PROD_MONGODB=mongodb://dbname:password@ds131323.mlab.com:31323/ian-test&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;&lt;a href=&quot;https://devcenter.heroku.com/articles/mongolab#connecting-to-existing-mlab-deployments-from-heroku&quot; title=&quot;heroku mLab setting&quot;&gt;heroku mLab setting&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;heroku-deploy-流程&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#heroku-deploy-%E6%B5%81%E7%A8%8B&quot; aria-label=&quot;heroku deploy 流程 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;heroku deploy 流程&lt;/h3&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;//login account
 heroku login
 
@@ -5868,7 +5862,7 @@ heroku open&lt;/code&gt;
 &lt;p&gt;其餘還有驗證網頁 amp、改善 html、指定網站搜尋地區、響應式裝置檢驗等等，剩下也有滿多好用的功能。這邊介紹的功能，雖然都簡單用幾個圖片文字帶過，但實際工作上幫助非常大，不論是行銷、工程師都用得到。&lt;/p&gt;
 &lt;p&gt;最後感謝閱讀，希望這篇文章能對你有幫助。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[HTML postMessage iframe and open window 跨視窗傳訊用法]]></title><description><![CDATA[最近在公司專案學到了滿好用的功能 postMessage，當今天使用到跨視窗 iframe 或是 openWindow，原本 parent 頁面需要傳遞訊息給內頁 iframe 或是 tab 頁，就可以利用 postMessage 來傳遞資料。接下來會建立 demo…]]></description><link>https://ianccy.com/2018-09-postmessage/</link><guid isPermaLink="false">https://ianccy.com/2018-09-postmessage/</guid><pubDate>Sun, 23 Sep 2018 16:02:44 GMT</pubDate><content:encoded>&lt;p&gt;最近在公司專案學到了滿好用的功能 postMessage，當今天使用到跨視窗 iframe 或是 openWindow，原本 parent 頁面需要傳遞訊息給內頁 iframe 或是 tab 頁，就可以利用 postMessage 來傳遞資料。接下來會建立 demo 頁面，介紹一下 iframe 跟 window open 的使用方法。&lt;/p&gt;
 &lt;!--- ![JavaScript](../images/post_message.png &quot;JavaScript&quot;) ---&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;window.postMessage() 方法被調用時，會在所有頁面腳本執行完畢之後
 （e.g., 在該方法之後設置的事件、之前設置的timeout 事件,etc.）
 向目標窗口派發一個  MessageEvent 消息。
@@ -6009,7 +6003,7 @@ source 屬性記錄調用 window.postMessage() 方法的窗口信息。&lt;/code
 &lt;p&gt;以上就是簡單的 demo，還有更多延伸的運用，例如做出開視窗會員註冊，送出後傳遞資料回原本頁面渲染畫面。另外當你今天不得不用 iframe 的話，postMessage 會非常好用，賦予 iframe 更有彈性。另外提醒一下，實際運用要記得判斷 post Message 的網址，避免外部可能的攻擊。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Google Tag Manager tracking code 安裝追蹤碼]]></title><description><![CDATA[Tag manager 是一個強大的程式碼管理容器，一個代碼管理中心的概念，提醒一下它並不是取代 google analytics，而是涵蓋著處理各種代碼的設定，包括 google analytics 以及各種 tracking code、或是 html…]]></description><link>https://ianccy.com/2018-08-tagmanager/</link><guid isPermaLink="false">https://ianccy.com/2018-08-tagmanager/</guid><pubDate>Sun, 26 Aug 2018 14:01:35 GMT</pubDate><content:encoded>&lt;p&gt;Tag manager 是一個強大的程式碼管理容器，一個代碼管理中心的概念，提醒一下它並不是取代 google analytics，而是涵蓋著處理各種代碼的設定，包括 google analytics 以及各種 tracking code、或是 html 等等。功能非常的強大，因此寫錯 script 或 css 就可能讓你網站出問題。&lt;/p&gt;
 &lt;!--- ![google tagmanager](../images/tagmanager.png &quot;google tagmanager&quot;) ---&gt;
 &lt;p&gt;以往的埋設追蹤碼都是增加一段 script，但是當你有用了 tag manager，這段 script 可以轉由 tag manager 幫你引入，由 tag manager 來控管 tracking code，假設你是行銷人員，就不用在請程式人員幫你埋碼了。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// 傳統 google analytics tacking code
 &amp;lt;script&amp;gt;(function(i,s,o,g,r,a,m){i[&amp;#39;GoogleAnalyticsObject&amp;#39;]=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -6022,7 +6016,7 @@ ga(&amp;#39;create&amp;#39;,&amp;#39;UA-xxxxxxxxxx-1&amp;#39;,&amp;#39;auto&amp;
         &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;建立帳戶-埋設-tag-manager-traking-code&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E5%BB%BA%E7%AB%8B%E5%B8%B3%E6%88%B6-%E5%9F%8B%E8%A8%AD-tag-manager-traking-code&quot; aria-label=&quot;建立帳戶 埋設 tag manager traking code permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;建立帳戶 埋設 Tag Manager traking code&lt;/h2&gt;
 &lt;p&gt;進入 &lt;a href=&quot;https://tagmanager.google.com/&quot; title=&quot;tag manager&quot;&gt;google tag manager&lt;/a&gt; 網站註冊登入，點選建立帳戶，接下來會彈出一段程式碼。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;
 
 ...
@@ -6653,7 +6647,7 @@ j=d.createElement(s),dl=l!=&amp;#39;dataLayer&amp;#39;?&amp;#39;&amp;amp;l=&amp;
 &lt;!--- ![JavaScript](../images/JavaScript-logo.png &quot;JavaScript&quot;) ---&gt;
 &lt;h2 id=&quot;javascript-prototype-介紹&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#javascript-prototype-%E4%BB%8B%E7%B4%B9&quot; aria-label=&quot;javascript prototype 介紹 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;JavaScript ProtoType 介紹&lt;/h2&gt;
 &lt;p&gt;JavaScript 沒有類的特性(class-based)，跟 Java 不一樣，雖然說 ES6 有 class 但它只是語法糖，每個 JavaScript 都具備有 prototype，只是分為公開、私有差異，而 JavaScript 就用 prototype 來處理繼承(prototype-based)，特性是延展性高。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// 使用解構復值作為參數  並且預設沒傳值預設給予字串
 function Family({m = &amp;#39;no person&amp;#39;,w = &amp;#39;no person&amp;#39;, c = &amp;#39;no child&amp;#39;} = {}){
   this.father = m;
@@ -6730,7 +6724,7 @@ console.log(paul);
   &lt;/figure&gt;
       &lt;/p&gt;
 &lt;p&gt;接下來擴充一下 Family，增加一個 function。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// 增加一個 hi function
 Family.prototype.hi = function(){
   console.log(`Family&amp;#39;s child is ${this.chidren}. Family&amp;#39;s father is ${this.father}`);
@@ -6796,7 +6790,7 @@ paul.hi();
   &lt;/figure&gt;
       &lt;/p&gt;
 &lt;p&gt;簡單的範例&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;var Person = function () {
   this.name = `chu`;
 }
@@ -6872,7 +6866,7 @@ console.log(ian.name, ian.age, ian.gender); // chu 18 male
       &lt;/p&gt;
 &lt;p&gt;突然提到 prototype，主要是在 React 開發時，時常用到 ES6 class，才知道 class 背後處理了非常關於 prototype 繼承的細節。才知道 prototype 的概念形影不離。&lt;/p&gt;
 &lt;p&gt;例如一個簡單的 class 如下&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;class Person {
   constructor(name){
     this.name = name
@@ -6906,7 +6900,7 @@ ian.hello(); // hello,i am chu&lt;/code&gt;
 &lt;h2 id=&quot;工作階段定義&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E5%B7%A5%E4%BD%9C%E9%9A%8E%E6%AE%B5%E5%AE%9A%E7%BE%A9&quot; aria-label=&quot;工作階段定義 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;工作階段定義&lt;/h2&gt;
 &lt;p&gt;官方定義是『 工作階段代表指定期間內在網站上發生的多項使用者互動；舉例來說，一個工作階段可能包含多個網頁瀏覽、事件、社交互動和電子商務交易』，簡單講就是當使用者進入網站，那一刻起就算一個工作階段，沒有所謂使用者進來一跳出，沒有計算到工作階段，他跟網頁停留時間邏輯不一樣，不是依靠節點相減計算的。&lt;/p&gt;
 &lt;h2 id=&quot;一般正常流程&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E4%B8%80%E8%88%AC%E6%AD%A3%E5%B8%B8%E6%B5%81%E7%A8%8B&quot; aria-label=&quot;一般正常流程 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;一般正常流程&lt;/h2&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;使用者輸入 https://ianccy.com =&amp;gt;
 
 載入網頁 (計算為一個工作階段) =&amp;gt;
@@ -6919,7 +6913,7 @@ wow 文章太長拉 離開
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;在複雜一點解釋就是使用者在你網頁中同一頁停留 30 分鐘 (ga 預設 30 分鐘)以內，都算是一個工作階段，如果超過 30 分鐘，那會再加一個工作階段。&lt;/p&gt;
 &lt;h2 id=&quot;使用者停留過久流程&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E4%BD%BF%E7%94%A8%E8%80%85%E5%81%9C%E7%95%99%E9%81%8E%E4%B9%85%E6%B5%81%E7%A8%8B&quot; aria-label=&quot;使用者停留過久流程 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;使用者停留過久流程&lt;/h2&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;使用者輸入 https://tw.yahoo.com/ =&amp;gt;
 
 進入首頁 (計算為一個工作階段) 時間 7/30 20:00 =&amp;gt;
@@ -7005,7 +6999,7 @@ constructor(props) {
 &lt;p&gt;get­Derived­State­From­Props 主要是對比到 componentWillReceiveProps，get­Derived­State­From­Props 帶有兩個參數 nextProps, prevState，更新後的 props，先前的 state，這個 method 會在初始 render 調用，還有父元件重新 render，也會調用到。&lt;/p&gt;
 &lt;p&gt;還有當你使用了 get­Derived­State­From­Props，要更新 state 就需要回傳物件，如果不更新就必須回傳 null。&lt;/p&gt;
 &lt;p&gt;PS.當你使用 get­Derived­State­From­Props，也同時使用 componentWillMount，WillMount 會不執行，並且 console 會傳出警告，另外就算改用 UNSAFE_componentWillMount 也不會執行。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;class ExampleComponent extends React.Component {
   // Initialize state in constructor,
   state = {
@@ -7033,7 +7027,7 @@ by officical react&lt;/code&gt;
 &lt;p&gt;執行 setState、更新父元件傳遞的 props，都會執行 render()，假設 shouldComponentUpdate()回傳 false，則是阻止 render 執行。使用 render 必須回傳 react element(JSX、createClass、react 元件)、或 Fragment、Portals(可以綁定 render 到其他 Dom root)、如果不回傳內容則回傳 boolean、或是 null。&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://reactjs.org/docs/portals.html&quot; title=&quot;Portals&quot;&gt;Portals&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;然後使用 render 盡量保持 pure，例如盡量少在這邊額外處理 props 以及 state，在外面處理保持 render 內乾淨。(這點我也沒做到…)&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;class App extends React.Component {
   filterProps = () =&amp;gt; {
     const { personList } = this.props
@@ -7076,7 +7070,7 @@ by officical react&lt;/code&gt;
 &lt;h4 id=&quot;componentdidupdateprevprops-prevstate-snapshot&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#componentdidupdateprevprops-prevstate-snapshot&quot; aria-label=&quot;componentdidupdateprevprops prevstate snapshot permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;componentDidUpdate(prevProps, prevState, snapshot)&lt;/h4&gt;
 &lt;p&gt;Updating 階段最後一個執行，在畫面渲染更新後調用，新版本的還多加 getSnapshotBeforeUpdate 傳遞的參數。&lt;/p&gt;
 &lt;p&gt;在這邊可以處理 call api 動作，或是 setState，促使重新更新，但提醒記得要判斷執行時機，否則一樣會進入無限迴圈。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;componentDidUpdate(prevProps) {
     if (this.props.name !== prevProps.name) {
         updateUser(this.props.id);
@@ -7179,7 +7173,7 @@ by officical react&lt;/code&gt;
 &lt;!--- ![node.js](../images/node.png &quot;node.js&quot;) ---&gt;
 &lt;h2 id=&quot;express-建立-router&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#express-%E5%BB%BA%E7%AB%8B-router&quot; aria-label=&quot;express 建立 router permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;express 建立 router&lt;/h2&gt;
 &lt;p&gt;1.首先建立資料夾、建立 package.json&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// create folder and movein create package.json
 mkdir node-express
 cd node-express
@@ -7189,7 +7183,7 @@ npm init -y
 npm install express --save&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;2.建立 app.js&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// use express method
 var express = require(&amp;#39;express&amp;#39;);
 var app = express();
@@ -7216,7 +7210,7 @@ if(port === 3000){
 &lt;a href=&quot;http://expressjs.com/zh-tw/4x/api.html#app.METHOD&quot; title=&quot;express METHOD&quot;&gt;express METHOD&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;3.執行 app.js、打開 &lt;a href=&quot;http://localhost:3000/&quot;&gt;http://localhost:3000/&lt;/a&gt;&lt;br&gt;
 打開 command 輸入 node app.js 執行檔案&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;node app.js&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;
@@ -7271,7 +7265,7 @@ if(port === 3000){
 成功看到了 Hello world，這樣就建立了一個很簡易的 node server。但這邊印出來的 hello world，只是純粹字串，不具備 html 架構。&lt;/p&gt;
 &lt;p&gt;4.建立對應 html 檔案搭配動態 router&lt;/p&gt;
 &lt;p&gt;這邊用到的是 ejs template，方便我們之後取用 node.js 傳遞的資料。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// install ejs
 npm install ejs-locals --save&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
@@ -7324,7 +7318,7 @@ npm install ejs-locals --save&lt;/code&gt;
   &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;file structure&lt;/figcaption&gt;
   &lt;/figure&gt;
       &lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// create ejs
 var engine = require(&amp;#39;ejs-locals&amp;#39;);
 app.engine(&amp;#39;ejs&amp;#39;,engine);
@@ -7396,7 +7390,7 @@ app.get(&amp;#39;/about&amp;#39;, function(req, res){
 &lt;p&gt;再來讓我們試著串接 MySQL，做一個完整的後端服務。如果你的電腦沒有安裝 MySQL，要記得先安裝好，&lt;a href=&quot;https://dev.mysql.com/doc/refman/5.7/en/osx-installation-pkg.html&quot; title=&quot;mac 安裝 mysql 教學&quot;&gt;mac 安裝 mysql 教學&lt;/a&gt;、&lt;a href=&quot;https://jerrynest.io/windows-mysql-installer/&quot; title=&quot;windwos 安裝 mysql 教學&quot;&gt;windwos 安裝 mysql 教學&lt;/a&gt;。&lt;br&gt;
 ps.mysql 記得安裝 5.7 以下版本，剛剛跑一遍下載到 8.0.x 版本的，sequel pro 連接出一堆問題，也許是不支援新版的。&lt;/p&gt;
 &lt;p&gt;1.安裝 MySQL for node.js&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// install MySQL tool
 npm install mysql --save&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
@@ -7452,7 +7446,7 @@ npm install mysql --save&lt;/code&gt;
   &lt;/figure&gt;
       &lt;br&gt;
 在剛剛建立的 app.js 上面建立&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;...
 var mysql      = require(&amp;#39;mysql&amp;#39;);
 
@@ -7472,7 +7466,7 @@ connection.query(&amp;#39;select * from MyGuests&amp;#39;, function(err, rows, f
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;執行 node app.js 會看到印出資料，這樣就成功地在 express 連接到 MySQL 了，接下來就要把這個資料加到 express 的 router 中，讓我們在頁面中可以使用資料&lt;/p&gt;
 &lt;p&gt;3.把剛剛 sql 的資料設定到 about page&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// create object
 var data = {};
 connection.query(&amp;#39;select * from MyGuests&amp;#39;, function(err, rows, fields) {
@@ -7491,7 +7485,7 @@ app.get(&amp;#39;/about&amp;#39;, function(req, res){
 });&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;4.修改 about.ejs 使用設定的 data&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;    &amp;lt;h2&amp;gt;Name:&amp;lt;%- data.id %&amp;gt;&amp;lt;/h2&amp;gt;
     &amp;lt;h2&amp;gt;firstname:&amp;lt;%- data.firstname %&amp;gt;&amp;lt;/h2&amp;gt;
     &amp;lt;h2&amp;gt;lastname:&amp;lt;%- data.lastname %&amp;gt;&amp;lt;/h2&amp;gt;
@@ -7553,7 +7547,7 @@ app.get(&amp;#39;/about&amp;#39;, function(req, res){
 &lt;p&gt;再來把剛剛寫好的 node.js 部署到網路上面，heroku 有免費使用的方案，所以這邊使用的是 heroku。&lt;/p&gt;
 &lt;p&gt;首先要安裝 heroku cli，再來註冊帳號，在專案內的 package.json 加入”start”: “node app.js”，新增檔案 Procfile。&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction&quot; title=&quot;heroku node deploy 教學&quot;&gt;heroku node deploy 教學&lt;/a&gt;&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// file package.json
 
   &amp;quot;engines&amp;quot;: {
@@ -7568,7 +7562,7 @@ app.get(&amp;#39;/about&amp;#39;, function(req, res){
 web: node app.js&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;開始準備部署作業&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;//login account
 heroku login
 
@@ -7707,7 +7701,7 @@ heroku open&lt;/code&gt;
 &lt;!--- ![react](../images/react.png &quot;react&quot;) ---&gt;
 &lt;h2 id=&quot;stateless-component&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#stateless-component&quot; aria-label=&quot;stateless component permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;stateless component&lt;/h2&gt;
 &lt;p&gt;ps.以下混雜使用 es6 解構、展開運算子(Spread Operator)寫法，在 react 中處理大量 props 很方便。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;//stateless component  預設props會作為參數
 function NameCard(props){
   return &amp;lt;h2&amp;gt;Hello,{props.name}&amp;lt;/h2&amp;gt;
@@ -7727,7 +7721,7 @@ ReactDOM.render(element, document.getElementById(&amp;#39;root&amp;#39;));&lt;/c
 [範例連結 ](https://codepen.io/chu1228/pen/vjpRrW?editors=0010 &quot;範例連結&quot;)
 &lt;h2 id=&quot;hoc-component&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#hoc-component&quot; aria-label=&quot;hoc component permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;HOC component&lt;/h2&gt;
 &lt;p&gt;ps.es6 arrow function 產生 return function 邏輯&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;const Wrapper = (a) =&amp;gt; (b)=&amp;gt;{
 	console.log(a,b)
 }
@@ -7740,7 +7734,7 @@ var Wrapper = function Wrapper(a) {
 };&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;接下來就改使用 return function 來傳遞額外資料&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;//建立 Person 元件
 function Person(props) {
   const {name,age,status} = props;
@@ -7779,7 +7773,7 @@ ReactDOM.render(element, document.getElementById(&amp;#39;root&amp;#39;));&lt;/c
 &lt;/ul&gt;
 &lt;br/&gt;
 簡單介紹一下在寫啥米
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;  //當使用者觸發 會發送 類別:導覽清單 ,動作:點擊 ,標籤:註冊會員 , 價值:200
   ga(&amp;#39;send&amp;#39;, {
     hitType: &amp;#39;event&amp;#39;,
@@ -7793,7 +7787,7 @@ ReactDOM.render(element, document.getElementById(&amp;#39;root&amp;#39;));&lt;/c
         &lt;/deckgo-highlight-code&gt;
 &lt;br/&gt;
 &lt;p&gt;寫好了 event 的參數之後，再來是要如何才能觸發，我們預期使用者點擊註冊跟登入會員按鈕，執行 ga 的事件紀錄。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;  // 登入註冊會員按鈕
 
   // 1.html onclick 設定方法
@@ -8137,7 +8131,7 @@ Es6 - 介紹 es6 新功能、Promise&lt;/p&gt;
 &lt;!--- ![炸雞demo](../images/炸雞demo.png &quot;炸雞demo&quot;) ---&gt;
 &lt;p&gt;&lt;a href=&quot;https://work.ianccy.com/%E7%82%B8%E9%9B%9E%E8%A8%82%E8%B3%BC&quot; title=&quot;炸雞訂購網頁&quot;&gt;炸雞訂購網頁&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;延伸文章: &lt;a href=&quot;/2019/05/11/googleformadv/&quot; title=&quot;客戶讀取、取消訂單&quot;&gt;客戶讀取、取消訂單&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;延伸文章: &lt;a href=&quot;/googleformadv/&quot; title=&quot;客戶讀取、取消訂單&quot;&gt;客戶讀取、取消訂單&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;google-excel-試算表-實作功能&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#google-excel-%E8%A9%A6%E7%AE%97%E8%A1%A8-%E5%AF%A6%E4%BD%9C%E5%8A%9F%E8%83%BD&quot; aria-label=&quot;google excel 試算表 實作功能 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;google excel 試算表 實作功能&lt;/h2&gt;
 &lt;p&gt;這邊要利用 google 試算表 增加資料 撈取 來實作一個網頁，簡單的鹹酥雞訂餐服務，老闆也可以修改處理狀態，讓顧客可以再取餐前查詢，到底老闆有沒有幫我做好鹹酥雞勒，還是放生我了 XD。&lt;/p&gt;
@@ -8251,7 +8245,7 @@ Es6 - 介紹 es6 新功能、Promise&lt;/p&gt;
 &lt;p&gt;後面是依靠 google sheet 的 method 來選取表單，後面貼上你剛剛 excel 的編碼，再來是用.getSheets()[0]來選取第 1 個工作表單。這樣就成功的選取到這整個 table 了。&lt;/p&gt;
 &lt;p&gt;這邊先處理接到值傳進來先命名，再來選取你要填入的 google excel 編碼、excel tab。&lt;/p&gt;
 &lt;p&gt;ps.這邊用的是 doGet function，代表這個 function 會被 api 的 Get 調用到，也可以用 doPost，但是你串接 api 就要改用 Post。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;function doGet(e) {
   //接帶入值 轉為變數    - 可根據需求修改
   var params = e.parameter;
@@ -8270,7 +8264,7 @@ Es6 - 介紹 es6 新功能、Promise&lt;/p&gt;
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;這邊比較搞剛的是要處理訂單編號，以便於日後我們比對資料方便，剩下最重要的塞剛剛帶進來的值。就完成的簡單的插入資料 function 了！&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;  ...
   //取得 LastRow = 有資料的最後一行的位置
   var LastRow = Sheet.getLastRow();
@@ -8298,7 +8292,7 @@ Es6 - 介紹 es6 新功能、Promise&lt;/p&gt;
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h3 id=&quot;step4-建立-debuggs-來測試剛剛的-建立資料&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#step4-%E5%BB%BA%E7%AB%8B-debuggs-%E4%BE%86%E6%B8%AC%E8%A9%A6%E5%89%9B%E5%89%9B%E7%9A%84-%E5%BB%BA%E7%AB%8B%E8%B3%87%E6%96%99&quot; aria-label=&quot;step4 建立 debuggs 來測試剛剛的 建立資料 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;STEP.4 建立 debug.gs 來測試剛剛的 建立資料&lt;/h3&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;//call
 function debug() {
   var Result = doGet(
@@ -8562,7 +8556,7 @@ function debug() {
 &lt;h3 id=&quot;step7-建立-html-串接資料&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#step7-%E5%BB%BA%E7%AB%8B-html-%E4%B8%B2%E6%8E%A5%E8%B3%87%E6%96%99&quot; aria-label=&quot;step7 建立 html 串接資料 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;STEP.7 建立 html 串接資料&lt;/h3&gt;
 &lt;p&gt;快速簡單的建出了一個網頁，點擊下方的送出，然後 call send function 非同步送出資料，然後成功再回傳給使用者感謝，&lt;/p&gt;
 &lt;p&gt;這個頁面的 javasctipt 都在處理 沒填寫資料要被擋，還有組出訂購的品量數量。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;上半部為觸發call function
 ...
       var data = {
@@ -8595,7 +8589,7 @@ function debug() {
 &lt;h2 id=&quot;使用心得&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97&quot; aria-label=&quot;使用心得 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;使用心得&lt;/h2&gt;
 &lt;p&gt;目前服務的公司也經常使用 google excel api，假設填表資料需要分享觀看、編輯，也不希望合作夥伴觀看公司後台，通常就會使用 google excel 來處理填表，優點就是創立非常快速、不需要後端幫忙，只要前端處理 css + html + javascript 大概 2 小時可以搞定。&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;接續文章: &lt;a href=&quot;/2019/05/11/googleformadv/&quot; title=&quot;客戶讀取、取消訂單&quot;&gt;客戶讀取、取消訂單&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;接續文章: &lt;a href=&quot;/googleformadv/&quot; title=&quot;客戶讀取、取消訂單&quot;&gt;客戶讀取、取消訂單&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content:encoded></item><item><title><![CDATA[SEO優化 google教學guideline介紹]]></title><description><![CDATA[SEO 優化是什麼，SEO 是 Search Engine Optimization 的簡稱，中文叫做搜尋引擎優化，簡單講就是使用 google、yahoo、bing 等搜尋引擎搜尋時，網站能排在前面，更容易使用者被看到點擊。 SEO 跟大家常看到的 adword…]]></description><link>https://ianccy.com/2018-01-whatseo/</link><guid isPermaLink="false">https://ianccy.com/2018-01-whatseo/</guid><pubDate>Sun, 28 Jan 2018 14:45:21 GMT</pubDate><content:encoded>&lt;p&gt;SEO 優化是什麼，SEO 是 Search Engine Optimization 的簡稱，中文叫做搜尋引擎優化，簡單講就是使用 google、yahoo、bing 等搜尋引擎搜尋時，網站能排在前面，更容易使用者被看到點擊。&lt;/p&gt;
 &lt;p&gt;SEO 跟大家常看到的 adword 關鍵字廣告是完全不同東西，adword 是可以依靠花錢就排在最前面，但 SEO 沒辦法 (這裡不提黑帽)，他只能透過各種方式來提升排名。長話短說就是你要讓你的網站夠好夠棒夠棒棒，讓這些搜尋引擎跑演算法的時候，權重分數夠高讓你排在上面。&lt;/p&gt;
 &lt;!--- ![google search](../images/google_search.png &quot;google search&quot;) ---&gt;
@@ -8626,7 +8620,7 @@ function debug() {
 &lt;h2 id=&quot;rwd-手機版網頁&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#rwd-%E6%89%8B%E6%A9%9F%E7%89%88%E7%B6%B2%E9%A0%81&quot; aria-label=&quot;rwd 手機版網頁 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;rwd 手機版網頁&lt;/h2&gt;
 &lt;p&gt;google 在 15 年 宣告手機版搜尋獨立計算排名，&lt;a href=&quot;https://webmaster-tcn.googleblog.com/2015/02/blog-post.html&quot; title=&quot;rwd announce&quot;&gt;rwd 排名宣告&lt;/a&gt;，意味著網站要能兼容手機變得非常重要，手機版網頁有幾種實作，最簡單的是響應式設計，依靠 css media query 針對螢幕來變換寬度，另一種是手機版網頁，實際上存在兩個頁面，一個 for 桌機另一個 for mobile，這記得要互相宣告。&lt;/p&gt;
 &lt;p&gt;方法如下&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;//桌機版網頁標記
 &amp;lt;link rel=&amp;quot;alternate&amp;quot; media=&amp;quot;only screen and (max-width: 640px)&amp;quot;  href=&amp;quot;http://手機版URL&amp;quot;&amp;gt;
 //行動版網頁
@@ -8709,7 +8703,7 @@ function debug() {
 等於 0 不變更位置。&lt;/p&gt;
 &lt;h2 id=&quot;array-sort-範例&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#array-sort-%E7%AF%84%E4%BE%8B&quot; aria-label=&quot;array sort 範例 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Array sort 範例&lt;/h2&gt;
 &lt;p&gt;針對 price 數字 陣列排序&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;let Arr = [{name:&amp;#39;apple&amp;#39;,price:50},
            {name:&amp;#39;watermelon&amp;#39;,price:30},
            {name:&amp;#39;mango&amp;#39;,price:90},
@@ -8729,7 +8723,7 @@ console.log(Arr)
 console.log(times) // 9次&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;針對字串 name 陣列排序&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;let Arr = [{name:&amp;#39;apple&amp;#39;,price:50},
            {name:&amp;#39;watermelon&amp;#39;,price:30},
            {name:&amp;#39;mango&amp;#39;,price:90},
@@ -8758,7 +8752,7 @@ console.log(Arr)
 &lt;h2 id=&quot;google-map-搭配內建-marker-infowindow&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#google-map-%E6%90%AD%E9%85%8D%E5%85%A7%E5%BB%BA-marker-infowindow&quot; aria-label=&quot;google map 搭配內建 marker infowindow permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;google map 搭配內建 marker infowindow&lt;/h2&gt;
 &lt;p&gt;首先先運用比較常用到的功能，google map 下多個 marker，再搭配 marker 的 event 來互動，以下是打開 infowindow 的運用。&lt;/p&gt;
 &lt;p&gt;簡單創建多筆經緯度資料，呈現的是搭計程車到地點的價格。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;//我只標出比較重要部分，其他就codepen點開來看唄
   var marker = new google.maps.Marker({
     position: {lat: item.lat, lng: item.lng},
@@ -8784,7 +8778,7 @@ ps.可以利用指定某個 marker markerArr[i].setOptions({data=“/change/imag
 &lt;p&gt;感謝 google 大大，其實 googlemap 官方 github 有整理滿多 library &lt;a href=&quot;https://github.com/googlemaps/v3-utility-library&quot; title=&quot;google map library&quot;&gt;google map library&lt;/a&gt;，建議下載使用，因為滿多工具 demo 頁面都呈現 404…。&lt;/p&gt;
 &lt;p&gt;這邊要用的是&lt;a href=&quot;https://github.com/googlemaps/v3-utility-library/tree/master/markerwithlabel&quot; title=&quot;google map library&quot;&gt;markerwithlabel&lt;/a&gt; 還有 &lt;a href=&quot;https://github.com/googlemaps/v3-utility-library/tree/master/markerclusterer&quot; title=&quot;google map library&quot;&gt;markercluster&lt;/a&gt;這兩個 library，markerwithlabel 讓我們更簡單設計不同的 marker，例如讓他帶自訂的 image，再來是重點 markercluster，它讓我們可以解決 marker 過多，同時重疊的問題。&lt;/p&gt;
 &lt;p&gt;首先處理單一個 marker 用的是 MarkerWithLabel，原本呼叫 google.maps.Marker 改成 MarkerWithLabel，然後就搞定了，非常快速簡單，他可以用的 event 滿多的，基本上都可以處理 marker 的互動，甚至也可以像一般的 marker 設定物件上去。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;//更多變數請點選說明文件，基本上可以用class 搭配 css操作，或是labelStyle 處理icon style
   var marker = new MarkerWithLabel({
     draggable: false,
@@ -8803,11 +8797,11 @@ ps.可以利用指定某個 marker markerArr[i].setOptions({data=“/change/imag
 &lt;script async src=&quot;https://production-assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
 &lt;p&gt;最後是使用 markercluster 工具，這工具目前還有另一版 markerclusterplus，這邊就只用來一般版來操作。&lt;/p&gt;
 &lt;p&gt;markercluster 主要是處理 marker 下完後，call function 渲染畫面，快速的判斷每個 marker 之間是否接近到某個程度，在創造出屬性這區塊的聚合 marker，簡單的就是&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;下 marker -&amp;gt; markerArr.markercluster({})&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;建立 Cluster 的方法，這個版本無法帶入 className，需要打開.js 檔案，直接在 style.push 區塊修改，我這邊有修改 background-repeat:no-repeat。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;//arr 是剛剛marker的 array 需要建立帶入 其餘是內建option
   markerCluster = new MarkerClusterer(map, arr, {
     gridSize: 50,
@@ -8818,7 +8812,7 @@ ps.可以利用指定某個 marker markerArr[i].setOptions({data=“/change/imag
   });&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;這邊是客製化 Cluster icon 的方法，這個 function 會抓到這個建立中的 cluster 內包含的 marker，會用陣列帶進來，這時候我們就跑迴圈，將 marker 內的資料帶出來，在看你想呈現的方式處理，我這邊是計算裡面的平均價格（這範例下方有 click event 寫法，不過我直接寫進 codepen 導致跑不動)。&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// 稍微修改 cluster.js的檔案  讓聚合變得更客製化
 MarkerClusterer.prototype.calculator_ = function(markers, numStyles) {
     //省略

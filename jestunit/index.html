@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "React Unit Test with Jest 單元測試",
         "datePublished": "September 29, 2019",
-        "dateModified": "2021-04-03T11:16:59.787Z",
+        "dateModified": "2021-05-15T08:27:52.304Z",
         "description": "單元測試在我剛寫程式時，認為測試 case 是自己預期的，還主觀的認為沒什麼用。但我在實際寫幾個測試後，能更專注在預期判斷 input output，也有助於你思考 function 架構更清楚。接下來就來針對 react hooks 做 component testing。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -142,13 +142,13 @@ void function() {
 <p>接下來就來針對 react hooks 做 component testing。</p>
 <h2 id="安裝測試工具-jest" style="position:relative;"><a href="#%E5%AE%89%E8%A3%9D%E6%B8%AC%E8%A9%A6%E5%B7%A5%E5%85%B7-jest" aria-label="安裝測試工具 jest permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>安裝測試工具 Jest</h2>
 <p>Jest 是由 facebook 開源的工具，源自於 Jasmine 延伸開發，設定少、輕巧，官方文件非常清楚，提供斷言庫、mocking data 等，Jest 算是我們 test 的 runner，可以再搭配 enzyme、puppeteer 等等執行，讓 test 能更齊全。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">npm install --save-dev jest</code>
         </deckgo-highlight-code>
 <ul>
 <li>編輯 package.json</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">  &quot;scripts&quot;: {
     ...
     &quot;test&quot;: &quot;jest&quot;,
@@ -157,7 +157,7 @@ void function() {
         </deckgo-highlight-code>
 <p>執行 Jest 會預設抓取 <code class="language-text">__tests__</code> folder 內 js、ts 檔案，或是 fileName 有 spec、test 的 js ts 檔案 來跑測試， 假設你有用到 babel，或是其他 css 編譯工具，則需要設定 jest config。</p>
 <p>規則預設</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">([ &quot;**/__tests__/**/*.[jt]s?(x)&quot;, &quot;**/?(*.)+(spec|test).[jt]s?(x)&quot; ])</code>
         </deckgo-highlight-code>
 <p>官方文件: <a href="https://jestjs.io/docs/en/getting-started" title="Jest starter guide">Jest starter guide</a></p>
@@ -166,7 +166,7 @@ void function() {
 <ul>
 <li>Jest 使用</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">describe(&#39;Test sum&#39;, () =&gt; {
     test(&#39;function return 0&#39;, () =&gt; {
         expect(sum(0)).toBe(0)
@@ -183,7 +183,7 @@ void function() {
 <p>如果你元件經常要更新，可想而知你這份 snapshot testing 會經常需要更新，但如果穩定，就可以直接測試出 component 與資料不同的更新樣貌。</p>
 <p>文件: <a href="https://reactjs.org/docs/test-renderer.html#testrenderer" title="react-test-renderer">react-test-renderer</a></p>
 <p>下面是簡單的元件，主要測試是觸發 <code class="language-text">&lt;span&gt;</code> 的 onClick 讓 state count 更新。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">function TodoView() {
   const inputEl = useRef(null);
   const [todoList, addTodo, deleteToDo] = useTodoList([], inputEl);
@@ -202,7 +202,7 @@ void function() {
 <ul>
 <li>src/<strong>testSnap</strong>/TodoView.test.js</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">import React from &quot;react&quot;;
 import { create, act } from &quot;react-test-renderer&quot;;
 import TodoView from &#39;/container/TodoView&#39;;
@@ -230,7 +230,7 @@ describe(&quot;TodoView component&quot;, () =&gt; {
 <ul>
 <li>React 官方 test note</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">We recommend using React Testing Library which is designed to
 enable and encourage writing tests that use your components
 as the end users do.
@@ -245,7 +245,7 @@ React Components’ output.</code>
 <ul>
 <li>TypeInInput Component</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">import React, { useState } from &quot;react&quot;;
 import { render, fireEvent } from &quot;@testing-library/react&quot;;
 
@@ -282,7 +282,7 @@ describe(&quot;Test TypeInInput&quot;, () =&gt; {
 <ul>
 <li>babel.config.js</li>
 </ul>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">    [
       &quot;@babel/preset-env&quot;,
       {
@@ -295,7 +295,7 @@ describe(&quot;Test TypeInInput&quot;, () =&gt; {
 <p>Fetch 接受 url、axios (模擬 api call) 兩個 prop。Component 內用到 state、useCallback、建立 function fetchData，</p>
 <p>Component 預期狀態</p>
 <p>useEffect 會在元件 render 傳入 url 以及 apiCall function，並執行 click element 觸發 fetchData 調用 apiCall 更新 state。</p>
-<deckgo-highlight-code   >
+<deckgo-highlight-code language="javascript"  >
           <code slot="code">import React, { useState, useCallback } from &quot;react&quot;;
 import axios from &quot;axios&quot;;
 import { render, fireEvent, waitForElement } from &quot;@testing-library/react&quot;;
