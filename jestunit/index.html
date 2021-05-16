@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "React Unit Test with Jest 單元測試",
         "datePublished": "September 29, 2019",
-        "dateModified": "2021-05-15T08:27:52.304Z",
+        "dateModified": "2021-05-16T05:03:10.451Z",
         "description": "單元測試在我剛寫程式時，認為測試 case 是自己預期的，還主觀的認為沒什麼用。但我在實際寫幾個測試後，能更專注在預期判斷 input output，也有助於你思考 function 架構更清楚。接下來就來針對 react hooks 做 component testing。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -158,7 +158,7 @@ void function() {
 <p>執行 Jest 會預設抓取 <code class="language-text">__tests__</code> folder 內 js、ts 檔案，或是 fileName 有 spec、test 的 js ts 檔案 來跑測試， 假設你有用到 babel，或是其他 css 編譯工具，則需要設定 jest config。</p>
 <p>規則預設</p>
 <deckgo-highlight-code language="javascript"  >
-          <code slot="code">([ &quot;**/__tests__/**/*.[jt]s?(x)&quot;, &quot;**/?(*.)+(spec|test).[jt]s?(x)&quot; ])</code>
+          <code slot="code">[&#39;**/__tests__/**/*.[jt]s?(x)&#39;, &#39;**/?(*.)+(spec|test).[jt]s?(x)&#39;];</code>
         </deckgo-highlight-code>
 <p>官方文件: <a href="https://jestjs.io/docs/en/getting-started" title="Jest starter guide">Jest starter guide</a></p>
 <p>Jest 主要依賴幾個 function 執行測試，describe function 可以讓我們對這一個測試做命名，以便後面執行測試追蹤，test function 則是讓我們定義某個 test case，例如範例，我們用 describe 測試包覆多種狀況來測試，expect 則是讓我們丟入 function 做 return，toBe 就是預期測試結果是否符合預期。</p>
@@ -169,12 +169,12 @@ void function() {
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">describe(&#39;Test sum&#39;, () =&gt; {
     test(&#39;function return 0&#39;, () =&gt; {
-        expect(sum(0)).toBe(0)
-    })
+        expect(sum(0)).toBe(0);
+    });
     test(&#39;function sum 0, 1 return 1&#39;, () =&gt; {
-        expect(sum(0,1)).toBe(1)
-    })
-})</code>
+        expect(sum(0, 1)).toBe(1);
+    });
+});</code>
         </deckgo-highlight-code>
 <p>目前新專案是純倚賴 Jest 來測試，主要規劃會以 function test 以及 end to end 為主，主要先針對最重要的 function 做不同情境測試。</p>
 <p>安裝完成有遇到 react-script start 會有 jest error，依照提示移除 jest、node_modules、package-lock.json，並重新安裝即可解決。</p>
@@ -185,16 +185,16 @@ void function() {
 <p>下面是簡單的元件，主要測試是觸發 <code class="language-text">&lt;span&gt;</code> 的 onClick 讓 state count 更新。</p>
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">function TodoView() {
-  const inputEl = useRef(null);
-  const [todoList, addTodo, deleteToDo] = useTodoList([], inputEl);
-  const [count, setCount] = useState(0);
+    const inputEl = useRef(null);
+    const [todoList, addTodo, deleteToDo] = useTodoList([], inputEl);
+    const [count, setCount] = useState(0);
 
-  return (
-    &lt;div&gt;
-      &lt;span onClick={()=&gt;setCount(count+1)}&gt;Counter : {count}&lt;/span&gt;
-      ...
-    &lt;/div&gt;
-  );
+    return (
+        &lt;div&gt;
+            &lt;span onClick={() =&gt; setCount(count + 1)}&gt;Counter : {count}&lt;/span&gt;
+            ...
+        &lt;/div&gt;
+    );
 }</code>
         </deckgo-highlight-code>
 <p>下方為實際使用範例，主要邏輯就是使用 create render component，再把元件資料轉格式匯出 snapshot，並可以用 act 來調用 component function，直接拉 props function 用會有 error warning，主要用起來困難點會是在 selector，還是如何整理 snapshot 匯出格式，幫助我們日後測試。</p>
@@ -203,25 +203,25 @@ void function() {
 <li>src/<strong>testSnap</strong>/TodoView.test.js</li>
 </ul>
 <deckgo-highlight-code language="javascript"  >
-          <code slot="code">import React from &quot;react&quot;;
-import { create, act } from &quot;react-test-renderer&quot;;
+          <code slot="code">import React from &#39;react&#39;;
+import { create, act } from &#39;react-test-renderer&#39;;
 import TodoView from &#39;/container/TodoView&#39;;
 
-describe(&quot;TodoView component&quot;, () =&gt; {
-  test(&quot;it shows the expected text when clicked&quot;, () =&gt; {
-    let component;
-    act(() =&gt; {
-      component = create(&lt;TodoView /&gt;);
-    });
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-    const instance = component.root;
+describe(&#39;TodoView component&#39;, () =&gt; {
+    test(&#39;it shows the expected text when clicked&#39;, () =&gt; {
+        let component;
+        act(() =&gt; {
+            component = create(&lt;TodoView /&gt;);
+        });
+        let tree = component.toJSON();
+        expect(tree).toMatchSnapshot();
+        const instance = component.root;
 
-    const button = instance.findByType(&quot;span&quot;);
-    act(() =&gt; button.props.onClick());
-    expect(button.props.children.join()).toBe(&quot;Counter : ,1&quot;)
-    expect(button.props.children).toMatchSnapshot();
-  });
+        const button = instance.findByType(&#39;span&#39;);
+        act(() =&gt; button.props.onClick());
+        expect(button.props.children.join()).toBe(&#39;Counter : ,1&#39;);
+        expect(button.props.children).toMatchSnapshot();
+    });
 });</code>
         </deckgo-highlight-code>
 <h2 id="component-testing-testing-libraryreact" style="position:relative;"><a href="#component-testing-testing-libraryreact" aria-label="component testing testing libraryreact permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Component Testing @testing-library/react</h2>
@@ -246,36 +246,36 @@ React Components’ output.</code>
 <li>TypeInInput Component</li>
 </ul>
 <deckgo-highlight-code language="javascript"  >
-          <code slot="code">import React, { useState } from &quot;react&quot;;
-import { render, fireEvent } from &quot;@testing-library/react&quot;;
+          <code slot="code">import React, { useState } from &#39;react&#39;;
+import { render, fireEvent } from &#39;@testing-library/react&#39;;
 
-function TypeInInput({text}) {
-  const [value, setValue] = useState(&#39;&#39;);
-  const onChangeValue = e =&gt; {
-    setValue(e.target.value);
-  };
-  return (
-    &lt;div&gt;
-      &lt;label&gt;{text}&lt;/label&gt;
-      &lt;input data-testid=&quot;typeIn&quot; value={value} onChange={onChangeValue} /&gt;
-    &lt;/div&gt;
-  );
+function TypeInInput({ text }) {
+    const [value, setValue] = useState(&#39;&#39;);
+    const onChangeValue = e =&gt; {
+        setValue(e.target.value);
+    };
+    return (
+        &lt;div&gt;
+            &lt;label&gt;{text}&lt;/label&gt;
+            &lt;input data-testid=&quot;typeIn&quot; value={value} onChange={onChangeValue} /&gt;
+        &lt;/div&gt;
+    );
 }
 
-describe(&quot;Test TypeInInput&quot;, () =&gt; {
-  const text = &quot;email&quot;;
-  test(&quot;change event&quot;, () =&gt; {
-    const { getByText } = render(&lt;TypeInInput text={text} /&gt;);
-    const title = getByText(/email/);
-    expect(title.textContent).toEqual(text);
-  });
-  test(&quot;change event&quot;, () =&gt; {
-    const { getByTestId } = render(&lt;TypeInInput text={text} /&gt;);
-    const typeInElem = getByTestId(&quot;typeIn&quot;);
-    const test = &quot;emample@gmail.com&quot;;
-    fireEvent.change(typeInElem, { target: { value: test } });
-    expect(typeInElem.value).toEqual(test);
-  });
+describe(&#39;Test TypeInInput&#39;, () =&gt; {
+    const text = &#39;email&#39;;
+    test(&#39;change event&#39;, () =&gt; {
+        const { getByText } = render(&lt;TypeInInput text={text} /&gt;);
+        const title = getByText(/email/);
+        expect(title.textContent).toEqual(text);
+    });
+    test(&#39;change event&#39;, () =&gt; {
+        const { getByTestId } = render(&lt;TypeInInput text={text} /&gt;);
+        const typeInElem = getByTestId(&#39;typeIn&#39;);
+        const test = &#39;emample@gmail.com&#39;;
+        fireEvent.change(typeInElem, { target: { value: test } });
+        expect(typeInElem.value).toEqual(test);
+    });
 });</code>
         </deckgo-highlight-code>
 <p>至於比較複雜的 async function api 的操作，記得要修改 babel config 執行非同步，以及安裝 @testing-library/jest-dom 執行 toHaveTextContent，讓斷言能更靈活。</p>
@@ -283,52 +283,50 @@ describe(&quot;Test TypeInInput&quot;, () =&gt; {
 <li>babel.config.js</li>
 </ul>
 <deckgo-highlight-code language="javascript"  >
-          <code slot="code">    [
-      &quot;@babel/preset-env&quot;,
-      {
+          <code slot="code">[
+    &#39;@babel/preset-env&#39;,
+    {
         targets: {
-          node: &quot;current&quot;
+            node: &#39;current&#39;
         }
-      }
-    ]</code>
+    }
+];</code>
         </deckgo-highlight-code>
 <p>Fetch 接受 url、axios (模擬 api call) 兩個 prop。Component 內用到 state、useCallback、建立 function fetchData，</p>
 <p>Component 預期狀態</p>
 <p>useEffect 會在元件 render 傳入 url 以及 apiCall function，並執行 click element 觸發 fetchData 調用 apiCall 更新 state。</p>
 <deckgo-highlight-code language="javascript"  >
-          <code slot="code">import React, { useState, useCallback } from &quot;react&quot;;
-import axios from &quot;axios&quot;;
-import { render, fireEvent, waitForElement } from &quot;@testing-library/react&quot;;
+          <code slot="code">import React, { useState, useCallback } from &#39;react&#39;;
+import axios from &#39;axios&#39;;
+import { render, fireEvent, waitForElement } from &#39;@testing-library/react&#39;;
 
-import &#39;@testing-library/jest-dom/extend-expect&#39;
+import &#39;@testing-library/jest-dom/extend-expect&#39;;
 
 function Fetch({ url, apiCall }) {
-  const [data, setDate] = useState();
-  const fetchData = useCallback(async () =&gt; {
-    const response = await apiCall.get(url);
-    setDate(response.data);
-  }, [apiCall, url]);
-  return (
-    &lt;div&gt;
-      &lt;button onClick={fetchData}&gt;Fetch&lt;/button&gt;
-      {data ? &lt;span data-testid=&quot;fetch&quot;&gt;{data.test}&lt;/span&gt; : null}
-    &lt;/div&gt;
-  );
+    const [data, setDate] = useState();
+    const fetchData = useCallback(async () =&gt; {
+        const response = await apiCall.get(url);
+        setDate(response.data);
+    }, [apiCall, url]);
+    return (
+        &lt;div&gt;
+            &lt;button onClick={fetchData}&gt;Fetch&lt;/button&gt;
+            {data ? &lt;span data-testid=&quot;fetch&quot;&gt;{data.test}&lt;/span&gt; : null}
+        &lt;/div&gt;
+    );
 }
 
-test(&quot;Fetch makes an API call and displays the greeting&quot;, async () =&gt; {
-  const fakeAxios = {
-    get: jest.fn(() =&gt; Promise.resolve({ data: { test: &quot;hello world&quot; } }))
-  };
-  const url = &quot;https://example.com/get-hello-there&quot;;
-  const { getByText, getByTestId } = render(
-    &lt;Fetch url={url} apiCall={fakeAxios} /&gt;
-  );
-  fireEvent.click(getByText(/fetch/i));
+test(&#39;Fetch makes an API call and displays the greeting&#39;, async () =&gt; {
+    const fakeAxios = {
+        get: jest.fn(() =&gt; Promise.resolve({ data: { test: &#39;hello world&#39; } }))
+    };
+    const url = &#39;https://example.com/get-hello-there&#39;;
+    const { getByText, getByTestId } = render(&lt;Fetch url={url} apiCall={fakeAxios} /&gt;);
+    fireEvent.click(getByText(/fetch/i));
 
-  const fetchNode = await waitForElement(() =&gt; getByTestId(&quot;fetch&quot;));
+    const fetchNode = await waitForElement(() =&gt; getByTestId(&#39;fetch&#39;));
 
-  expect(fetchNode).toHaveTextContent(&quot;hello world&quot;);
+    expect(fetchNode).toHaveTextContent(&#39;hello world&#39;);
 });</code>
         </deckgo-highlight-code>
 <p>更複雜例子也可以查閱作者在 codesandbox 寫的各種 sample code，</p>

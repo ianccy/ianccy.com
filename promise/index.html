@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Javascript Promise example 簡易實作模擬",
         "datePublished": "February 18, 2019",
-        "dateModified": "2021-05-15T08:25:56.836Z",
+        "dateModified": "2021-05-16T05:03:09.769Z",
         "description": "接下來會用 promise 處理 callback hell，還有建立一個簡易的 promise，幫助我們理解promise。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -207,46 +207,46 @@ void function() {
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">// declare arrow function return Promise
 // ** new Promise to inherit Promise instance **
-const getData = (url) =&gt; new Promise((resolve, reject) =&gt; {
-  // create http request
-  const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = () =&gt; {
-    console.log(xhttp.readyState)
-    if (xhttp.readyState === 4 ) {
-      if (xhttp.status === 200) {
-        // resolve will trigger Promise then callback
-        console.log(JSON.parse(xhttp.response));
-        resolve(JSON.parse(xhttp.response));
-      } else {
-        // reject will trigger Promise catch callback
-        reject(xhttp.statusText);
-      }
-    }
-  };
-  xhttp.open(&quot;GET&quot;, url, true);
-  xhttp.send();
-});
+const getData = url =&gt;
+    new Promise((resolve, reject) =&gt; {
+        // create http request
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = () =&gt; {
+            console.log(xhttp.readyState);
+            if (xhttp.readyState === 4) {
+                if (xhttp.status === 200) {
+                    // resolve will trigger Promise then callback
+                    console.log(JSON.parse(xhttp.response));
+                    resolve(JSON.parse(xhttp.response));
+                } else {
+                    // reject will trigger Promise catch callback
+                    reject(xhttp.statusText);
+                }
+            }
+        };
+        xhttp.open(&#39;GET&#39;, url, true);
+        xhttp.send();
+    });
 
 getData(&#39;https://jsonplaceholder.typicode.com/todos/1&#39;)
-  .then(res =&gt; {
-    // destructuring object
-    const { id, title, completed } = res;
-    const html = `&lt;div class=&quot;item&quot;&gt;
+    .then(res =&gt; {
+        // destructuring object
+        const { id, title, completed } = res;
+        const html = `&lt;div class=&quot;item&quot;&gt;
                     &lt;p&gt;Id: ${id}&lt;/p&gt;
                     &lt;div&gt;Title: ${title}&lt;/div&gt;
                     &lt;div&gt;Completed: ${completed}&lt;/div&gt;
                   &lt;/div&gt;`;
-    const newNode = document.createElement(&#39;div&#39;);
-    newNode.innerHTML = html;
-    document.querySelector(&#39;#list&#39;).appendChild(newNode);
-    }
-  )
-  // it will run when promise Reject or
-  // in then function appear javascript error
-  .catch(res =&gt; {
-    console.log(res);
-    alert(`Something Error ,because ${res}`);
-  });</code>
+        const newNode = document.createElement(&#39;div&#39;);
+        newNode.innerHTML = html;
+        document.querySelector(&#39;#list&#39;).appendChild(newNode);
+    })
+    // it will run when promise Reject or
+    // in then function appear javascript error
+    .catch(res =&gt; {
+        console.log(res);
+        alert(`Something Error ,because ${res}`);
+    });</code>
         </deckgo-highlight-code>
 <iframe src="//codepen.io/chu1228/embed/yZrVKW/?height=400&theme-id=0&default-tab=js" width="100%" height="400"></iframe>
 <p><a href="https://codepen.io/chu1228/pen/yZrVKW?editors=1111" title="codepen promise demo">codepen promise demo</a></p>
@@ -328,39 +328,39 @@ const appendItem = (res) =&gt; {
 </ul>
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">class promise {
-  constructor(callback){
-    // promise status
-    this.status = &#39;pending&#39;;
-    // create variable to store resolve or reject value
-    this.value;
-    // resolve is not outside resolve
-    // it is use to pass callback function first function
+    constructor(callback) {
+        // promise status
+        this.status = &#39;pending&#39;;
+        // create variable to store resolve or reject value
+        this.value;
+        // resolve is not outside resolve
+        // it is use to pass callback function first function
 
-    const resolve = res =&gt; {
-      if(this.status === &#39;pending&#39;){
-        this.status = &#39;fullfilled&#39;;
-        this.value = res;
-      }
-    }
+        const resolve = res =&gt; {
+            if (this.status === &#39;pending&#39;) {
+                this.status = &#39;fullfilled&#39;;
+                this.value = res;
+            }
+        };
 
-    // reject is not outside reject
-    // it is use to pass callback function second function
-    const reject = res =&gt; {
-      if(this.status !== &#39;pending&#39;){
-        this.status = &#39;rejected&#39;;
-        this.value = res;
-      }
-    }
+        // reject is not outside reject
+        // it is use to pass callback function second function
+        const reject = res =&gt; {
+            if (this.status !== &#39;pending&#39;) {
+                this.status = &#39;rejected&#39;;
+                this.value = res;
+            }
+        };
 
-    // it&#39;s keypoint to call reslove or reject function
-    // reslove or reject just assign status and value
-    try {
-      // this resolve is upper resolve function
-      callback(resolve, reject);
-    } catch (err) {
-      reject(err);
+        // it&#39;s keypoint to call reslove or reject function
+        // reslove or reject just assign status and value
+        try {
+            // this resolve is upper resolve function
+            callback(resolve, reject);
+        } catch (err) {
+            reject(err);
+        }
     }
-  }
 }</code>
         </deckgo-highlight-code>
 <ul>

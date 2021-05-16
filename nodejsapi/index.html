@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Node.js Express MongoDB RESTful Api 留言板實作教學",
         "datePublished": "October 11, 2018",
-        "dateModified": "2021-05-15T08:24:32.910Z",
+        "dateModified": "2021-05-16T05:03:09.198Z",
         "description": "RESTful是某種設計架構的稱呼，方便、有彈性的傳輸資料。這邊會用node.js搭配express架構RESTful Api，資料會使用mongoDB，部署到server上，建立一個簡單的留言板。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -175,12 +175,12 @@ const app = express();
 const port = 3000;
 
 app.get(&#39;/&#39;, (req, res) =&gt; {
-  res.sendFile(__dirname + &#39;/index.html&#39;)
-})
+    res.sendFile(__dirname + &#39;/index.html&#39;);
+});
 
-app.listen(port, function () {
-   console.log(`server start on http://localhost:${port}, port`)
-})</code>
+app.listen(port, function() {
+    console.log(`server start on http://localhost:${port}, port`);
+});</code>
         </deckgo-highlight-code>
 <h4 id="indexhtml" style="position:relative;"><a href="#indexhtml" aria-label="indexhtml permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>index.html</h4>
 <deckgo-highlight-code language="javascript"  >
@@ -361,18 +361,19 @@ MongoClient.connect(url, (err, client) =&gt; {
 <h4 id="javascript-fetch-post" style="position:relative;"><a href="#javascript-fetch-post" aria-label="javascript fetch post permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>javascript fetch post</h4>
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">fetch(&#39;http://localhost:3000/comments&#39;, {
-  method: &#39;post&#39;,
-  headers: {
-    &#39;Accept&#39;: &#39;application/json, text/plain, */*&#39;,
-    &#39;Content-Type&#39;: &#39;application/json&#39;
-  },
-  body: JSON.stringify({
-	&quot;name&quot;: &quot;mikessss&quot;,
-	&quot;time&quot;:&quot;2018/10/13-02:33:01&quot;,
-	&quot;content&quot;: &quot;ggggggg.&quot;
-  })
-}).then(res=&gt;res.json())
-  .then(res =&gt; console.log(res));</code>
+    method: &#39;post&#39;,
+    headers: {
+        Accept: &#39;application/json, text/plain, */*&#39;,
+        &#39;Content-Type&#39;: &#39;application/json&#39;
+    },
+    body: JSON.stringify({
+        name: &#39;mikessss&#39;,
+        time: &#39;2018/10/13-02:33:01&#39;,
+        content: &#39;ggggggg.&#39;
+    })
+})
+    .then(res =&gt; res.json())
+    .then(res =&gt; console.log(res));</code>
         </deckgo-highlight-code>
 <h2 id="get-api-取得資料" style="position:relative;"><a href="#get-api-%E5%8F%96%E5%BE%97%E8%B3%87%E6%96%99" aria-label="get api 取得資料 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Get Api 取得資料</h2>
 <p>我們前面成功的建立了儲存的 api，之後的邏輯都大同小異，接收 request，再依照請求方式跟 mongoDB 連接資料。我們這邊的 get api 會拿整個 comments 的資料，如果看不懂 collection.find()，可以看一下 w3c 的 mongoDB 語法教學，非常簡單易懂。</p>
@@ -399,13 +400,13 @@ app.get(&#39;/comments&#39;, (req, res) =&gt; {
 
 app.delete(&#39;/comments/:id&#39;, (req, res) =&gt; {
     // use _id need use ObjectID(value)
-    const obj = {_id: ObjectID(req.params.id)};
-    db.collection(&quot;comments&quot;).remove(obj, function(err, obj) {
+    const obj = { _id: ObjectID(req.params.id) };
+    db.collection(&#39;comments&#39;).remove(obj, function(err, obj) {
         if (err) throw err;
-        console.log(&quot;1 document deleted&quot;);
+        console.log(&#39;1 document deleted&#39;);
         res.send(&#39;delete success&#39;);
     });
-})</code>
+});</code>
         </deckgo-highlight-code>
 <h2 id="update-api-更新資料" style="position:relative;"><a href="#update-api-%E6%9B%B4%E6%96%B0%E8%B3%87%E6%96%99" aria-label="update api 更新資料 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Update Api 更新資料</h2>
 <p>建立 put 的 route，使用 updateOne 來更新資料，前面兩個參數要帶查詢、更新資料。</p>

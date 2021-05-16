@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "JavaScript Capture Bubble DOM事件獲取&冒泡",
         "datePublished": "March 21, 2019",
-        "dateModified": "2021-05-15T08:26:12.188Z",
+        "dateModified": "2021-05-16T05:03:09.846Z",
         "description": "JavaScript處理DOM事件上的獲取和冒泡，實務上滿常用到的觀念，可以透過這方式解決一些麻煩問題，例如popup視窗的關閉、內外層DOM互動關係，另外事件獲取、冒泡也幾乎是面試必考題。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -222,18 +222,18 @@ eventPhase: 3 冒泡階段，會由目標物件的第一層父層開始，一路
       </p>
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">// get All elements
-const nodeList= [...document.querySelectorAll(&#39;*&#39;)];
+const nodeList = [...document.querySelectorAll(&#39;*&#39;)];
 
 // add All elements eventListener
-nodeList.forEach(elem =&gt;{
+nodeList.forEach(elem =&gt; {
     // use true is for capture
-    elem.addEventListener(&quot;click&quot;, e =&gt;
-      alert(`capture ${elem.tagName} phase:${e.eventPhase}`)
-    , true );
-    // default false is for bubble
-    elem.addEventListener(&quot;click&quot;, e =&gt;
-      alert(`bubble: ${elem.tagName} phase:${e.eventPhase}`)
+    elem.addEventListener(
+        &#39;click&#39;,
+        e =&gt; alert(`capture ${elem.tagName} phase:${e.eventPhase}`),
+        true
     );
+    // default false is for bubble
+    elem.addEventListener(&#39;click&#39;, e =&gt; alert(`bubble: ${elem.tagName} phase:${e.eventPhase}`));
 });</code>
         </deckgo-highlight-code>
 <iframe src="//codepen.io/chu1228/embed/EMdwVJ/?height=400&theme-id=0&default-tab=result" width="100%" height="290"></iframe>

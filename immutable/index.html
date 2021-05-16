@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Immutable 對於 React 重要性",
         "datePublished": "April 29, 2020",
-        "dateModified": "2021-05-15T08:28:17.700Z",
+        "dateModified": "2021-05-16T05:03:10.737Z",
         "description": "React 有提到 state 的更新，都必須要是 immutable，當你有使用到 useState 或是 pureComponent、shouldComponentUpdate，你就會發現問題。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -146,7 +146,7 @@ void function() {
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">let str = &#39;Hello, you!!&#39;;
 let ianHello = str;
-ianHello += &#39;ian&#39;
+ianHello += &#39;ian&#39;;
 
 // not changed
 console.log(str); // Hello, you!!
@@ -185,7 +185,7 @@ setNames(names);</code>
 <li>immutable setState</li>
 </ul>
 <deckgo-highlight-code language="javascript"  >
-          <code slot="code">setNames(names =&gt; [...names, value])</code>
+          <code slot="code">setNames(names =&gt; [...names, value]);</code>
         </deckgo-highlight-code>
 <p><a href="https://reactjs.org/docs/optimizing-performance.html#the-power-of-not-mutating-data" title="react optimizing-performance">react optimizing-performance</a></p>
 <p><a href="https://redux.js.org/recipes/structuring-reducers/beyond-combinereducers#using-slice-reducers-with-immutablejs-objects" title="redux reducers immutablejs">redux reducers immutablejs</a></p>

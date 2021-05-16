@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "React Server-side rendering SEO處理",
         "datePublished": "January 30, 2019",
-        "dateModified": "2021-05-15T08:25:36.554Z",
+        "dateModified": "2021-05-16T05:03:09.677Z",
         "description": "不使用next.js，來試著依靠原生方法，架構出React server-side render，會使用到react官方的cli create-react-app，以及node.js作為server。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -173,8 +173,8 @@ const path = require(&#39;path&#39;);
 app.use(express.static(path.join(__dirname, &#39;../build&#39;)));
 
 // settting router
-app.get(&#39;*&#39;, (req,res) =&gt;{
-    res.sendFile(path.join(__dirname+&#39;../build/index.html&#39;));
+app.get(&#39;*&#39;, (req, res) =&gt; {
+    res.sendFile(path.join(__dirname + &#39;../build/index.html&#39;));
 });
 
 app.listen(8080);</code>
@@ -257,25 +257,21 @@ const extensions = [&#39;.gif&#39;, &#39;.jpeg&#39;, &#39;.jpg&#39;, &#39;.png&#
 
 // ignore image and style request
 register(ignoreStyles.DEFAULT_EXTENSIONS, (module, filename) =&gt; {
-  if (!extensions.find(f =&gt; filename.endsWith(f))) {
-    // use for style
-    return ignoreStyles.noOp();
-  } else {
-    // use for image and add hash follow react cli
-    const hash = md5File.sync(filename).slice(0, 8);
-    const bn = path.basename(filename).replace(/(\.\w{3})$/, `.${hash}$1`);
-    module.exports = `/static/media/${bn}`;
-  }
+    if (!extensions.find(f =&gt; filename.endsWith(f))) {
+        // use for style
+        return ignoreStyles.noOp();
+    } else {
+        // use for image and add hash follow react cli
+        const hash = md5File.sync(filename).slice(0, 8);
+        const bn = path.basename(filename).replace(/(\.\w{3})$/, `.${hash}$1`);
+        module.exports = `/static/media/${bn}`;
+    }
 });
 require(&#39;@babel/polyfill&#39;);
 require(&#39;@babel/register&#39;)({
-  ignore: [/\/(build|node_modules)\//],
-  presets: [&#39;@babel/preset-env&#39;, &#39;@babel/preset-react&#39;],
-  plugins: [
-    &#39;@babel/plugin-syntax-dynamic-import&#39;,
-    &#39;dynamic-import-node&#39;,
-    &#39;react-loadable/babel&#39;
-  ]
+    ignore: [/\/(build|node_modules)\//],
+    presets: [&#39;@babel/preset-env&#39;, &#39;@babel/preset-react&#39;],
+    plugins: [&#39;@babel/plugin-syntax-dynamic-import&#39;, &#39;dynamic-import-node&#39;, &#39;react-loadable/babel&#39;]
 });
 
 // it will run express
@@ -294,7 +290,6 @@ import render from &#39;./render&#39;;
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-
 app.use(express.Router().get(&#39;/&#39;, render));
 app.use(express.static(path.resolve(__dirname, &#39;../build&#39;)));
 app.use(render);
@@ -302,7 +297,7 @@ app.use(render);
 // Loadable listener to make sure that all of your loadable components are already loaded
 // https://github.com/jamiebuilds/react-loadable#preloading-all-your-loadable-components-on-the-server
 Loadable.preloadAll().then(() =&gt; {
-  app.listen(PORT, console.log(`App listening on port ${PORT}!`));
+    app.listen(PORT, console.log(`App listening on port ${PORT}!`));
 });</code>
         </deckgo-highlight-code>
 <h2 id="renderjs-功能" style="position:relative;"><a href="#renderjs-%E5%8A%9F%E8%83%BD" aria-label="renderjs 功能 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>render.js 功能</h2>
@@ -332,21 +327,17 @@ export default (req, res) =&gt; {
             html: helmet.htmlAttributes.toString(),
             title: helmet.title.toString(),
             meta: helmet.meta.toString(),
-            body: renderToString(&lt;App wording=&quot;THIS IS Server Side Render&quot;/&gt;)
+            body: renderToString(&lt;App wording=&quot;THIS IS Server Side Render&quot; /&gt;)
         });
         res.send(html);
-        }
-    );
+    });
 };
 
 const injectHTML = (data, { html, title, meta, body, state }) =&gt; {
     data = data.replace(&#39;&lt;html&gt;&#39;, `&lt;html ${html}&gt;`);
     data = data.replace(/&lt;title&gt;.*?&lt;\/title&gt;/g, title);
     data = data.replace(&#39;&lt;/head&gt;&#39;, `${meta}&lt;/head&gt;`);
-    data = data.replace(
-        &#39;&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;&#39;,
-        `&lt;div id=&quot;root&quot;&gt;${body}&lt;/div&gt;`
-    );
+    data = data.replace(&#39;&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;&#39;, `&lt;div id=&quot;root&quot;&gt;${body}&lt;/div&gt;`);
     return data;
 };</code>
         </deckgo-highlight-code>

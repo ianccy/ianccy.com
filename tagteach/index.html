@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Google Tag Manager(gtm)教學 觸發、代碼、變數設定介紹",
         "datePublished": "October 16, 2018",
-        "dateModified": "2021-05-15T08:24:42.441Z",
+        "dateModified": "2021-05-16T05:03:09.304Z",
         "description": "完整介紹tag manager功能設定細節、功能，建立流程步驟教學，以留言板追蹤為範例。假設我們要追蹤送出留言，建立一個事件，拿進ga當作轉換目標。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -251,7 +251,9 @@ ps. 每個步驟中都可以使用變數</code>
       </p>
 <h4 id="按鈕-html" style="position:relative;"><a href="#%E6%8C%89%E9%88%95-html" aria-label="按鈕 html permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>按鈕 HTML</h4>
 <deckgo-highlight-code language="javascript"  >
-          <code slot="code">&lt;button type=&quot;button&quot; id=&quot;submitComment&quot; class=&quot;btn btn-secondary&quot;&gt;送出&lt;/button&gt;</code>
+          <code slot="code">&lt;button type=&quot;button&quot; id=&quot;submitComment&quot; class=&quot;btn btn-secondary&quot;&gt;
+    送出
+&lt;/button&gt;</code>
         </deckgo-highlight-code>
 <p>這時候會發現按鈕的 id <code class="language-text">submitComment</code>，通常來說一個頁面的 id 只會存在一個，所以我們會用這個 id 被點擊來作為觸發點，如果你要用 className 也是沒問題，只要處理好判斷即可。</p>
 <p>學會查看網頁的 html 很重要，學會這個工具的話，對你在設定追蹤數據有很大幫助。</p>

@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Google Sheet RESTful API 試算表表單",
         "datePublished": "May 11, 2019",
-        "dateModified": "2021-05-15T08:26:43.687Z",
+        "dateModified": "2021-05-16T05:03:10.043Z",
         "description": "分享如何建立app script api管理讀取、更新excel表單資料，簡單講就是API的CRUD，並且製作一個可以用的簡單畫面，串接api更新訂單狀態。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -153,29 +153,30 @@ void function() {
 <p>ps.儲存發布記得要再新增版本，這邊我卡了 1 小時…。</p>
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">function doPost(e) {
-  var params = e.parameter;
-  var name = params.name;
-  var phone = params.phone;
+    var params = e.parameter;
+    var name = params.name;
+    var phone = params.phone;
 
-  var SpreadSheet = SpreadsheetApp.openById(&quot;1JbXssixJaqTL_BMgnmOiMxLyAZm0jOkw173VdewqO9c&quot;);
-  var Sheet = SpreadSheet.getSheets()[0];
+    var SpreadSheet = SpreadsheetApp.openById(&#39;1JbXssixJaqTL_BMgnmOiMxLyAZm0jOkw173VdewqO9c&#39;);
+    var Sheet = SpreadSheet.getSheets()[0];
 
-  var LastRow = Sheet.getLastRow();
-  var data = [];
+    var LastRow = Sheet.getLastRow();
+    var data = [];
 
-  // get All data as Array
-  // first row, first column, last row, seven columns
-  var listAll = Sheet.getSheetValues(1, 1, LastRow, 7);
+    // get All data as Array
+    // first row, first column, last row, seven columns
+    var listAll = Sheet.getSheetValues(1, 1, LastRow, 7);
 
-  // find phone and name mapping data and Push Array
-  for(var i = 0;i &lt; list.length; i++){
-    if(listAll[i].indexOf(phone) === 1 &amp;&amp; listAll[i].indexOf(name) === 0){
-      data.push({data: listAll[i], index: i + 1 })
+    // find phone and name mapping data and Push Array
+    for (var i = 0; i &lt; list.length; i++) {
+        if (listAll[i].indexOf(phone) === 1 &amp;&amp; listAll[i].indexOf(name) === 0) {
+            data.push({ data: listAll[i], index: i + 1 });
+        }
     }
-  }
-  // return data as JSON
-  return ContentService.createTextOutput(JSON.stringify(data))
-    .setMimeType(ContentService.MimeType.JSON);
+    // return data as JSON
+    return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(
+        ContentService.MimeType.JSON
+    );
 }</code>
         </deckgo-highlight-code>
 <p><a href="https://developers.google.com/apps-script/reference/spreadsheet/sheet#getSheetValues(Integer,Integer,Integer,Integer)" title="google sheet getSheetValues">google sheet getSheetValues</a></p>
@@ -236,46 +237,47 @@ void function() {
 <p>另外我們定義處理狀態 0 代表訂單取消，1 代表完成訂單。</p>
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">function doPost(e) {
-  var params = e.parameter;
-  var name = params.name;
-  var phone = params.phone;
-  var status = params.status;
+    var params = e.parameter;
+    var name = params.name;
+    var phone = params.phone;
+    var status = params.status;
 
-  // add action filter post function
-  var action = params.action;
+    // add action filter post function
+    var action = params.action;
 
-  var SpreadSheet = SpreadsheetApp.openById(&quot;1JbXssixJaqTL_BMgnmOiMxLyAZm0jOkw173VdewqO9c&quot;);
-  var Sheet = SpreadSheet.getSheets()[0];
-  var data = &#39;&#39;;
-  if (action === &#39;query&#39;) {
-    data = queryData(Sheet, name, phone);
-  } else if (action === &#39;delete&#39;){
-    data = updateData(Sheet, name, phone, status, index);
-  }
-  return ContentService.createTextOutput(JSON.stringify(data))
-    .setMimeType(ContentService.MimeType.JSON);
+    var SpreadSheet = SpreadsheetApp.openById(&#39;1JbXssixJaqTL_BMgnmOiMxLyAZm0jOkw173VdewqO9c&#39;);
+    var Sheet = SpreadSheet.getSheets()[0];
+    var data = &#39;&#39;;
+    if (action === &#39;query&#39;) {
+        data = queryData(Sheet, name, phone);
+    } else if (action === &#39;delete&#39;) {
+        data = updateData(Sheet, name, phone, status, index);
+    }
+    return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(
+        ContentService.MimeType.JSON
+    );
 }
 
-function queryData (Sheet, name, phone){
-  var LastRow = Sheet.getLastRow();
-  var data = [];
-  var listAll = Sheet.getSheetValues(1, 1, LastRow, 7);
-  for(var i = 0;i &lt; listAll.length; i++){
-    if(listAll[i].indexOf(phone) === 1 &amp;&amp; listAll[i].indexOf(name) === 0){
-      data.push({data: listAll[i],index: i })
+function queryData(Sheet, name, phone) {
+    var LastRow = Sheet.getLastRow();
+    var data = [];
+    var listAll = Sheet.getSheetValues(1, 1, LastRow, 7);
+    for (var i = 0; i &lt; listAll.length; i++) {
+        if (listAll[i].indexOf(phone) === 1 &amp;&amp; listAll[i].indexOf(name) === 0) {
+            data.push({ data: listAll[i], index: i });
+        }
     }
-  }
-  return data;
+    return data;
 }
 // update use function
-function updateData(Sheet, name, phone, status, index){
-  var checkName = Sheet.getSheetValues(index, 1, 1, 1) == name;
-  var checkPhone = Sheet.getSheetValues(index, 2, 1, 1) == phone;
-  if(checkName &amp;&amp; checkPhone){
-    Sheet.getRange(index, 7).setValue(status);
-    return &#39;success&#39;;
-  }
-  return null;
+function updateData(Sheet, name, phone, status, index) {
+    var checkName = Sheet.getSheetValues(index, 1, 1, 1) == name;
+    var checkPhone = Sheet.getSheetValues(index, 2, 1, 1) == phone;
+    if (checkName &amp;&amp; checkPhone) {
+        Sheet.getRange(index, 7).setValue(status);
+        return &#39;success&#39;;
+    }
+    return null;
 }</code>
         </deckgo-highlight-code>
 <h2 id="前端畫面" style="position:relative;"><a href="#%E5%89%8D%E7%AB%AF%E7%95%AB%E9%9D%A2" aria-label="前端畫面 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>前端畫面</h2>

@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "lazy loading image 延後載入畫面外圖片",
         "datePublished": "April 25, 2019",
-        "dateModified": "2021-05-15T08:29:07.968Z",
+        "dateModified": "2021-05-16T05:03:09.953Z",
         "description": "分享一點最近處理lazyload心得，lazy loading image 對網站是很合理的處理優化，使用者沒看到的區塊本來就不需要浪費網路載入。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -240,42 +240,42 @@ void function() {
 <li>Source code</li>
 </ul>
 <deckgo-highlight-code language="javascript"  >
-          <code slot="code">document.addEventListener(&quot;DOMContentLoaded&quot;, function() {
-  var lazyImages = [].slice.call(document.querySelectorAll(&quot;img.lazyload&quot;));
+          <code slot="code">document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
+    var lazyImages = [].slice.call(document.querySelectorAll(&#39;img.lazyload&#39;));
 
-  if (&quot;IntersectionObserver&quot; in window) {
-    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          let lazyImage = entry.target;
-          lazyImage.src = lazyImage.dataset.src;
-          lazyImage.classList.remove(&quot;lazyload&quot;);
+    if (&#39;IntersectionObserver&#39; in window) {
+        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    let lazyImage = entry.target;
+                    lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.classList.remove(&#39;lazyload&#39;);
 
-          //clear padding-top
-          lazyImage.style.paddingTop = &#39;&#39;;
-          lazyImageObserver.unobserve(lazyImage);
-        }
-      });
-    });
+                    //clear padding-top
+                    lazyImage.style.paddingTop = &#39;&#39;;
+                    lazyImageObserver.unobserve(lazyImage);
+                }
+            });
+        });
 
-    lazyImages.forEach(function(lazyImage) {
-      // get image ratio
-      var ratio = lazyImage.dataset.ratio;
-      // create padding-top
-      lazyImage.style.paddingTop = ratio + &#39;%&#39;;
-      lazyImageObserver.observe(lazyImage);
-    });
-  } else {
-    // Possibly fall back to a more compatible method here
-  }
+        lazyImages.forEach(function(lazyImage) {
+            // get image ratio
+            var ratio = lazyImage.dataset.ratio;
+            // create padding-top
+            lazyImage.style.paddingTop = ratio + &#39;%&#39;;
+            lazyImageObserver.observe(lazyImage);
+        });
+    } else {
+        // Possibly fall back to a more compatible method here
+    }
 });</code>
         </deckgo-highlight-code>
 <p>頁面範例: <a href="https://codepen.io/chu1228/pen/BEgaKZ?editors=1010" title="codepen">codepen demo</a></p>
 <p>另外還可以加上 onload listener 讓載入圖片過程，保持 lazyload 灰色區塊。</p>
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">lazyImage.src = lazyImage.dataset.src;
-lazyImage.onload = function(){
-    lazyImage.classList.remove(&quot;lazyload&quot;);
+lazyImage.onload = function() {
+    lazyImage.classList.remove(&#39;lazyload&#39;);
 
     //clear padding-top
     lazyImage.style.paddingTop = &#39;&#39;;
@@ -290,12 +290,12 @@ lazyImage.onload = function(){
           <code slot="code">function getImageRatio(url, callback) {
     var img = new Image();
     img.onload = function() {
-        callback(this.height/this.width * 100);
-    }
+        callback((this.height / this.width) * 100);
+    };
     img.src = url;
 }
-function setRatio(ratio){
-    console.log(ratio)
+function setRatio(ratio) {
+    console.log(ratio);
 }
 getImageRatio(&#39;https://ianccy.com/images/rabbit.png&#39;, setRatio);</code>
         </deckgo-highlight-code>

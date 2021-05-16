@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "GA跨網域追蹤 google analytics cross-domain tracking",
         "datePublished": "August 04, 2019",
-        "dateModified": "2021-05-15T08:27:24.312Z",
+        "dateModified": "2021-05-16T05:03:10.236Z",
         "description": "如果你有多個網站服務，每個服務又是各自在不同網域上，就會遇到一個棘手的問題，無法確切的追蹤使用者數據。google analytics有提供跨網域追蹤，讓我們解決這個問題，後面就來嘗試跨網域追蹤設定。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -159,9 +159,9 @@ void function() {
 <li>buyservice.com 修改追蹤碼</li>
 </ul>
 <deckgo-highlight-code language="javascript"  >
-          <code slot="code">  ga(&#39;create&#39;, &#39;UA-XXXXXXX-Y&#39;, &#39;auto&#39;, {&#39;allowLinker&#39;: true});
-  ga(&#39;require&#39;, &#39;linker&#39;);
-  ga(&#39;linker:autoLink&#39;, [&#39;example.com&#39;] );</code>
+          <code slot="code">ga(&#39;create&#39;, &#39;UA-XXXXXXX-Y&#39;, &#39;auto&#39;, { allowLinker: true });
+ga(&#39;require&#39;, &#39;linker&#39;);
+ga(&#39;linker:autoLink&#39;, [&#39;example.com&#39;]);</code>
         </deckgo-highlight-code>
 <h3 id="tag-manager-追蹤碼" style="position:relative;"><a href="#tag-manager-%E8%BF%BD%E8%B9%A4%E7%A2%BC" aria-label="tag manager 追蹤碼 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>tag manager 追蹤碼</h3>
 <p>如果你是用 tag manager 設定 google analytics 的話，在 google analaytics 追增設定內的欄位設定(Field)，再增加 allowLinker 值 true，自動連結網址就填上要連動的網域。這樣就完成 tag manager 的設定了。記得 tag manager 的改動要提交更新。</p>

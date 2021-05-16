@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "JavaScript Prototype 繼承、原型鏈 Prototype chain",
         "datePublished": "August 25, 2018",
-        "dateModified": "2021-05-15T08:23:51.051Z",
+        "dateModified": "2021-05-16T05:03:08.908Z",
         "description": "JavaScript沒有類的特性(class-based)，跟Java不一樣，雖然說ES6 有class但它只是語法糖，每個JavaScript都具備有prototype，只是分為公開、私有差異，而JavaScript就用prototype來處理繼承(prototype-based)，特性是延展性高。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -142,20 +142,20 @@ void function() {
 <p>JavaScript 沒有類的特性(class-based)，跟 Java 不一樣，雖然說 ES6 有 class 但它只是語法糖，每個 JavaScript 都具備有 prototype，只是分為公開、私有差異，而 JavaScript 就用 prototype 來處理繼承(prototype-based)，特性是延展性高。</p>
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">// 使用解構復值作為參數  並且預設沒傳值預設給予字串
-function Family({m = &#39;no person&#39;,w = &#39;no person&#39;, c = &#39;no child&#39;} = {}){
-  this.father = m;
-  this.mother = w;
-  this.chidren = c;
+function Family({ m = &#39;no person&#39;, w = &#39;no person&#39;, c = &#39;no child&#39; } = {}) {
+    this.father = m;
+    this.mother = w;
+    this.chidren = c;
 }
 
 var data = {
-  m: &#39;John Paul&#39;,
-  w: &#39;Mary Alice&#39;,
-  c: &#39;Chris Paul&#39;
+    m: &#39;John Paul&#39;,
+    w: &#39;Mary Alice&#39;,
+    c: &#39;Chris Paul&#39;
 };
 
 // 繼承 Family
-var paul = new Family(data)
+var paul = new Family(data);
 // 等同於
 // var paul[[Prototype]] = Family.prototype;
 // Family.call(paul);
@@ -219,9 +219,9 @@ console.log(paul);
 <p>接下來擴充一下 Family，增加一個 function。</p>
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">// 增加一個 hi function
-Family.prototype.hi = function(){
-  console.log(`Family&#39;s child is ${this.chidren}. Family&#39;s father is ${this.father}`);
-}
+Family.prototype.hi = function() {
+    console.log(`Family&#39;s child is ${this.chidren}. Family&#39;s father is ${this.father}`);
+};
 
 // this 指向調用時的物件 paul
 paul.hi();
@@ -284,17 +284,17 @@ paul.hi();
       </p>
 <p>簡單的範例</p>
 <deckgo-highlight-code language="javascript"  >
-          <code slot="code">var Person = function () {
-  this.name = `chu`;
-}
+          <code slot="code">var Person = function() {
+    this.name = `chu`;
+};
 
-var Age = function () {
-   this.age = 18;
-}
+var Age = function() {
+    this.age = 18;
+};
 
-var Gender = function () {
-   this.gender = &#39;male&#39;;
-}
+var Gender = function() {
+    this.gender = &#39;male&#39;;
+};
 
 Age.prototype = new Person();
 
@@ -361,27 +361,27 @@ console.log(ian.name, ian.age, ian.gender); // chu 18 male
 <p>例如一個簡單的 class 如下</p>
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">class Person {
-  constructor(name){
-    this.name = name
-  }
-  hello(){
-    console.log(`hello,i am ${this.name}`)
-  }
+    constructor(name) {
+        this.name = name;
+    }
+    hello() {
+        console.log(`hello,i am ${this.name}`);
+    }
 }
 class Age extends Person {
     // constructor會在建立時倍呼叫
     // 接受傳遞參數
-    constructor(name,age){
-      // 繼承父層 prototype.name
-      super(name);
-      this.age = age;
+    constructor(name, age) {
+        // 繼承父層 prototype.name
+        super(name);
+        this.age = age;
     }
-    intro(){
-      console.log(`i am ${this.name}, and ${this.age} years old,`)
+    intro() {
+        console.log(`i am ${this.name}, and ${this.age} years old,`);
     }
 }
 
-const ian = new Age(`chu`,18)
+const ian = new Age(`chu`, 18);
 ian.intro(); // i am chu, and 18 years old,
 ian.hello(); // hello,i am chu</code>
         </deckgo-highlight-code>

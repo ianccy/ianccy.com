@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Node.js、Express、MySQL串接資料庫，Heroku部署環境",
         "datePublished": "June 17, 2018",
-        "dateModified": "2021-05-15T08:23:30.260Z",
+        "dateModified": "2021-05-16T05:03:08.740Z",
         "description": "在這個前後端分離的時代，多半會再開一台Node.js的server給前端處理router，這邊就要來使用Node.js搭配express以及MySQL來建立簡單的網站router。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -159,8 +159,8 @@ var app = express();
 
 // use express get method
 // create root router and print hello world
-app.get(&#39;/&#39;, function(req, res){
-  res.send(&#39;hello world&#39;);
+app.get(&#39;/&#39;, function(req, res) {
+    res.send(&#39;hello world&#39;);
 });
 
 // check running enviroment
@@ -170,8 +170,8 @@ var port = process.env.PORT || 3000;
 app.listen(port);
 
 // only print hint link for local enviroment
-if(port === 3000){
-  console.log(&#39;RUN http://localhost:3000/&#39;)
+if (port === 3000) {
+    console.log(&#39;RUN http://localhost:3000/&#39;);
 }</code>
         </deckgo-highlight-code>
 <p><a href="http://expressjs.com/zh-tw/4x/api.html#app.get.method" title="express get">express get</a><br>
@@ -439,18 +439,18 @@ connection.query(&#39;select * from MyGuests&#39;, function(err, rows, fields) {
           <code slot="code">// create object
 var data = {};
 connection.query(&#39;select * from MyGuests&#39;, function(err, rows, fields) {
-  if (err) throw err;
-  // set data to object
-  data.user = rows[0];
+    if (err) throw err;
+    // set data to object
+    data.user = rows[0];
 });
 
-app.get(&#39;/&#39;, function(req, res){
-  res.render(&#39;index&#39;);
+app.get(&#39;/&#39;, function(req, res) {
+    res.render(&#39;index&#39;);
 });
 
-app.get(&#39;/about&#39;, function(req, res){
-  // add data property to about page
-  res.render(&#39;about&#39;,{data: data.user});
+app.get(&#39;/about&#39;, function(req, res) {
+    // add data property to about page
+    res.render(&#39;about&#39;, { data: data.user });
 });</code>
         </deckgo-highlight-code>
 <p>4.修改 about.ejs 使用設定的 data</p>

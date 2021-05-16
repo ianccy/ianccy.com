@@ -1,4 +1,144 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Ian Chu]]></title><description><![CDATA[我目前是前端工程師，曾有網路行銷相關工作經驗，這裡會有工作實戰經驗分享，擅長javascript、css、seo、google analytics等。]]></description><link>https://ianccy.com</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 15 May 2021 08:39:51 GMT</lastBuildDate><item><title><![CDATA[Critical Rendering Path 關鍵渲染路徑優化]]></title><description><![CDATA[CSS 常被認為簡單好學，我對它看法是易學但難精通，以前都只想過實現各種 UI、效果，但沒認真考慮過效能，怎樣的寫法最適合這個情境。假設你有針對 google page speed、lighthouse…]]></description><link>https://ianccy.com/2021-02-cssperformance/</link><guid isPermaLink="false">https://ianccy.com/2021-02-cssperformance/</guid><pubDate>Thu, 11 Feb 2021 05:30:44 GMT</pubDate><content:encoded>&lt;p&gt;CSS 常被認為簡單好學，我對它看法是易學但難精通，以前都只想過實現各種 UI、效果，但沒認真考慮過效能，怎樣的寫法最適合這個情境。假設你有針對 google page speed、lighthouse 優化過，應該會特別有感觸，該如何才能讓網頁載入更快。&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Ian Chu]]></title><description><![CDATA[我目前是前端工程師，曾有網路行銷相關工作經驗，這裡會有工作實戰經驗分享，擅長javascript、css、seo、google analytics等。]]></description><link>https://ianccy.com</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 16 May 2021 07:21:13 GMT</lastBuildDate><item><title><![CDATA[CSS animation Performance]]></title><description><![CDATA[前一篇才介紹關於 CSS DOM painting performance，再來分享個關於 CSS animation performance，後面會提到自己在專案上遇到相關的問題。 前一篇: cssperformance 啊，先提一下，以下沒有要介紹 CSS animation…]]></description><link>https://ianccy.com/2021-05-cssanimation/</link><guid isPermaLink="false">https://ianccy.com/2021-05-cssanimation/</guid><pubDate>Sat, 08 May 2021 07:05:54 GMT</pubDate><content:encoded>&lt;p&gt;前一篇才介紹關於 CSS DOM painting performance，再來分享個關於 CSS animation performance，後面會提到自己在專案上遇到相關的問題。&lt;/p&gt;
+&lt;p&gt;前一篇: &lt;a href=&quot;../cssperformance/&quot; title=&quot;cssperformance&quot;&gt;cssperformance&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;啊，先提一下，以下沒有要介紹 CSS animation 有哪些寫法，或是什麼炫砲特效的。&lt;/p&gt;
+&lt;h2 id=&quot;browser-60fps&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#browser-60fps&quot; aria-label=&quot;browser 60fps permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;browser 60fps&lt;/h2&gt;
+&lt;p&gt;先介紹一下何謂動畫卡頓感，人眼在 60 frames per seconds 更新下會是順暢感的，下方影片就是 60 fps vs 30 fps vs 24 fps 的比較，會明顯發現 fps 越低會越有卡頓感。&lt;/p&gt;
+&lt;p&gt;避免 fps 太低的方法，大概是因為避免頻繁的更新畫面，例如 scroll 搭配複雜的更新 css，或是 javascript 過度的佔用資源，或是 setInterval 頻繁更新畫面等等。&lt;/p&gt;
+&lt;p&gt;除非你用插件，否則畫面卡頓你通常會知道是為什麼，因為這些寫法都頗暴力。&lt;/p&gt;
+&lt;div class=&quot;gatsby-resp-iframe-wrapper&quot; style=&quot;padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden; margin-bottom: 1.0725rem&quot; &gt; &lt;iframe src=&quot;https://www.youtube.com/embed/_SzGQkI-IwM?start=19&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen style=&quot; position: absolute; top: 0; left: 0; width: 100%; height: 100%; &quot;&gt;&lt;/iframe&gt; &lt;/div&gt;
+&lt;h2 id=&quot;避免使用過於負擔的-css-style&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E9%81%BF%E5%85%8D%E4%BD%BF%E7%94%A8%E9%81%8E%E6%96%BC%E8%B2%A0%E6%93%94%E7%9A%84-css-style&quot; aria-label=&quot;避免使用過於負擔的 css style permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;避免使用過於負擔的 css style&lt;/h2&gt;
+&lt;p&gt;一個頁面效果的更新，通常會有五個 thread， javascript 執行，接下來會在執行 Style 計算，後面會執行 Layout 計算，再來執行 Paint 收集需要繪製的部分，最後會執行 Composite，如果前面有需要更新 paint，都收集起來更新到畫面上。&lt;/p&gt;
+&lt;p&gt;google 教學: &lt;a href=&quot;https://developers.google.com/web/fundamentals/performance/rendering&quot; title=&quot;performance rendering&quot;&gt;performance rendering&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;
+  &lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;margin: 7vw 0;&quot;&gt;
+  
+  &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/1c7ed88b2c4a56e09c57344951e5e7fd/4f804/css_render.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+  
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1696px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 16.767676767676768%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAIAAAAcOLh5AAAACXBIWXMAABYlAAAWJQFJUiTwAAAAwklEQVQI1wG3AEj/APvz3vrqxfrsyPrrxvntz+Xd9t3T9+HY9+Tc9t3V9t7T+eHg7tToztDlzdjp1Nfo0tHlzNHlzNDly+Tw4gD02I/txVrvzXHuymvyyVa3mcKiieyhhuShhuaiieWni+mcitmAtnWBuXR7tm6AuHOCuHWIvHt9tm+jzJsA9uSz8tSF89iR8teO89iNyLTduKXwvarsv63tuqfsvKfvvLPhosyYn8mVpc2dpc2coMqXpMybnciUwdy7ILuIR+EWyO8AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;picture&gt;
+        &lt;source
+          srcset=&quot;/static/1c7ed88b2c4a56e09c57344951e5e7fd/a805d/css_render.webp 495w,
+/static/1c7ed88b2c4a56e09c57344951e5e7fd/36741/css_render.webp 990w,
+/static/1c7ed88b2c4a56e09c57344951e5e7fd/45881/css_render.webp 1696w&quot;
+          sizes=&quot;(max-width: 1696px) 100vw, 1696px&quot;
+          type=&quot;image/webp&quot;
+        /&gt;
+        &lt;source
+          srcset=&quot;/static/1c7ed88b2c4a56e09c57344951e5e7fd/b3db0/css_render.png 495w,
+/static/1c7ed88b2c4a56e09c57344951e5e7fd/8ddfd/css_render.png 990w,
+/static/1c7ed88b2c4a56e09c57344951e5e7fd/4f804/css_render.png 1696w&quot;
+          sizes=&quot;(max-width: 1696px) 100vw, 1696px&quot;
+          type=&quot;image/png&quot;
+        /&gt;
+        &lt;img
+          class=&quot;gatsby-resp-image-image&quot;
+          style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+          src=&quot;/static/1c7ed88b2c4a56e09c57344951e5e7fd/4f804/css_render.png&quot;
+          alt=&quot;render step&quot;
+          title=&quot;render step&quot;
+          src=&quot;/static/1c7ed88b2c4a56e09c57344951e5e7fd/4f804/css_render.png&quot;
+        /&gt;
+      &lt;/picture&gt;
+      &lt;/span&gt;
+  &lt;/span&gt;
+  
+  &lt;/a&gt;
+    
+  &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;render step&lt;/figcaption&gt;
+  &lt;/figure&gt;
+      &lt;/p&gt;
+&lt;p&gt;CSS 執行部分主要分為 Layout、Paint、Composite 這三個。其中 Layout 付出的成本最高，會促使 CSSOM tree 更新重繪，至於 painting 也是高成本的計算，最節省資源的是 Composite，能幫助優化 GPU 效能。&lt;/p&gt;
+&lt;p&gt;另外 CSS 每個屬性背後所要付出的成本其實不大相同，top 跟 transform 就不一樣。top 會造成整個畫面需要重新繪製位移，負擔較大，至於 transform 則是只需要 composite。詳細每個 style 在下方連結有列出。&lt;/p&gt;
+&lt;p&gt;提醒如果你需要使用 animation 的話，盡量能用&lt;code class=&quot;language-text&quot;&gt;只需要 composite 的 style&lt;/code&gt;，避免對畫面造成可能的負擔。&lt;/p&gt;
+&lt;p&gt;文件: &lt;a href=&quot;https://csstriggers.com/visibility&quot; title=&quot;csstrigger&quot;&gt;csstriggers&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;css-animation-專案&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#css-animation-%E5%B0%88%E6%A1%88&quot; aria-label=&quot;css animation 專案 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;CSS animation 專案&lt;/h2&gt;
+&lt;p&gt;最近完成一個有趣東西，是關於動畫效果的，需求就是要落下紅包雨，然後要讓 user 點擊開獎。在有開發時間壓力，其它種種因素之下，決定簡單用 css animation 簡單處理。&lt;/p&gt;
+&lt;h4 id=&quot;react-reupdate-影響-animation&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#react-reupdate-%E5%BD%B1%E9%9F%BF-animation&quot; aria-label=&quot;react reupdate 影響 animation permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;React reupdate 影響 animation&lt;/h4&gt;
+&lt;p&gt;因為專案是全用 react 開發的，所以我也打算用 react 處理這個特效，在一開始是依賴 requestAnimationFrame 來針對每一組紅包 component 在動畫完成落下，再抹殺重建立產生新的動畫落下，不過因為更新過於頻繁，html dom 一直不斷在更新，造成畫面卡頓感嚴重。&lt;/p&gt;
+&lt;p&gt;那時候發現 fps 在遭遇大量的 component update 時，fps 會落到 30~40 不等，後面就直接拋棄 react 處理，直接改用 react build component，後面就不盡量不依賴 javascript 去接觸 animation 更新，講直接一點就是直接用 animation-iteration-count infinite，再一開始 init 計算，用一些方式製造出時間差，讓落下有錯開的錯覺。&lt;/p&gt;
+&lt;p&gt;結果就如下方，因為需求就是要多個紅包，設計還要有分離感，最後還是使用了多個 animation…。實務上務必能減少同時 animation 就減少。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/8a542ccc893fd517fc201917a357ca15/red_envelope.gif&quot; alt=&quot;red envelope&quot; title=&quot;red envelope&quot;&gt;&lt;br&gt;
+壓縮 gif 產生卡頓感&lt;/p&gt;
+&lt;h2 id=&quot;javascript-阻塞-rendering-queue&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#javascript-%E9%98%BB%E5%A1%9E-rendering-queue&quot; aria-label=&quot;javascript 阻塞 rendering queue permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Javascript 阻塞 rendering-queue&lt;/h2&gt;
+&lt;p&gt;另一個正在進行的專案，利用 canvas 處理圖片，這邊是非常極端的情境，超級大的圖片跟 webp，結果入畫面，有兩個 loading 引導，下方是用 css animation 的，上方是 loading gif，可以看得出來下方的 css animation 十分卡頓。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/fd21aa15fb00f87dc947140aae48d7a6/animation-stuck.gif&quot; alt=&quot;animation stuck&quot; title=&quot;animation stuck&quot;&gt;&lt;/p&gt;
+&lt;p&gt;打開 devtool 的 performance 去錄製操作，由結果上可以發現到 scripting 幾乎佔滿了整個線程，導致我們頁面的 rendering 幾乎沒資源可以執行，另外也可以發現 CPU usage 直接跑到 100%。&lt;/p&gt;
+&lt;p&gt;
+  &lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;margin: 7vw 0;&quot;&gt;
+  
+  &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/d137f936fa30976bbe897149adde2d99/52e96/devtool_render_stuck.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+  
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1980px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 75.95959595959596%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAIAAABr+ngCAAAACXBIWXMAABYlAAAWJQFJUiTwAAACVklEQVQoz5WSbU/bMBDH843Z12DvBmISiI5SVuhUsVBgjMHGEGgMJCjQtOWhSfPQPDVpkyZNHNt56K4Eob0b++X0953tO9nxMdVqtVRaK64CpZXilEJxtfBh5f1iYblQ3KhU1jc2FheX5ufny+X1WeDt7MLcwvJSYbVUYizLcp4IwimUUj9KAxQFiCAcByEGy7IJkGQZpgnCFGOSzzCyKAoCL8mSKIq2bXvuYOwNPKcfecZ4qEaeGTgqcnV/0AtdfaDzcvdeFB76umKoEnPbaPMdiedlQVCcUazrUp07v2teKBwrcTWJ25IarNLaFhus3KwprVqn8b1VP27Vj5r1I+aycXXGnZ02Tn9eH51wJ9s/WHa3XNkq1g4+be6VN7+U2f1Kdffj1jfQte3D6uf99cPTnYOT2v4xy/Q0WR0oHnXc2BZtvttpj7TuQOX7vUer9/isyoOtdkz53u49yjynim3wDemO0XQjQsTuD6+vboTW/eVVs91+MDQjwSTBGCyjJCVTy50spuBklKaUMKIkQ36HF+bm3s28mdn5und+8avZvNF6vNS9810rjsYk9CjyXywPQRnP89I0zZ7+fYhxP3TgCj7xzLE5DIdJOp3PV1/IQ1DGNE14anjhLEtpkvqI0BhHBK4SkhjndWEJNsP2qU2eQ1AG2sN1hr7nYYxDFI1DnCRJHMdJDMPUASiN/yYPQRlF69vDkeu6Tw0WQAloMkIIhu9fMFA9RepkkkLT+SMHjjB5NYyrnY+03xlSAkQ1Q7cs+z+SqXtL7ItJSnx/DIdHCL0++Q9NMSvV60+4hQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;picture&gt;
+        &lt;source
+          srcset=&quot;/static/d137f936fa30976bbe897149adde2d99/a805d/devtool_render_stuck.webp 495w,
+/static/d137f936fa30976bbe897149adde2d99/36741/devtool_render_stuck.webp 990w,
+/static/d137f936fa30976bbe897149adde2d99/41a9f/devtool_render_stuck.webp 1980w,
+/static/d137f936fa30976bbe897149adde2d99/1816f/devtool_render_stuck.webp 2030w&quot;
+          sizes=&quot;(max-width: 1980px) 100vw, 1980px&quot;
+          type=&quot;image/webp&quot;
+        /&gt;
+        &lt;source
+          srcset=&quot;/static/d137f936fa30976bbe897149adde2d99/b3db0/devtool_render_stuck.png 495w,
+/static/d137f936fa30976bbe897149adde2d99/8ddfd/devtool_render_stuck.png 990w,
+/static/d137f936fa30976bbe897149adde2d99/7c078/devtool_render_stuck.png 1980w,
+/static/d137f936fa30976bbe897149adde2d99/52e96/devtool_render_stuck.png 2030w&quot;
+          sizes=&quot;(max-width: 1980px) 100vw, 1980px&quot;
+          type=&quot;image/png&quot;
+        /&gt;
+        &lt;img
+          class=&quot;gatsby-resp-image-image&quot;
+          style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+          src=&quot;/static/d137f936fa30976bbe897149adde2d99/7c078/devtool_render_stuck.png&quot;
+          alt=&quot;devtool render stuck&quot;
+          title=&quot;devtool render stuck&quot;
+          src=&quot;/static/d137f936fa30976bbe897149adde2d99/7c078/devtool_render_stuck.png&quot;
+        /&gt;
+      &lt;/picture&gt;
+      &lt;/span&gt;
+  &lt;/span&gt;
+  
+  &lt;/a&gt;
+    
+  &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;devtool render stuck&lt;/figcaption&gt;
+  &lt;/figure&gt;
+      &lt;/p&gt;
+&lt;h4 id=&quot;render-queue-with-event-loop&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#render-queue-with-event-loop&quot; aria-label=&quot;render queue with event loop permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;render-queue with event loop&lt;/h4&gt;
+&lt;p&gt;其中 render-queue 又是與 event loop 有相關。如果不大理解的話，可以看下方這段影片，激推、神清楚。&lt;/p&gt;
+&lt;div class=&quot;gatsby-resp-iframe-wrapper&quot; style=&quot;padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden; margin-bottom: 1.0725rem&quot; &gt; &lt;iframe src=&quot;https://www.youtube.com/embed/8aGhZQkoFbQ&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen style=&quot; position: absolute; top: 0; left: 0; width: 100%; height: 100%; &quot;&gt;&lt;/iframe&gt; &lt;/div&gt;
+&lt;p&gt;卡頓問題的解法可以用 web worker api，讓我們執行序 (thread) 在背景運行，這樣就避免畫面跟 user 互動中斷，以及避免畫面卡頓感。&lt;/p&gt;
+&lt;p&gt;不過 web worker 沒支援 ie11…，也知道能不能撐受這麼大的執行運算，還在思考解法中。&lt;/p&gt;
+&lt;p&gt;mdn: &lt;a href=&quot;https://developer.mozilla.org/zh-TW/docs/Web/API/Web_Workers_API/Using_web_workers&quot; title=&quot;mdn web workers&quot;&gt;web workers&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;google chrome update: &lt;a href=&quot;https://developers.google.com/web/updates/2018/08/offscreen-canvas&quot; title=&quot;web worker handle canvas&quot;&gt;web worker handle canvas&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;心得&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E5%BF%83%E5%BE%97&quot; aria-label=&quot;心得 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;心得&lt;/h2&gt;
+&lt;p&gt;這個議題我在專案上遇到的，才開始研究 css style animation，所以才會額外提到專案。畢竟由實務切入，比較能更能理解相關技術運用的地方。&lt;/p&gt;
+&lt;p&gt;以上有問題歡迎留言。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Critical Rendering Path 關鍵渲染路徑優化]]></title><description><![CDATA[CSS 常被認為簡單好學，我對它看法是易學但難精通，以前都只想過實現各種 UI、效果，但沒認真考慮過效能，怎樣的寫法最適合這個情境。假設你有針對 google page speed、lighthouse…]]></description><link>https://ianccy.com/2021-02-cssperformance/</link><guid isPermaLink="false">https://ianccy.com/2021-02-cssperformance/</guid><pubDate>Thu, 11 Feb 2021 05:30:44 GMT</pubDate><content:encoded>&lt;p&gt;CSS 常被認為簡單好學，我對它看法是易學但難精通，以前都只想過實現各種 UI、效果，但沒認真考慮過效能，怎樣的寫法最適合這個情境。假設你有針對 google page speed、lighthouse 優化過，應該會特別有感觸，該如何才能讓網頁載入更快。&lt;/p&gt;
 &lt;p&gt;接下來討論如何讓畫面渲染載入更快，以及一些最佳化使用方式。&lt;/p&gt;
 &lt;h2 id=&quot;網頁渲染邏輯&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E7%B6%B2%E9%A0%81%E6%B8%B2%E6%9F%93%E9%82%8F%E8%BC%AF&quot; aria-label=&quot;網頁渲染邏輯 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;網頁渲染邏輯&lt;/h2&gt;
 &lt;p&gt;首先介紹最基礎的 painting，瀏覽器的畫面產生，需要有幾個步驟，先是由上至下掃一遍 html，擷取內容後，先產生 HTML DOM tree，再來產生 CSSOM tree，&lt;/p&gt;
@@ -168,7 +308,7 @@ with references to its surrounding state (the lexical environment).&lt;/code&gt;
 &lt;/ul&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;var a = { name: &amp;#39;ian&amp;#39; };
-function getValueA(){
+function getValueA() {
     return a;
 }
 var assignA = getValueA();
@@ -193,8 +333,8 @@ console.log(getValueA()); // 2&lt;/code&gt;
 &lt;/ul&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;for (var i = 0; i &amp;lt; 3; i++) {
-    setTimeout(function(){
-        console.log(i)
+    setTimeout(function() {
+        console.log(i);
     }, 0);
 }
 // 3
@@ -209,7 +349,7 @@ console.log(getValueA()); // 2&lt;/code&gt;
           &lt;code slot=&quot;code&quot;&gt;for (var i = 0; i &amp;lt; 3; i++) {
     function logI(i) {
         setTimeout(function() {
-            console.log(i)
+            console.log(i);
         }, 0);
     }
     logI(i);
@@ -245,7 +385,7 @@ console.log(getValueA()); // 2&lt;/code&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;let str = &amp;#39;Hello, you!!&amp;#39;;
 let ianHello = str;
-ianHello += &amp;#39;ian&amp;#39;
+ianHello += &amp;#39;ian&amp;#39;;
 
 // not changed
 console.log(str); // Hello, you!!
@@ -284,7 +424,7 @@ setNames(names);&lt;/code&gt;
 &lt;li&gt;immutable setState&lt;/li&gt;
 &lt;/ul&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;setNames(names =&amp;gt; [...names, value])&lt;/code&gt;
+          &lt;code slot=&quot;code&quot;&gt;setNames(names =&amp;gt; [...names, value]);&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;&lt;a href=&quot;https://reactjs.org/docs/optimizing-performance.html#the-power-of-not-mutating-data&quot; title=&quot;react optimizing-performance&quot;&gt;react optimizing-performance&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://redux.js.org/recipes/structuring-reducers/beyond-combinereducers#using-slice-reducers-with-immutablejs-objects&quot; title=&quot;redux reducers immutablejs&quot;&gt;redux reducers immutablejs&lt;/a&gt;&lt;/p&gt;
@@ -620,15 +760,15 @@ and location are set to ask for permission before granting access.&lt;/code&gt;
 &lt;li&gt;batch 使用方法&lt;/li&gt;
 &lt;/ul&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;import { batch } from &amp;#39;react-redux&amp;#39;
+          &lt;code slot=&quot;code&quot;&gt;import { batch } from &amp;#39;react-redux&amp;#39;;
 function myThunk() {
     return (dispatch, getState) =&amp;gt; {
         // should only result in one combined re-render, not two
         batch(() =&amp;gt; {
-        dispatch(increment())
-        dispatch(increment())
-        })
-    }
+            dispatch(increment());
+            dispatch(increment());
+        });
+    };
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/reduxjs/redux/blob/a5739d9455afbed663a4ca1fcac002988c885fcb/docs/faq/Performance.md#how-can-i-reduce-the-number-of-store-update-events&quot; title=&quot;react redux github batch Q&amp;#x26;A&quot;&gt;react redux github batch Q&amp;#x26;A&lt;/a&gt;&lt;/p&gt;
@@ -663,19 +803,19 @@ let foo = () =&amp;gt; 1 + 2;&lt;/code&gt;
 &lt;li&gt;Add thunk on redux middleWare&lt;/li&gt;
 &lt;/ul&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;import { createStore, applyMiddleware } from &amp;quot;redux&amp;quot;;
-import thunk from &amp;quot;redux-thunk&amp;quot;;
-import reducers from &amp;quot;../redux/reducers&amp;quot;;
+          &lt;code slot=&quot;code&quot;&gt;import { createStore, applyMiddleware } from &amp;#39;redux&amp;#39;;
+import thunk from &amp;#39;redux-thunk&amp;#39;;
+import reducers from &amp;#39;../redux/reducers&amp;#39;;
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
 function fetchUser(data) {
-  return (dispatch, getState) =&amp;gt; {
-    dispatch({ type: ADD_USERCOMMENT, payload: data.list });
-    if (data.userInfo) {
-      dispatch({ type: INIT_INFO, payload: data.userInfo });
-    }
-  };
+    return (dispatch, getState) =&amp;gt; {
+        dispatch({ type: ADD_USERCOMMENT, payload: data.list });
+        if (data.userInfo) {
+            dispatch({ type: INIT_INFO, payload: data.userInfo });
+        }
+    };
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;extraArgument 不用理會，這是新功能讓使用者客製化增加 thunk 的參數，action 會是我們傳入的 action creator，當 action creator 是一個 function，就執行 action creator function，如果不是就執行 next 帶入 action creator，正常的執行 dispatch。&lt;/p&gt;
@@ -685,13 +825,13 @@ function fetchUser(data) {
 &lt;/ul&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;function createThunkMiddleware(extraArgument) {
-  return ({ dispatch, getState }) =&amp;gt; next =&amp;gt; action =&amp;gt; {
-    if (typeof action === &amp;quot;function&amp;quot;) {
-      return action(dispatch, getState, extraArgument);
-    }
+    return ({ dispatch, getState }) =&amp;gt; next =&amp;gt; action =&amp;gt; {
+        if (typeof action === &amp;#39;function&amp;#39;) {
+            return action(dispatch, getState, extraArgument);
+        }
 
-    return next(action);
-  };
+        return next(action);
+    };
 }
 
 const thunk = createThunkMiddleware();
@@ -706,26 +846,26 @@ export default thunk;&lt;/code&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// middlewares argument is pass thunk
 export default function(...middlewares) {
-  return createStore =&amp;gt; (reducers, initialState, enhancer) =&amp;gt; {
-    const store = createStore(reducers, initialState, enhancer);
-    const dispatch = store.dispatch;
-    const chain = [];
-    const middleWareAPI = {
-      getState: store.getState,
-      dispatch: action =&amp;gt; dispatch(action)
-    };
+    return createStore =&amp;gt; (reducers, initialState, enhancer) =&amp;gt; {
+        const store = createStore(reducers, initialState, enhancer);
+        const dispatch = store.dispatch;
+        const chain = [];
+        const middleWareAPI = {
+            getState: store.getState,
+            dispatch: action =&amp;gt; dispatch(action)
+        };
 
-    chain = middlewares.map(middleware =&amp;gt; middleware(middlewareAPI));
-    dispatch = compose(...chain)(store.dispatch); // store.dispatch or dispatch both work
-    // compose will do following thing:
-    /*
-     * a, b, c ==&amp;gt; a(b(c())), indeed, it is just a reduce and store.dispatch will be an initial value
-     */
-    return {
-      ...store,
-      dispatch
+        chain = middlewares.map(middleware =&amp;gt; middleware(middlewareAPI));
+        dispatch = compose(...chain)(store.dispatch); // store.dispatch or dispatch both work
+        // compose will do following thing:
+        /*
+         * a, b, c ==&amp;gt; a(b(c())), indeed, it is just a reduce and store.dispatch will be an initial value
+         */
+        return {
+            ...store,
+            dispatch
+        };
     };
-  };
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;redux thunk code 很優美，完美的示範如何使用 redux 的 middleWare，邏輯清楚又不複雜。我一定不會說這篇文章是為了分享 redux thunk。&lt;/p&gt;
@@ -753,7 +893,7 @@ export default function(...middlewares) {
 &lt;p&gt;執行 Jest 會預設抓取 &lt;code class=&quot;language-text&quot;&gt;__tests__&lt;/code&gt; folder 內 js、ts 檔案，或是 fileName 有 spec、test 的 js ts 檔案 來跑測試， 假設你有用到 babel，或是其他 css 編譯工具，則需要設定 jest config。&lt;/p&gt;
 &lt;p&gt;規則預設&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;([ &amp;quot;**/__tests__/**/*.[jt]s?(x)&amp;quot;, &amp;quot;**/?(*.)+(spec|test).[jt]s?(x)&amp;quot; ])&lt;/code&gt;
+          &lt;code slot=&quot;code&quot;&gt;[&amp;#39;**/__tests__/**/*.[jt]s?(x)&amp;#39;, &amp;#39;**/?(*.)+(spec|test).[jt]s?(x)&amp;#39;];&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;官方文件: &lt;a href=&quot;https://jestjs.io/docs/en/getting-started&quot; title=&quot;Jest starter guide&quot;&gt;Jest starter guide&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Jest 主要依賴幾個 function 執行測試，describe function 可以讓我們對這一個測試做命名，以便後面執行測試追蹤，test function 則是讓我們定義某個 test case，例如範例，我們用 describe 測試包覆多種狀況來測試，expect 則是讓我們丟入 function 做 return，toBe 就是預期測試結果是否符合預期。&lt;/p&gt;
@@ -764,12 +904,12 @@ export default function(...middlewares) {
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;describe(&amp;#39;Test sum&amp;#39;, () =&amp;gt; {
     test(&amp;#39;function return 0&amp;#39;, () =&amp;gt; {
-        expect(sum(0)).toBe(0)
-    })
+        expect(sum(0)).toBe(0);
+    });
     test(&amp;#39;function sum 0, 1 return 1&amp;#39;, () =&amp;gt; {
-        expect(sum(0,1)).toBe(1)
-    })
-})&lt;/code&gt;
+        expect(sum(0, 1)).toBe(1);
+    });
+});&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;目前新專案是純倚賴 Jest 來測試，主要規劃會以 function test 以及 end to end 為主，主要先針對最重要的 function 做不同情境測試。&lt;/p&gt;
 &lt;p&gt;安裝完成有遇到 react-script start 會有 jest error，依照提示移除 jest、node_modules、package-lock.json，並重新安裝即可解決。&lt;/p&gt;
@@ -780,16 +920,16 @@ export default function(...middlewares) {
 &lt;p&gt;下面是簡單的元件，主要測試是觸發 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;span&amp;gt;&lt;/code&gt; 的 onClick 讓 state count 更新。&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;function TodoView() {
-  const inputEl = useRef(null);
-  const [todoList, addTodo, deleteToDo] = useTodoList([], inputEl);
-  const [count, setCount] = useState(0);
+    const inputEl = useRef(null);
+    const [todoList, addTodo, deleteToDo] = useTodoList([], inputEl);
+    const [count, setCount] = useState(0);
 
-  return (
-    &amp;lt;div&amp;gt;
-      &amp;lt;span onClick={()=&amp;gt;setCount(count+1)}&amp;gt;Counter : {count}&amp;lt;/span&amp;gt;
-      ...
-    &amp;lt;/div&amp;gt;
-  );
+    return (
+        &amp;lt;div&amp;gt;
+            &amp;lt;span onClick={() =&amp;gt; setCount(count + 1)}&amp;gt;Counter : {count}&amp;lt;/span&amp;gt;
+            ...
+        &amp;lt;/div&amp;gt;
+    );
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;下方為實際使用範例，主要邏輯就是使用 create render component，再把元件資料轉格式匯出 snapshot，並可以用 act 來調用 component function，直接拉 props function 用會有 error warning，主要用起來困難點會是在 selector，還是如何整理 snapshot 匯出格式，幫助我們日後測試。&lt;/p&gt;
@@ -798,25 +938,25 @@ export default function(...middlewares) {
 &lt;li&gt;src/&lt;strong&gt;testSnap&lt;/strong&gt;/TodoView.test.js&lt;/li&gt;
 &lt;/ul&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;import React from &amp;quot;react&amp;quot;;
-import { create, act } from &amp;quot;react-test-renderer&amp;quot;;
+          &lt;code slot=&quot;code&quot;&gt;import React from &amp;#39;react&amp;#39;;
+import { create, act } from &amp;#39;react-test-renderer&amp;#39;;
 import TodoView from &amp;#39;/container/TodoView&amp;#39;;
 
-describe(&amp;quot;TodoView component&amp;quot;, () =&amp;gt; {
-  test(&amp;quot;it shows the expected text when clicked&amp;quot;, () =&amp;gt; {
-    let component;
-    act(() =&amp;gt; {
-      component = create(&amp;lt;TodoView /&amp;gt;);
-    });
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-    const instance = component.root;
+describe(&amp;#39;TodoView component&amp;#39;, () =&amp;gt; {
+    test(&amp;#39;it shows the expected text when clicked&amp;#39;, () =&amp;gt; {
+        let component;
+        act(() =&amp;gt; {
+            component = create(&amp;lt;TodoView /&amp;gt;);
+        });
+        let tree = component.toJSON();
+        expect(tree).toMatchSnapshot();
+        const instance = component.root;
 
-    const button = instance.findByType(&amp;quot;span&amp;quot;);
-    act(() =&amp;gt; button.props.onClick());
-    expect(button.props.children.join()).toBe(&amp;quot;Counter : ,1&amp;quot;)
-    expect(button.props.children).toMatchSnapshot();
-  });
+        const button = instance.findByType(&amp;#39;span&amp;#39;);
+        act(() =&amp;gt; button.props.onClick());
+        expect(button.props.children.join()).toBe(&amp;#39;Counter : ,1&amp;#39;);
+        expect(button.props.children).toMatchSnapshot();
+    });
 });&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;component-testing-testing-libraryreact&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#component-testing-testing-libraryreact&quot; aria-label=&quot;component testing testing libraryreact permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Component Testing @testing-library/react&lt;/h2&gt;
@@ -841,36 +981,36 @@ React Components’ output.&lt;/code&gt;
 &lt;li&gt;TypeInInput Component&lt;/li&gt;
 &lt;/ul&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;import React, { useState } from &amp;quot;react&amp;quot;;
-import { render, fireEvent } from &amp;quot;@testing-library/react&amp;quot;;
+          &lt;code slot=&quot;code&quot;&gt;import React, { useState } from &amp;#39;react&amp;#39;;
+import { render, fireEvent } from &amp;#39;@testing-library/react&amp;#39;;
 
-function TypeInInput({text}) {
-  const [value, setValue] = useState(&amp;#39;&amp;#39;);
-  const onChangeValue = e =&amp;gt; {
-    setValue(e.target.value);
-  };
-  return (
-    &amp;lt;div&amp;gt;
-      &amp;lt;label&amp;gt;{text}&amp;lt;/label&amp;gt;
-      &amp;lt;input data-testid=&amp;quot;typeIn&amp;quot; value={value} onChange={onChangeValue} /&amp;gt;
-    &amp;lt;/div&amp;gt;
-  );
+function TypeInInput({ text }) {
+    const [value, setValue] = useState(&amp;#39;&amp;#39;);
+    const onChangeValue = e =&amp;gt; {
+        setValue(e.target.value);
+    };
+    return (
+        &amp;lt;div&amp;gt;
+            &amp;lt;label&amp;gt;{text}&amp;lt;/label&amp;gt;
+            &amp;lt;input data-testid=&amp;quot;typeIn&amp;quot; value={value} onChange={onChangeValue} /&amp;gt;
+        &amp;lt;/div&amp;gt;
+    );
 }
 
-describe(&amp;quot;Test TypeInInput&amp;quot;, () =&amp;gt; {
-  const text = &amp;quot;email&amp;quot;;
-  test(&amp;quot;change event&amp;quot;, () =&amp;gt; {
-    const { getByText } = render(&amp;lt;TypeInInput text={text} /&amp;gt;);
-    const title = getByText(/email/);
-    expect(title.textContent).toEqual(text);
-  });
-  test(&amp;quot;change event&amp;quot;, () =&amp;gt; {
-    const { getByTestId } = render(&amp;lt;TypeInInput text={text} /&amp;gt;);
-    const typeInElem = getByTestId(&amp;quot;typeIn&amp;quot;);
-    const test = &amp;quot;emample@gmail.com&amp;quot;;
-    fireEvent.change(typeInElem, { target: { value: test } });
-    expect(typeInElem.value).toEqual(test);
-  });
+describe(&amp;#39;Test TypeInInput&amp;#39;, () =&amp;gt; {
+    const text = &amp;#39;email&amp;#39;;
+    test(&amp;#39;change event&amp;#39;, () =&amp;gt; {
+        const { getByText } = render(&amp;lt;TypeInInput text={text} /&amp;gt;);
+        const title = getByText(/email/);
+        expect(title.textContent).toEqual(text);
+    });
+    test(&amp;#39;change event&amp;#39;, () =&amp;gt; {
+        const { getByTestId } = render(&amp;lt;TypeInInput text={text} /&amp;gt;);
+        const typeInElem = getByTestId(&amp;#39;typeIn&amp;#39;);
+        const test = &amp;#39;emample@gmail.com&amp;#39;;
+        fireEvent.change(typeInElem, { target: { value: test } });
+        expect(typeInElem.value).toEqual(test);
+    });
 });&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;至於比較複雜的 async function api 的操作，記得要修改 babel config 執行非同步，以及安裝 @testing-library/jest-dom 執行 toHaveTextContent，讓斷言能更靈活。&lt;/p&gt;
@@ -878,52 +1018,50 @@ describe(&amp;quot;Test TypeInInput&amp;quot;, () =&amp;gt; {
 &lt;li&gt;babel.config.js&lt;/li&gt;
 &lt;/ul&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;    [
-      &amp;quot;@babel/preset-env&amp;quot;,
-      {
+          &lt;code slot=&quot;code&quot;&gt;[
+    &amp;#39;@babel/preset-env&amp;#39;,
+    {
         targets: {
-          node: &amp;quot;current&amp;quot;
+            node: &amp;#39;current&amp;#39;
         }
-      }
-    ]&lt;/code&gt;
+    }
+];&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;Fetch 接受 url、axios (模擬 api call) 兩個 prop。Component 內用到 state、useCallback、建立 function fetchData，&lt;/p&gt;
 &lt;p&gt;Component 預期狀態&lt;/p&gt;
 &lt;p&gt;useEffect 會在元件 render 傳入 url 以及 apiCall function，並執行 click element 觸發 fetchData 調用 apiCall 更新 state。&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;import React, { useState, useCallback } from &amp;quot;react&amp;quot;;
-import axios from &amp;quot;axios&amp;quot;;
-import { render, fireEvent, waitForElement } from &amp;quot;@testing-library/react&amp;quot;;
+          &lt;code slot=&quot;code&quot;&gt;import React, { useState, useCallback } from &amp;#39;react&amp;#39;;
+import axios from &amp;#39;axios&amp;#39;;
+import { render, fireEvent, waitForElement } from &amp;#39;@testing-library/react&amp;#39;;
 
-import &amp;#39;@testing-library/jest-dom/extend-expect&amp;#39;
+import &amp;#39;@testing-library/jest-dom/extend-expect&amp;#39;;
 
 function Fetch({ url, apiCall }) {
-  const [data, setDate] = useState();
-  const fetchData = useCallback(async () =&amp;gt; {
-    const response = await apiCall.get(url);
-    setDate(response.data);
-  }, [apiCall, url]);
-  return (
-    &amp;lt;div&amp;gt;
-      &amp;lt;button onClick={fetchData}&amp;gt;Fetch&amp;lt;/button&amp;gt;
-      {data ? &amp;lt;span data-testid=&amp;quot;fetch&amp;quot;&amp;gt;{data.test}&amp;lt;/span&amp;gt; : null}
-    &amp;lt;/div&amp;gt;
-  );
+    const [data, setDate] = useState();
+    const fetchData = useCallback(async () =&amp;gt; {
+        const response = await apiCall.get(url);
+        setDate(response.data);
+    }, [apiCall, url]);
+    return (
+        &amp;lt;div&amp;gt;
+            &amp;lt;button onClick={fetchData}&amp;gt;Fetch&amp;lt;/button&amp;gt;
+            {data ? &amp;lt;span data-testid=&amp;quot;fetch&amp;quot;&amp;gt;{data.test}&amp;lt;/span&amp;gt; : null}
+        &amp;lt;/div&amp;gt;
+    );
 }
 
-test(&amp;quot;Fetch makes an API call and displays the greeting&amp;quot;, async () =&amp;gt; {
-  const fakeAxios = {
-    get: jest.fn(() =&amp;gt; Promise.resolve({ data: { test: &amp;quot;hello world&amp;quot; } }))
-  };
-  const url = &amp;quot;https://example.com/get-hello-there&amp;quot;;
-  const { getByText, getByTestId } = render(
-    &amp;lt;Fetch url={url} apiCall={fakeAxios} /&amp;gt;
-  );
-  fireEvent.click(getByText(/fetch/i));
+test(&amp;#39;Fetch makes an API call and displays the greeting&amp;#39;, async () =&amp;gt; {
+    const fakeAxios = {
+        get: jest.fn(() =&amp;gt; Promise.resolve({ data: { test: &amp;#39;hello world&amp;#39; } }))
+    };
+    const url = &amp;#39;https://example.com/get-hello-there&amp;#39;;
+    const { getByText, getByTestId } = render(&amp;lt;Fetch url={url} apiCall={fakeAxios} /&amp;gt;);
+    fireEvent.click(getByText(/fetch/i));
 
-  const fetchNode = await waitForElement(() =&amp;gt; getByTestId(&amp;quot;fetch&amp;quot;));
+    const fetchNode = await waitForElement(() =&amp;gt; getByTestId(&amp;#39;fetch&amp;#39;));
 
-  expect(fetchNode).toHaveTextContent(&amp;quot;hello world&amp;quot;);
+    expect(fetchNode).toHaveTextContent(&amp;#39;hello world&amp;#39;);
 });&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;更複雜例子也可以查閱作者在 codesandbox 寫的各種 sample code，&lt;/p&gt;
@@ -957,9 +1095,9 @@ test(&amp;quot;Fetch makes an API call and displays the greeting&amp;quot;, asyn
 &lt;li&gt;buyservice.com 修改追蹤碼&lt;/li&gt;
 &lt;/ul&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;  ga(&amp;#39;create&amp;#39;, &amp;#39;UA-XXXXXXX-Y&amp;#39;, &amp;#39;auto&amp;#39;, {&amp;#39;allowLinker&amp;#39;: true});
-  ga(&amp;#39;require&amp;#39;, &amp;#39;linker&amp;#39;);
-  ga(&amp;#39;linker:autoLink&amp;#39;, [&amp;#39;example.com&amp;#39;] );&lt;/code&gt;
+          &lt;code slot=&quot;code&quot;&gt;ga(&amp;#39;create&amp;#39;, &amp;#39;UA-XXXXXXX-Y&amp;#39;, &amp;#39;auto&amp;#39;, { allowLinker: true });
+ga(&amp;#39;require&amp;#39;, &amp;#39;linker&amp;#39;);
+ga(&amp;#39;linker:autoLink&amp;#39;, [&amp;#39;example.com&amp;#39;]);&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h3 id=&quot;tag-manager-追蹤碼&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#tag-manager-%E8%BF%BD%E8%B9%A4%E7%A2%BC&quot; aria-label=&quot;tag manager 追蹤碼 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;tag manager 追蹤碼&lt;/h3&gt;
 &lt;p&gt;如果你是用 tag manager 設定 google analytics 的話，在 google analaytics 追增設定內的欄位設定(Field)，再增加 allowLinker 值 true，自動連結網址就填上要連動的網域。這樣就完成 tag manager 的設定了。記得 tag manager 的改動要提交更新。&lt;/p&gt;
@@ -1328,19 +1466,19 @@ export default class Container extends Component {
 &lt;h2 id=&quot;consumer-提取-value&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#consumer-%E6%8F%90%E5%8F%96-value&quot; aria-label=&quot;consumer 提取 value permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Consumer 提取 value&lt;/h2&gt;
 &lt;p&gt;Consumer 元件可以獲取 context 資料，假設沒有最接近的 Provider 提供 value，Cosumer 會取到 createContext 的 defaultvalue。若有 Provider 提供值，則是會保持訂閱更新，也就是達到跨元件同步資料，並 update component。&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;import React from &amp;quot;react&amp;quot;;
-import { MyContext } from &amp;quot;../Container&amp;quot;;
+          &lt;code slot=&quot;code&quot;&gt;import React from &amp;#39;react&amp;#39;;
+import { MyContext } from &amp;#39;../Container&amp;#39;;
 
 export default function Account() {
-  return (
-    &amp;lt;div className=&amp;quot;account&amp;quot;&amp;gt;
-      &amp;lt;MyContext.Consumer&amp;gt;
-        {({ isLogin }) =&amp;gt; {
-          return isLogin ? &amp;quot;Logout&amp;quot; : &amp;quot;Login&amp;quot;;
-        }}
-      &amp;lt;/MyContext.Consumer&amp;gt;
-    &amp;lt;/div&amp;gt;
-  );
+    return (
+        &amp;lt;div className=&amp;quot;account&amp;quot;&amp;gt;
+            &amp;lt;MyContext.Consumer&amp;gt;
+                {({ isLogin }) =&amp;gt; {
+                    return isLogin ? &amp;#39;Logout&amp;#39; : &amp;#39;Login&amp;#39;;
+                }}
+            &amp;lt;/MyContext.Consumer&amp;gt;
+        &amp;lt;/div&amp;gt;
+    );
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;&lt;a href=&quot;https://codesandbox.io/s/relaxed-banzai-su39f&quot; title=&quot;Consumer codesandbox&quot;&gt;Consumer codesandbox&lt;/a&gt;&lt;/p&gt;
@@ -1352,22 +1490,22 @@ export default function Account() {
 &lt;h2 id=&quot;contexttype-取值&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#contexttype-%E5%8F%96%E5%80%BC&quot; aria-label=&quot;contexttype 取值 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;contextType 取值&lt;/h2&gt;
 &lt;p&gt;contextType 是直接在 react 的 component 的 instance 再加上 context，所以只能用在 class Component，一個元件只能使用一個 context。&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;import React, { Component } from &amp;quot;react&amp;quot;;
-import MyContext from &amp;quot;../context/MyContext&amp;quot;;
+          &lt;code slot=&quot;code&quot;&gt;import React, { Component } from &amp;#39;react&amp;#39;;
+import MyContext from &amp;#39;../context/MyContext&amp;#39;;
 
 export default class Account extends Component {
-  static contextType = MyContext;
-  render() {
-    const { isLogin, setLogin } = this.context;
-    return (
-      &amp;lt;div className=&amp;quot;account&amp;quot;&amp;gt;
-        &amp;lt;div&amp;gt;
-          {isLogin ? &amp;quot;Logout&amp;quot; : &amp;quot;Login&amp;quot;}
-          &amp;lt;button onClick={setLogin}&amp;gt;toggleLogin&amp;lt;/button&amp;gt;
-        &amp;lt;/div&amp;gt;
-      &amp;lt;/div&amp;gt;
-    );
-  }
+    static contextType = MyContext;
+    render() {
+        const { isLogin, setLogin } = this.context;
+        return (
+            &amp;lt;div className=&amp;quot;account&amp;quot;&amp;gt;
+                &amp;lt;div&amp;gt;
+                    {isLogin ? &amp;#39;Logout&amp;#39; : &amp;#39;Login&amp;#39;}
+                    &amp;lt;button onClick={setLogin}&amp;gt;toggleLogin&amp;lt;/button&amp;gt;
+                &amp;lt;/div&amp;gt;
+            &amp;lt;/div&amp;gt;
+        );
+    }
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;我在這邊有遇到一個問題，在 Container component export context，並在 Account 引用 Container export 的 context 時，會發生我取不到值得問題，這是因為循環依賴的關係，在我們 Account 引用 Container 內的 MyContext 時，ES6 只會是 referrence MyContext undefined 狀態，實際在 Container 還尚未建立 createContext，這個 Account 又會再初始化階段就執行 MyContext，導致拿到 empty object。&lt;/p&gt;
@@ -1418,21 +1556,21 @@ export default class Account extends Component {
 &lt;p&gt;Preventing rerenders with React.memo and useContext hook.&lt;br&gt;
 &lt;a href=&quot;https://github.com/facebook/react/issues/15156#issuecomment-474590693&quot; title=&quot;Preventing rerenders with React.memo and useContext hook.&quot;&gt;Preventing rerenders with React.memo and useContext hook.&lt;/a&gt;&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;import React, { useContext, useMemo } from &amp;quot;react&amp;quot;;
-import MyContext from &amp;quot;../context/MyContext&amp;quot;;
+          &lt;code slot=&quot;code&quot;&gt;import React, { useContext, useMemo } from &amp;#39;react&amp;#39;;
+import MyContext from &amp;#39;../context/MyContext&amp;#39;;
 
 export default function Account() {
-  const { isLogin, setLogin } = useContext(MyContext);
-  return useMemo(() =&amp;gt; {
-    return (
-      &amp;lt;div className=&amp;quot;account&amp;quot;&amp;gt;
-        &amp;lt;div&amp;gt;
-          {isLogin ? &amp;quot;Logout&amp;quot; : &amp;quot;Login&amp;quot;}
-          &amp;lt;button onClick={setLogin}&amp;gt;toggleLogin&amp;lt;/button&amp;gt;
-        &amp;lt;/div&amp;gt;
-      &amp;lt;/div&amp;gt;
-    );
-  }, [isLogin, setLogin]);
+    const { isLogin, setLogin } = useContext(MyContext);
+    return useMemo(() =&amp;gt; {
+        return (
+            &amp;lt;div className=&amp;quot;account&amp;quot;&amp;gt;
+                &amp;lt;div&amp;gt;
+                    {isLogin ? &amp;#39;Logout&amp;#39; : &amp;#39;Login&amp;#39;}
+                    &amp;lt;button onClick={setLogin}&amp;gt;toggleLogin&amp;lt;/button&amp;gt;
+                &amp;lt;/div&amp;gt;
+            &amp;lt;/div&amp;gt;
+        );
+    }, [isLogin, setLogin]);
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;&lt;a href=&quot;https://codesandbox.io/s/gifted-wood-8ot48&quot; title=&quot;useContext with useMemo codesandbox&quot;&gt;useContext with useMemo codesandbox&lt;/a&gt;&lt;/p&gt;
@@ -1594,8 +1732,7 @@ export default function Account() {
 &lt;p&gt;接下來就需要定義使用者的 UserId，這邊有時候會用會員編號，不要使用敏感性個資去設定即可，能讓你在報表識別出這個人是誰就可以。&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// 全域網站代碼的追蹤程式碼 (gtag.js)：
-gtag(&amp;#39;set&amp;#39;, {&amp;#39;user_id&amp;#39;: &amp;#39;USER_ID&amp;#39;}); // 使用已登入的 user_id 設定 User ID。
-
+gtag(&amp;#39;set&amp;#39;, { user_id: &amp;#39;USER_ID&amp;#39; }); // 使用已登入的 user_id 設定 User ID。
 
 // 通用 Analytics (分析) 追蹤程式碼 (analytics.js)：
 ga(&amp;#39;set&amp;#39;, &amp;#39;userId&amp;#39;, &amp;#39;USER_ID&amp;#39;); // 使用已登入的 user_id 設定 User ID。&lt;/code&gt;
@@ -2263,29 +2400,30 @@ const deleteToDo = useCallback(
 &lt;p&gt;ps.儲存發布記得要再新增版本，這邊我卡了 1 小時…。&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;function doPost(e) {
-  var params = e.parameter;
-  var name = params.name;
-  var phone = params.phone;
+    var params = e.parameter;
+    var name = params.name;
+    var phone = params.phone;
 
-  var SpreadSheet = SpreadsheetApp.openById(&amp;quot;1JbXssixJaqTL_BMgnmOiMxLyAZm0jOkw173VdewqO9c&amp;quot;);
-  var Sheet = SpreadSheet.getSheets()[0];
+    var SpreadSheet = SpreadsheetApp.openById(&amp;#39;1JbXssixJaqTL_BMgnmOiMxLyAZm0jOkw173VdewqO9c&amp;#39;);
+    var Sheet = SpreadSheet.getSheets()[0];
 
-  var LastRow = Sheet.getLastRow();
-  var data = [];
+    var LastRow = Sheet.getLastRow();
+    var data = [];
 
-  // get All data as Array
-  // first row, first column, last row, seven columns
-  var listAll = Sheet.getSheetValues(1, 1, LastRow, 7);
+    // get All data as Array
+    // first row, first column, last row, seven columns
+    var listAll = Sheet.getSheetValues(1, 1, LastRow, 7);
 
-  // find phone and name mapping data and Push Array
-  for(var i = 0;i &amp;lt; list.length; i++){
-    if(listAll[i].indexOf(phone) === 1 &amp;amp;&amp;amp; listAll[i].indexOf(name) === 0){
-      data.push({data: listAll[i], index: i + 1 })
+    // find phone and name mapping data and Push Array
+    for (var i = 0; i &amp;lt; list.length; i++) {
+        if (listAll[i].indexOf(phone) === 1 &amp;amp;&amp;amp; listAll[i].indexOf(name) === 0) {
+            data.push({ data: listAll[i], index: i + 1 });
+        }
     }
-  }
-  // return data as JSON
-  return ContentService.createTextOutput(JSON.stringify(data))
-    .setMimeType(ContentService.MimeType.JSON);
+    // return data as JSON
+    return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(
+        ContentService.MimeType.JSON
+    );
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;&lt;a href=&quot;https://developers.google.com/apps-script/reference/spreadsheet/sheet#getSheetValues(Integer,Integer,Integer,Integer)&quot; title=&quot;google sheet getSheetValues&quot;&gt;google sheet getSheetValues&lt;/a&gt;&lt;/p&gt;
@@ -2346,46 +2484,47 @@ const deleteToDo = useCallback(
 &lt;p&gt;另外我們定義處理狀態 0 代表訂單取消，1 代表完成訂單。&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;function doPost(e) {
-  var params = e.parameter;
-  var name = params.name;
-  var phone = params.phone;
-  var status = params.status;
+    var params = e.parameter;
+    var name = params.name;
+    var phone = params.phone;
+    var status = params.status;
 
-  // add action filter post function
-  var action = params.action;
+    // add action filter post function
+    var action = params.action;
 
-  var SpreadSheet = SpreadsheetApp.openById(&amp;quot;1JbXssixJaqTL_BMgnmOiMxLyAZm0jOkw173VdewqO9c&amp;quot;);
-  var Sheet = SpreadSheet.getSheets()[0];
-  var data = &amp;#39;&amp;#39;;
-  if (action === &amp;#39;query&amp;#39;) {
-    data = queryData(Sheet, name, phone);
-  } else if (action === &amp;#39;delete&amp;#39;){
-    data = updateData(Sheet, name, phone, status, index);
-  }
-  return ContentService.createTextOutput(JSON.stringify(data))
-    .setMimeType(ContentService.MimeType.JSON);
+    var SpreadSheet = SpreadsheetApp.openById(&amp;#39;1JbXssixJaqTL_BMgnmOiMxLyAZm0jOkw173VdewqO9c&amp;#39;);
+    var Sheet = SpreadSheet.getSheets()[0];
+    var data = &amp;#39;&amp;#39;;
+    if (action === &amp;#39;query&amp;#39;) {
+        data = queryData(Sheet, name, phone);
+    } else if (action === &amp;#39;delete&amp;#39;) {
+        data = updateData(Sheet, name, phone, status, index);
+    }
+    return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(
+        ContentService.MimeType.JSON
+    );
 }
 
-function queryData (Sheet, name, phone){
-  var LastRow = Sheet.getLastRow();
-  var data = [];
-  var listAll = Sheet.getSheetValues(1, 1, LastRow, 7);
-  for(var i = 0;i &amp;lt; listAll.length; i++){
-    if(listAll[i].indexOf(phone) === 1 &amp;amp;&amp;amp; listAll[i].indexOf(name) === 0){
-      data.push({data: listAll[i],index: i })
+function queryData(Sheet, name, phone) {
+    var LastRow = Sheet.getLastRow();
+    var data = [];
+    var listAll = Sheet.getSheetValues(1, 1, LastRow, 7);
+    for (var i = 0; i &amp;lt; listAll.length; i++) {
+        if (listAll[i].indexOf(phone) === 1 &amp;amp;&amp;amp; listAll[i].indexOf(name) === 0) {
+            data.push({ data: listAll[i], index: i });
+        }
     }
-  }
-  return data;
+    return data;
 }
 // update use function
-function updateData(Sheet, name, phone, status, index){
-  var checkName = Sheet.getSheetValues(index, 1, 1, 1) == name;
-  var checkPhone = Sheet.getSheetValues(index, 2, 1, 1) == phone;
-  if(checkName &amp;amp;&amp;amp; checkPhone){
-    Sheet.getRange(index, 7).setValue(status);
-    return &amp;#39;success&amp;#39;;
-  }
-  return null;
+function updateData(Sheet, name, phone, status, index) {
+    var checkName = Sheet.getSheetValues(index, 1, 1, 1) == name;
+    var checkPhone = Sheet.getSheetValues(index, 2, 1, 1) == phone;
+    if (checkName &amp;amp;&amp;amp; checkPhone) {
+        Sheet.getRange(index, 7).setValue(status);
+        return &amp;#39;success&amp;#39;;
+    }
+    return null;
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;前端畫面&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E5%89%8D%E7%AB%AF%E7%95%AB%E9%9D%A2&quot; aria-label=&quot;前端畫面 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;前端畫面&lt;/h2&gt;
@@ -2655,42 +2794,42 @@ function updateData(Sheet, name, phone, status, index){
 &lt;li&gt;Source code&lt;/li&gt;
 &lt;/ul&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;document.addEventListener(&amp;quot;DOMContentLoaded&amp;quot;, function() {
-  var lazyImages = [].slice.call(document.querySelectorAll(&amp;quot;img.lazyload&amp;quot;));
+          &lt;code slot=&quot;code&quot;&gt;document.addEventListener(&amp;#39;DOMContentLoaded&amp;#39;, function() {
+    var lazyImages = [].slice.call(document.querySelectorAll(&amp;#39;img.lazyload&amp;#39;));
 
-  if (&amp;quot;IntersectionObserver&amp;quot; in window) {
-    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          let lazyImage = entry.target;
-          lazyImage.src = lazyImage.dataset.src;
-          lazyImage.classList.remove(&amp;quot;lazyload&amp;quot;);
+    if (&amp;#39;IntersectionObserver&amp;#39; in window) {
+        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    let lazyImage = entry.target;
+                    lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.classList.remove(&amp;#39;lazyload&amp;#39;);
 
-          //clear padding-top
-          lazyImage.style.paddingTop = &amp;#39;&amp;#39;;
-          lazyImageObserver.unobserve(lazyImage);
-        }
-      });
-    });
+                    //clear padding-top
+                    lazyImage.style.paddingTop = &amp;#39;&amp;#39;;
+                    lazyImageObserver.unobserve(lazyImage);
+                }
+            });
+        });
 
-    lazyImages.forEach(function(lazyImage) {
-      // get image ratio
-      var ratio = lazyImage.dataset.ratio;
-      // create padding-top
-      lazyImage.style.paddingTop = ratio + &amp;#39;%&amp;#39;;
-      lazyImageObserver.observe(lazyImage);
-    });
-  } else {
-    // Possibly fall back to a more compatible method here
-  }
+        lazyImages.forEach(function(lazyImage) {
+            // get image ratio
+            var ratio = lazyImage.dataset.ratio;
+            // create padding-top
+            lazyImage.style.paddingTop = ratio + &amp;#39;%&amp;#39;;
+            lazyImageObserver.observe(lazyImage);
+        });
+    } else {
+        // Possibly fall back to a more compatible method here
+    }
 });&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;頁面範例: &lt;a href=&quot;https://codepen.io/chu1228/pen/BEgaKZ?editors=1010&quot; title=&quot;codepen&quot;&gt;codepen demo&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;另外還可以加上 onload listener 讓載入圖片過程，保持 lazyload 灰色區塊。&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;lazyImage.src = lazyImage.dataset.src;
-lazyImage.onload = function(){
-    lazyImage.classList.remove(&amp;quot;lazyload&amp;quot;);
+lazyImage.onload = function() {
+    lazyImage.classList.remove(&amp;#39;lazyload&amp;#39;);
 
     //clear padding-top
     lazyImage.style.paddingTop = &amp;#39;&amp;#39;;
@@ -2705,12 +2844,12 @@ lazyImage.onload = function(){
           &lt;code slot=&quot;code&quot;&gt;function getImageRatio(url, callback) {
     var img = new Image();
     img.onload = function() {
-        callback(this.height/this.width * 100);
-    }
+        callback((this.height / this.width) * 100);
+    };
     img.src = url;
 }
-function setRatio(ratio){
-    console.log(ratio)
+function setRatio(ratio) {
+    console.log(ratio);
 }
 getImageRatio(&amp;#39;https://ianccy.com/images/rabbit.png&amp;#39;, setRatio);&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
@@ -2837,18 +2976,18 @@ eventPhase: 3 冒泡階段，會由目標物件的第一層父層開始，一路
       &lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// get All elements
-const nodeList= [...document.querySelectorAll(&amp;#39;*&amp;#39;)];
+const nodeList = [...document.querySelectorAll(&amp;#39;*&amp;#39;)];
 
 // add All elements eventListener
-nodeList.forEach(elem =&amp;gt;{
+nodeList.forEach(elem =&amp;gt; {
     // use true is for capture
-    elem.addEventListener(&amp;quot;click&amp;quot;, e =&amp;gt;
-      alert(`capture ${elem.tagName} phase:${e.eventPhase}`)
-    , true );
-    // default false is for bubble
-    elem.addEventListener(&amp;quot;click&amp;quot;, e =&amp;gt;
-      alert(`bubble: ${elem.tagName} phase:${e.eventPhase}`)
+    elem.addEventListener(
+        &amp;#39;click&amp;#39;,
+        e =&amp;gt; alert(`capture ${elem.tagName} phase:${e.eventPhase}`),
+        true
     );
+    // default false is for bubble
+    elem.addEventListener(&amp;#39;click&amp;#39;, e =&amp;gt; alert(`bubble: ${elem.tagName} phase:${e.eventPhase}`));
 });&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;iframe src=&quot;//codepen.io/chu1228/embed/EMdwVJ/?height=400&amp;theme-id=0&amp;default-tab=result&quot; width=&quot;100%&quot; height=&quot;290&quot;&gt;&lt;/iframe&gt;
@@ -3241,46 +3380,46 @@ function close () {
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// declare arrow function return Promise
 // ** new Promise to inherit Promise instance **
-const getData = (url) =&amp;gt; new Promise((resolve, reject) =&amp;gt; {
-  // create http request
-  const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = () =&amp;gt; {
-    console.log(xhttp.readyState)
-    if (xhttp.readyState === 4 ) {
-      if (xhttp.status === 200) {
-        // resolve will trigger Promise then callback
-        console.log(JSON.parse(xhttp.response));
-        resolve(JSON.parse(xhttp.response));
-      } else {
-        // reject will trigger Promise catch callback
-        reject(xhttp.statusText);
-      }
-    }
-  };
-  xhttp.open(&amp;quot;GET&amp;quot;, url, true);
-  xhttp.send();
-});
+const getData = url =&amp;gt;
+    new Promise((resolve, reject) =&amp;gt; {
+        // create http request
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = () =&amp;gt; {
+            console.log(xhttp.readyState);
+            if (xhttp.readyState === 4) {
+                if (xhttp.status === 200) {
+                    // resolve will trigger Promise then callback
+                    console.log(JSON.parse(xhttp.response));
+                    resolve(JSON.parse(xhttp.response));
+                } else {
+                    // reject will trigger Promise catch callback
+                    reject(xhttp.statusText);
+                }
+            }
+        };
+        xhttp.open(&amp;#39;GET&amp;#39;, url, true);
+        xhttp.send();
+    });
 
 getData(&amp;#39;https://jsonplaceholder.typicode.com/todos/1&amp;#39;)
-  .then(res =&amp;gt; {
-    // destructuring object
-    const { id, title, completed } = res;
-    const html = `&amp;lt;div class=&amp;quot;item&amp;quot;&amp;gt;
+    .then(res =&amp;gt; {
+        // destructuring object
+        const { id, title, completed } = res;
+        const html = `&amp;lt;div class=&amp;quot;item&amp;quot;&amp;gt;
                     &amp;lt;p&amp;gt;Id: ${id}&amp;lt;/p&amp;gt;
                     &amp;lt;div&amp;gt;Title: ${title}&amp;lt;/div&amp;gt;
                     &amp;lt;div&amp;gt;Completed: ${completed}&amp;lt;/div&amp;gt;
                   &amp;lt;/div&amp;gt;`;
-    const newNode = document.createElement(&amp;#39;div&amp;#39;);
-    newNode.innerHTML = html;
-    document.querySelector(&amp;#39;#list&amp;#39;).appendChild(newNode);
-    }
-  )
-  // it will run when promise Reject or
-  // in then function appear javascript error
-  .catch(res =&amp;gt; {
-    console.log(res);
-    alert(`Something Error ,because ${res}`);
-  });&lt;/code&gt;
+        const newNode = document.createElement(&amp;#39;div&amp;#39;);
+        newNode.innerHTML = html;
+        document.querySelector(&amp;#39;#list&amp;#39;).appendChild(newNode);
+    })
+    // it will run when promise Reject or
+    // in then function appear javascript error
+    .catch(res =&amp;gt; {
+        console.log(res);
+        alert(`Something Error ,because ${res}`);
+    });&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;iframe src=&quot;//codepen.io/chu1228/embed/yZrVKW/?height=400&amp;theme-id=0&amp;default-tab=js&quot; width=&quot;100%&quot; height=&quot;400&quot;&gt;&lt;/iframe&gt;
 &lt;p&gt;&lt;a href=&quot;https://codepen.io/chu1228/pen/yZrVKW?editors=1111&quot; title=&quot;codepen promise demo&quot;&gt;codepen promise demo&lt;/a&gt;&lt;/p&gt;
@@ -3362,39 +3501,39 @@ const appendItem = (res) =&amp;gt; {
 &lt;/ul&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;class promise {
-  constructor(callback){
-    // promise status
-    this.status = &amp;#39;pending&amp;#39;;
-    // create variable to store resolve or reject value
-    this.value;
-    // resolve is not outside resolve
-    // it is use to pass callback function first function
+    constructor(callback) {
+        // promise status
+        this.status = &amp;#39;pending&amp;#39;;
+        // create variable to store resolve or reject value
+        this.value;
+        // resolve is not outside resolve
+        // it is use to pass callback function first function
 
-    const resolve = res =&amp;gt; {
-      if(this.status === &amp;#39;pending&amp;#39;){
-        this.status = &amp;#39;fullfilled&amp;#39;;
-        this.value = res;
-      }
-    }
+        const resolve = res =&amp;gt; {
+            if (this.status === &amp;#39;pending&amp;#39;) {
+                this.status = &amp;#39;fullfilled&amp;#39;;
+                this.value = res;
+            }
+        };
 
-    // reject is not outside reject
-    // it is use to pass callback function second function
-    const reject = res =&amp;gt; {
-      if(this.status !== &amp;#39;pending&amp;#39;){
-        this.status = &amp;#39;rejected&amp;#39;;
-        this.value = res;
-      }
-    }
+        // reject is not outside reject
+        // it is use to pass callback function second function
+        const reject = res =&amp;gt; {
+            if (this.status !== &amp;#39;pending&amp;#39;) {
+                this.status = &amp;#39;rejected&amp;#39;;
+                this.value = res;
+            }
+        };
 
-    // it&amp;#39;s keypoint to call reslove or reject function
-    // reslove or reject just assign status and value
-    try {
-      // this resolve is upper resolve function
-      callback(resolve, reject);
-    } catch (err) {
-      reject(err);
+        // it&amp;#39;s keypoint to call reslove or reject function
+        // reslove or reject just assign status and value
+        try {
+            // this resolve is upper resolve function
+            callback(resolve, reject);
+        } catch (err) {
+            reject(err);
+        }
     }
-  }
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;ul&gt;
@@ -3459,8 +3598,8 @@ const path = require(&amp;#39;path&amp;#39;);
 app.use(express.static(path.join(__dirname, &amp;#39;../build&amp;#39;)));
 
 // settting router
-app.get(&amp;#39;*&amp;#39;, (req,res) =&amp;gt;{
-    res.sendFile(path.join(__dirname+&amp;#39;../build/index.html&amp;#39;));
+app.get(&amp;#39;*&amp;#39;, (req, res) =&amp;gt; {
+    res.sendFile(path.join(__dirname + &amp;#39;../build/index.html&amp;#39;));
 });
 
 app.listen(8080);&lt;/code&gt;
@@ -3543,25 +3682,21 @@ const extensions = [&amp;#39;.gif&amp;#39;, &amp;#39;.jpeg&amp;#39;, &amp;#39;.j
 
 // ignore image and style request
 register(ignoreStyles.DEFAULT_EXTENSIONS, (module, filename) =&amp;gt; {
-  if (!extensions.find(f =&amp;gt; filename.endsWith(f))) {
-    // use for style
-    return ignoreStyles.noOp();
-  } else {
-    // use for image and add hash follow react cli
-    const hash = md5File.sync(filename).slice(0, 8);
-    const bn = path.basename(filename).replace(/(\.\w{3})$/, `.${hash}$1`);
-    module.exports = `/static/media/${bn}`;
-  }
+    if (!extensions.find(f =&amp;gt; filename.endsWith(f))) {
+        // use for style
+        return ignoreStyles.noOp();
+    } else {
+        // use for image and add hash follow react cli
+        const hash = md5File.sync(filename).slice(0, 8);
+        const bn = path.basename(filename).replace(/(\.\w{3})$/, `.${hash}$1`);
+        module.exports = `/static/media/${bn}`;
+    }
 });
 require(&amp;#39;@babel/polyfill&amp;#39;);
 require(&amp;#39;@babel/register&amp;#39;)({
-  ignore: [/\/(build|node_modules)\//],
-  presets: [&amp;#39;@babel/preset-env&amp;#39;, &amp;#39;@babel/preset-react&amp;#39;],
-  plugins: [
-    &amp;#39;@babel/plugin-syntax-dynamic-import&amp;#39;,
-    &amp;#39;dynamic-import-node&amp;#39;,
-    &amp;#39;react-loadable/babel&amp;#39;
-  ]
+    ignore: [/\/(build|node_modules)\//],
+    presets: [&amp;#39;@babel/preset-env&amp;#39;, &amp;#39;@babel/preset-react&amp;#39;],
+    plugins: [&amp;#39;@babel/plugin-syntax-dynamic-import&amp;#39;, &amp;#39;dynamic-import-node&amp;#39;, &amp;#39;react-loadable/babel&amp;#39;]
 });
 
 // it will run express
@@ -3580,7 +3715,6 @@ import render from &amp;#39;./render&amp;#39;;
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-
 app.use(express.Router().get(&amp;#39;/&amp;#39;, render));
 app.use(express.static(path.resolve(__dirname, &amp;#39;../build&amp;#39;)));
 app.use(render);
@@ -3588,7 +3722,7 @@ app.use(render);
 // Loadable listener to make sure that all of your loadable components are already loaded
 // https://github.com/jamiebuilds/react-loadable#preloading-all-your-loadable-components-on-the-server
 Loadable.preloadAll().then(() =&amp;gt; {
-  app.listen(PORT, console.log(`App listening on port ${PORT}!`));
+    app.listen(PORT, console.log(`App listening on port ${PORT}!`));
 });&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;renderjs-功能&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#renderjs-%E5%8A%9F%E8%83%BD&quot; aria-label=&quot;renderjs 功能 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;render.js 功能&lt;/h2&gt;
@@ -3618,21 +3752,17 @@ export default (req, res) =&amp;gt; {
             html: helmet.htmlAttributes.toString(),
             title: helmet.title.toString(),
             meta: helmet.meta.toString(),
-            body: renderToString(&amp;lt;App wording=&amp;quot;THIS IS Server Side Render&amp;quot;/&amp;gt;)
+            body: renderToString(&amp;lt;App wording=&amp;quot;THIS IS Server Side Render&amp;quot; /&amp;gt;)
         });
         res.send(html);
-        }
-    );
+    });
 };
 
 const injectHTML = (data, { html, title, meta, body, state }) =&amp;gt; {
     data = data.replace(&amp;#39;&amp;lt;html&amp;gt;&amp;#39;, `&amp;lt;html ${html}&amp;gt;`);
     data = data.replace(/&amp;lt;title&amp;gt;.*?&amp;lt;\/title&amp;gt;/g, title);
     data = data.replace(&amp;#39;&amp;lt;/head&amp;gt;&amp;#39;, `${meta}&amp;lt;/head&amp;gt;`);
-    data = data.replace(
-        &amp;#39;&amp;lt;div id=&amp;quot;root&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;#39;,
-        `&amp;lt;div id=&amp;quot;root&amp;quot;&amp;gt;${body}&amp;lt;/div&amp;gt;`
-    );
+    data = data.replace(&amp;#39;&amp;lt;div id=&amp;quot;root&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;#39;, `&amp;lt;div id=&amp;quot;root&amp;quot;&amp;gt;${body}&amp;lt;/div&amp;gt;`);
     return data;
 };&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
@@ -3834,21 +3964,20 @@ However, it’s dangerous to have missing nodes on the server render as this mig
 &lt;/ul&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;body vocab=&amp;quot;http://schema.org/&amp;quot;&amp;gt;
-&amp;lt;main typeof=&amp;quot;Course&amp;quot;&amp;gt;
-  &amp;lt;h1 property=&amp;quot;name&amp;quot;&amp;gt;The Data Scientist&amp;#39;s Toolbox&amp;lt;/h1&amp;gt;
-  &amp;lt;h2&amp;gt;About this Course&amp;lt;/h2&amp;gt;
-  &amp;lt;p property=&amp;quot;description&amp;quot;&amp;gt;
-       In this course you will get an introduction to the main tools and
-       ideas in the data scientist&amp;#39;s toolbox...
-  &amp;lt;/p&amp;gt;
-  &amp;lt;div rel=&amp;quot;hasCourseInstance&amp;quot; typeof=&amp;quot;CourseInstance&amp;quot;&amp;gt;
-    &amp;lt;meta property=&amp;quot;courseMode&amp;quot; content=&amp;quot;MOOC&amp;quot; /&amp;gt;
-    &amp;lt;meta property=&amp;quot;courseMode&amp;quot; content=&amp;quot;online&amp;quot; /&amp;gt;
-    &amp;lt;h2&amp;gt;Session dates&amp;lt;/h2&amp;gt;
-    &amp;lt;span property=&amp;quot;startDate&amp;quot;&amp;gt;February 15&amp;lt;/span&amp;gt; -
-    &amp;lt;span property=&amp;quot;endDate&amp;quot;&amp;gt;March 21&amp;lt;/span&amp;gt;
-  &amp;lt;/div&amp;gt;
-&amp;lt;/main&amp;gt;
+    &amp;lt;main typeof=&amp;quot;Course&amp;quot;&amp;gt;
+        &amp;lt;h1 property=&amp;quot;name&amp;quot;&amp;gt;The Data Scientist&amp;#39;s Toolbox&amp;lt;/h1&amp;gt;
+        &amp;lt;h2&amp;gt;About this Course&amp;lt;/h2&amp;gt;
+        &amp;lt;p property=&amp;quot;description&amp;quot;&amp;gt;
+            In this course you will get an introduction to the main tools and ideas in the data
+            scientist&amp;#39;s toolbox...
+        &amp;lt;/p&amp;gt;
+        &amp;lt;div rel=&amp;quot;hasCourseInstance&amp;quot; typeof=&amp;quot;CourseInstance&amp;quot;&amp;gt;
+            &amp;lt;meta property=&amp;quot;courseMode&amp;quot; content=&amp;quot;MOOC&amp;quot; /&amp;gt;
+            &amp;lt;meta property=&amp;quot;courseMode&amp;quot; content=&amp;quot;online&amp;quot; /&amp;gt;
+            &amp;lt;h2&amp;gt;Session dates&amp;lt;/h2&amp;gt;
+            &amp;lt;span property=&amp;quot;startDate&amp;quot;&amp;gt;February 15&amp;lt;/span&amp;gt; -&amp;lt;span property=&amp;quot;endDate&amp;quot;&amp;gt;March 21&amp;lt;/span&amp;gt;
+        &amp;lt;/div&amp;gt;
+    &amp;lt;/main&amp;gt;
 &amp;lt;/body&amp;gt;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;breadcrumb-標記&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#breadcrumb-%E6%A8%99%E8%A8%98&quot; aria-label=&quot;breadcrumb 標記 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;breadcrumb 標記&lt;/h2&gt;
@@ -3983,7 +4112,7 @@ However, it’s dangerous to have missing nodes on the server render as this mig
 &lt;h2 id=&quot;搜尋結果錨點-非-structured-data&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E6%90%9C%E5%B0%8B%E7%B5%90%E6%9E%9C%E9%8C%A8%E9%BB%9E-%E9%9D%9E-structured-data&quot; aria-label=&quot;搜尋結果錨點 非 structured data permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;搜尋結果錨點 (非 structured data)&lt;/h2&gt;
 &lt;p&gt;最後再提供一個最近特別用到修改，下方的搜尋結果出現頁面內的錨點，原本 blog 頁面架構就有用 id 錨點)，查閱結構化資料過後發現，並沒有錨點可以使用的功能，於是我針對搜尋結果有出現錨點的頁面都看過一次 html。&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;&amp;lt;h2 id=&amp;quot;#錨點名稱&amp;quot;&amp;gt;{{content}}&amp;lt;/h2&amp;gt;&lt;/code&gt;
+          &lt;code slot=&quot;code&quot;&gt;&amp;lt;h2 id=&amp;quot;#錨點名稱&amp;quot;&amp;gt;{{ content }}&amp;lt;/h2&amp;gt;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;發現都有相同概念，就是要當你搜尋結果要出現錨點，頁面上就必須要有實體連結可以點過去。於是我就做了頁面左邊的那個點擊 scroll 區塊，大約過了一週後搜尋結果就開始出現錨點。雖然常常一下只顯示麵包屑，一下又只顯示錨點…。&lt;/p&gt;
 &lt;p&gt;
@@ -4040,25 +4169,25 @@ However, it’s dangerous to have missing nodes on the server render as this mig
 &lt;/ul&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;div class=&amp;quot;toc-article&amp;quot; id=&amp;quot;toc&amp;quot;&amp;gt;
-  &amp;lt;div class=&amp;quot;toc-title&amp;quot;&amp;gt;文章目錄&amp;lt;/div&amp;gt;
-  &amp;lt;ol class=&amp;quot;toc&amp;quot;&amp;gt;
-    &amp;lt;li class=&amp;quot;toc-item toc-level-2&amp;quot;&amp;gt;
-      &amp;lt;a class=&amp;quot;toc-link&amp;quot; href=&amp;quot;#Google-analytics-設定事件&amp;quot;&amp;gt;
-        &amp;lt;span class=&amp;quot;toc-text&amp;quot;&amp;gt;Google analytics 設定事件&amp;lt;/span&amp;gt;
-      &amp;lt;/a&amp;gt;
-    &amp;lt;/li&amp;gt;
-    &amp;lt;li class=&amp;quot;toc-item toc-level-2&amp;quot;&amp;gt;
-      &amp;lt;a class=&amp;quot;toc-link&amp;quot; href=&amp;quot;#實作測試&amp;quot;&amp;gt;
-        &amp;lt;span class=&amp;quot;toc-text&amp;quot;&amp;gt;實作測試&amp;lt;/span&amp;gt;
-      &amp;lt;/a&amp;gt;
-    &amp;lt;/li&amp;gt;
-    &amp;lt;li class=&amp;quot;toc-item toc-level-2&amp;quot;&amp;gt;
-      &amp;lt;a class=&amp;quot;toc-link&amp;quot; href=&amp;quot;#ga-event產生器&amp;quot;&amp;gt;
-        &amp;lt;span class=&amp;quot;toc-text&amp;quot;&amp;gt;ga event產生器&amp;lt;/span&amp;gt;
-      &amp;lt;/a&amp;gt;
-    &amp;lt;/li&amp;gt;
-    ...
-  &amp;lt;/ol&amp;gt;
+    &amp;lt;div class=&amp;quot;toc-title&amp;quot;&amp;gt;文章目錄&amp;lt;/div&amp;gt;
+    &amp;lt;ol class=&amp;quot;toc&amp;quot;&amp;gt;
+        &amp;lt;li class=&amp;quot;toc-item toc-level-2&amp;quot;&amp;gt;
+            &amp;lt;a class=&amp;quot;toc-link&amp;quot; href=&amp;quot;#Google-analytics-設定事件&amp;quot;&amp;gt;
+                &amp;lt;span class=&amp;quot;toc-text&amp;quot;&amp;gt;Google analytics 設定事件&amp;lt;/span&amp;gt;
+            &amp;lt;/a&amp;gt;
+        &amp;lt;/li&amp;gt;
+        &amp;lt;li class=&amp;quot;toc-item toc-level-2&amp;quot;&amp;gt;
+            &amp;lt;a class=&amp;quot;toc-link&amp;quot; href=&amp;quot;#實作測試&amp;quot;&amp;gt;
+                &amp;lt;span class=&amp;quot;toc-text&amp;quot;&amp;gt;實作測試&amp;lt;/span&amp;gt;
+            &amp;lt;/a&amp;gt;
+        &amp;lt;/li&amp;gt;
+        &amp;lt;li class=&amp;quot;toc-item toc-level-2&amp;quot;&amp;gt;
+            &amp;lt;a class=&amp;quot;toc-link&amp;quot; href=&amp;quot;#ga-event產生器&amp;quot;&amp;gt;
+                &amp;lt;span class=&amp;quot;toc-text&amp;quot;&amp;gt;ga event產生器&amp;lt;/span&amp;gt;
+            &amp;lt;/a&amp;gt;
+        &amp;lt;/li&amp;gt;
+        ...
+    &amp;lt;/ol&amp;gt;
 &amp;lt;/div&amp;gt;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;心得&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E5%BF%83%E5%BE%97&quot; aria-label=&quot;心得 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;心得&lt;/h2&gt;
@@ -4071,7 +4200,7 @@ However, it’s dangerous to have missing nodes on the server render as this mig
 &lt;h2 id=&quot;react-portals-rule&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#react-portals-rule&quot; aria-label=&quot;react portals rule permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;React Portals rule&lt;/h2&gt;
 &lt;p&gt;要用 React Portals 必須遵照規定的格式 ReactDOM.createPortal(element,container)，第一個參數要傳遞需要渲染的物件，第二個參數 container，建立&lt;code class=&quot;language-text&quot;&gt;document.createElement(&amp;#39;div&amp;#39;)&lt;/code&gt; 作為 render 的 container。&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;ReactDOM.createPortal(element,container)&lt;/code&gt;
+          &lt;code slot=&quot;code&quot;&gt;ReactDOM.createPortal(element, container);&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;會需要用到兩個 lifeCycle，第一個是 componentDidMount react 元件 render 後調用，另一個則是 componentWillUnmount 在元件被移除後會調用。&lt;/p&gt;
 &lt;p&gt;再來在 componentDidMount 上加入要渲染元素的節點，讓這個 component render 後調用 appendChild，讓 dom 依附渲染上去。如果要移除渲染的話，則是控制 component 移除觸發 componentWillUnmount，再調用 removeChild 就完成了移除。&lt;/p&gt;
@@ -4486,7 +4615,9 @@ ps. 每個步驟中都可以使用變數&lt;/code&gt;
       &lt;/p&gt;
 &lt;h4 id=&quot;按鈕-html&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E6%8C%89%E9%88%95-html&quot; aria-label=&quot;按鈕 html permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;按鈕 HTML&lt;/h4&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;&amp;lt;button type=&amp;quot;button&amp;quot; id=&amp;quot;submitComment&amp;quot; class=&amp;quot;btn btn-secondary&amp;quot;&amp;gt;送出&amp;lt;/button&amp;gt;&lt;/code&gt;
+          &lt;code slot=&quot;code&quot;&gt;&amp;lt;button type=&amp;quot;button&amp;quot; id=&amp;quot;submitComment&amp;quot; class=&amp;quot;btn btn-secondary&amp;quot;&amp;gt;
+    送出
+&amp;lt;/button&amp;gt;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;這時候會發現按鈕的 id &lt;code class=&quot;language-text&quot;&gt;submitComment&lt;/code&gt;，通常來說一個頁面的 id 只會存在一個，所以我們會用這個 id 被點擊來作為觸發點，如果你要用 className 也是沒問題，只要處理好判斷即可。&lt;/p&gt;
 &lt;p&gt;學會查看網頁的 html 很重要，學會這個工具的話，對你在設定追蹤數據有很大幫助。&lt;/p&gt;
@@ -5010,12 +5141,12 @@ const app = express();
 const port = 3000;
 
 app.get(&amp;#39;/&amp;#39;, (req, res) =&amp;gt; {
-  res.sendFile(__dirname + &amp;#39;/index.html&amp;#39;)
-})
+    res.sendFile(__dirname + &amp;#39;/index.html&amp;#39;);
+});
 
-app.listen(port, function () {
-   console.log(`server start on http://localhost:${port}, port`)
-})&lt;/code&gt;
+app.listen(port, function() {
+    console.log(`server start on http://localhost:${port}, port`);
+});&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h4 id=&quot;indexhtml&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#indexhtml&quot; aria-label=&quot;indexhtml permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;index.html&lt;/h4&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
@@ -5196,18 +5327,19 @@ MongoClient.connect(url, (err, client) =&amp;gt; {
 &lt;h4 id=&quot;javascript-fetch-post&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#javascript-fetch-post&quot; aria-label=&quot;javascript fetch post permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;javascript fetch post&lt;/h4&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;fetch(&amp;#39;http://localhost:3000/comments&amp;#39;, {
-  method: &amp;#39;post&amp;#39;,
-  headers: {
-    &amp;#39;Accept&amp;#39;: &amp;#39;application/json, text/plain, */*&amp;#39;,
-    &amp;#39;Content-Type&amp;#39;: &amp;#39;application/json&amp;#39;
-  },
-  body: JSON.stringify({
-	&amp;quot;name&amp;quot;: &amp;quot;mikessss&amp;quot;,
-	&amp;quot;time&amp;quot;:&amp;quot;2018/10/13-02:33:01&amp;quot;,
-	&amp;quot;content&amp;quot;: &amp;quot;ggggggg.&amp;quot;
-  })
-}).then(res=&amp;gt;res.json())
-  .then(res =&amp;gt; console.log(res));&lt;/code&gt;
+    method: &amp;#39;post&amp;#39;,
+    headers: {
+        Accept: &amp;#39;application/json, text/plain, */*&amp;#39;,
+        &amp;#39;Content-Type&amp;#39;: &amp;#39;application/json&amp;#39;
+    },
+    body: JSON.stringify({
+        name: &amp;#39;mikessss&amp;#39;,
+        time: &amp;#39;2018/10/13-02:33:01&amp;#39;,
+        content: &amp;#39;ggggggg.&amp;#39;
+    })
+})
+    .then(res =&amp;gt; res.json())
+    .then(res =&amp;gt; console.log(res));&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;get-api-取得資料&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#get-api-%E5%8F%96%E5%BE%97%E8%B3%87%E6%96%99&quot; aria-label=&quot;get api 取得資料 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Get Api 取得資料&lt;/h2&gt;
 &lt;p&gt;我們前面成功的建立了儲存的 api，之後的邏輯都大同小異，接收 request，再依照請求方式跟 mongoDB 連接資料。我們這邊的 get api 會拿整個 comments 的資料，如果看不懂 collection.find()，可以看一下 w3c 的 mongoDB 語法教學，非常簡單易懂。&lt;/p&gt;
@@ -5234,13 +5366,13 @@ app.get(&amp;#39;/comments&amp;#39;, (req, res) =&amp;gt; {
 
 app.delete(&amp;#39;/comments/:id&amp;#39;, (req, res) =&amp;gt; {
     // use _id need use ObjectID(value)
-    const obj = {_id: ObjectID(req.params.id)};
-    db.collection(&amp;quot;comments&amp;quot;).remove(obj, function(err, obj) {
+    const obj = { _id: ObjectID(req.params.id) };
+    db.collection(&amp;#39;comments&amp;#39;).remove(obj, function(err, obj) {
         if (err) throw err;
-        console.log(&amp;quot;1 document deleted&amp;quot;);
+        console.log(&amp;#39;1 document deleted&amp;#39;);
         res.send(&amp;#39;delete success&amp;#39;);
     });
-})&lt;/code&gt;
+});&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;update-api-更新資料&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#update-api-%E6%9B%B4%E6%96%B0%E8%B3%87%E6%96%99&quot; aria-label=&quot;update api 更新資料 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Update Api 更新資料&lt;/h2&gt;
 &lt;p&gt;建立 put 的 route，使用 updateOne 來更新資料，前面兩個參數要帶查詢、更新資料。&lt;/p&gt;
@@ -6649,20 +6781,20 @@ j=d.createElement(s),dl=l!=&amp;#39;dataLayer&amp;#39;?&amp;#39;&amp;amp;l=&amp;
 &lt;p&gt;JavaScript 沒有類的特性(class-based)，跟 Java 不一樣，雖然說 ES6 有 class 但它只是語法糖，每個 JavaScript 都具備有 prototype，只是分為公開、私有差異，而 JavaScript 就用 prototype 來處理繼承(prototype-based)，特性是延展性高。&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// 使用解構復值作為參數  並且預設沒傳值預設給予字串
-function Family({m = &amp;#39;no person&amp;#39;,w = &amp;#39;no person&amp;#39;, c = &amp;#39;no child&amp;#39;} = {}){
-  this.father = m;
-  this.mother = w;
-  this.chidren = c;
+function Family({ m = &amp;#39;no person&amp;#39;, w = &amp;#39;no person&amp;#39;, c = &amp;#39;no child&amp;#39; } = {}) {
+    this.father = m;
+    this.mother = w;
+    this.chidren = c;
 }
 
 var data = {
-  m: &amp;#39;John Paul&amp;#39;,
-  w: &amp;#39;Mary Alice&amp;#39;,
-  c: &amp;#39;Chris Paul&amp;#39;
+    m: &amp;#39;John Paul&amp;#39;,
+    w: &amp;#39;Mary Alice&amp;#39;,
+    c: &amp;#39;Chris Paul&amp;#39;
 };
 
 // 繼承 Family
-var paul = new Family(data)
+var paul = new Family(data);
 // 等同於
 // var paul[[Prototype]] = Family.prototype;
 // Family.call(paul);
@@ -6726,9 +6858,9 @@ console.log(paul);
 &lt;p&gt;接下來擴充一下 Family，增加一個 function。&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// 增加一個 hi function
-Family.prototype.hi = function(){
-  console.log(`Family&amp;#39;s child is ${this.chidren}. Family&amp;#39;s father is ${this.father}`);
-}
+Family.prototype.hi = function() {
+    console.log(`Family&amp;#39;s child is ${this.chidren}. Family&amp;#39;s father is ${this.father}`);
+};
 
 // this 指向調用時的物件 paul
 paul.hi();
@@ -6791,17 +6923,17 @@ paul.hi();
       &lt;/p&gt;
 &lt;p&gt;簡單的範例&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;var Person = function () {
-  this.name = `chu`;
-}
+          &lt;code slot=&quot;code&quot;&gt;var Person = function() {
+    this.name = `chu`;
+};
 
-var Age = function () {
-   this.age = 18;
-}
+var Age = function() {
+    this.age = 18;
+};
 
-var Gender = function () {
-   this.gender = &amp;#39;male&amp;#39;;
-}
+var Gender = function() {
+    this.gender = &amp;#39;male&amp;#39;;
+};
 
 Age.prototype = new Person();
 
@@ -6868,27 +7000,27 @@ console.log(ian.name, ian.age, ian.gender); // chu 18 male
 &lt;p&gt;例如一個簡單的 class 如下&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;class Person {
-  constructor(name){
-    this.name = name
-  }
-  hello(){
-    console.log(`hello,i am ${this.name}`)
-  }
+    constructor(name) {
+        this.name = name;
+    }
+    hello() {
+        console.log(`hello,i am ${this.name}`);
+    }
 }
 class Age extends Person {
     // constructor會在建立時倍呼叫
     // 接受傳遞參數
-    constructor(name,age){
-      // 繼承父層 prototype.name
-      super(name);
-      this.age = age;
+    constructor(name, age) {
+        // 繼承父層 prototype.name
+        super(name);
+        this.age = age;
     }
-    intro(){
-      console.log(`i am ${this.name}, and ${this.age} years old,`)
+    intro() {
+        console.log(`i am ${this.name}, and ${this.age} years old,`);
     }
 }
 
-const ian = new Age(`chu`,18)
+const ian = new Age(`chu`, 18);
 ian.intro(); // i am chu, and 18 years old,
 ian.hello(); // hello,i am chu&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
@@ -7190,8 +7322,8 @@ var app = express();
 
 // use express get method
 // create root router and print hello world
-app.get(&amp;#39;/&amp;#39;, function(req, res){
-  res.send(&amp;#39;hello world&amp;#39;);
+app.get(&amp;#39;/&amp;#39;, function(req, res) {
+    res.send(&amp;#39;hello world&amp;#39;);
 });
 
 // check running enviroment
@@ -7201,8 +7333,8 @@ var port = process.env.PORT || 3000;
 app.listen(port);
 
 // only print hint link for local enviroment
-if(port === 3000){
-  console.log(&amp;#39;RUN http://localhost:3000/&amp;#39;)
+if (port === 3000) {
+    console.log(&amp;#39;RUN http://localhost:3000/&amp;#39;);
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;&lt;a href=&quot;http://expressjs.com/zh-tw/4x/api.html#app.get.method&quot; title=&quot;express get&quot;&gt;express get&lt;/a&gt;&lt;br&gt;
@@ -7470,18 +7602,18 @@ connection.query(&amp;#39;select * from MyGuests&amp;#39;, function(err, rows, f
           &lt;code slot=&quot;code&quot;&gt;// create object
 var data = {};
 connection.query(&amp;#39;select * from MyGuests&amp;#39;, function(err, rows, fields) {
-  if (err) throw err;
-  // set data to object
-  data.user = rows[0];
+    if (err) throw err;
+    // set data to object
+    data.user = rows[0];
 });
 
-app.get(&amp;#39;/&amp;#39;, function(req, res){
-  res.render(&amp;#39;index&amp;#39;);
+app.get(&amp;#39;/&amp;#39;, function(req, res) {
+    res.render(&amp;#39;index&amp;#39;);
 });
 
-app.get(&amp;#39;/about&amp;#39;, function(req, res){
-  // add data property to about page
-  res.render(&amp;#39;about&amp;#39;,{data: data.user});
+app.get(&amp;#39;/about&amp;#39;, function(req, res) {
+    // add data property to about page
+    res.render(&amp;#39;about&amp;#39;, { data: data.user });
 });&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;4.修改 about.ejs 使用設定的 data&lt;/p&gt;
@@ -7703,14 +7835,14 @@ heroku open&lt;/code&gt;
 &lt;p&gt;ps.以下混雜使用 es6 解構、展開運算子(Spread Operator)寫法，在 react 中處理大量 props 很方便。&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;//stateless component  預設props會作為參數
-function NameCard(props){
-  return &amp;lt;h2&amp;gt;Hello,{props.name}&amp;lt;/h2&amp;gt;
+function NameCard(props) {
+    return &amp;lt;h2&amp;gt;Hello,{props.name}&amp;lt;/h2&amp;gt;;
 }
 
 //接到一個參數的元件 然後加上props 回傳有加入props的元件
-function Warpper(Item){
-  const props = {name:&amp;#39;Chu&amp;#39;}
-  return &amp;lt;Item {...props}/&amp;gt;
+function Warpper(Item) {
+    const props = { name: &amp;#39;Chu&amp;#39; };
+    return &amp;lt;Item {...props} /&amp;gt;;
 }
 const element = Warpper(NameCard);
 
@@ -7722,35 +7854,37 @@ ReactDOM.render(element, document.getElementById(&amp;#39;root&amp;#39;));&lt;/c
 &lt;h2 id=&quot;hoc-component&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#hoc-component&quot; aria-label=&quot;hoc component permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;HOC component&lt;/h2&gt;
 &lt;p&gt;ps.es6 arrow function 產生 return function 邏輯&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;const Wrapper = (a) =&amp;gt; (b)=&amp;gt;{
-	console.log(a,b)
-}
+          &lt;code slot=&quot;code&quot;&gt;const Wrapper = a =&amp;gt; b =&amp;gt; {
+    console.log(a, b);
+};
 
 // babel 會編譯為如下
 var Wrapper = function Wrapper(a) {
-	return function (b) {
-		console.log(a, b);
-	};
+    return function(b) {
+        console.log(a, b);
+    };
 };&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;接下來就改使用 return function 來傳遞額外資料&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;//建立 Person 元件
 function Person(props) {
-  const {name,age,status} = props;
-  return &amp;lt;h1&amp;gt;Hello, {name} is {age} years old,ohhh and so {status}&amp;lt;/h1&amp;gt;;
+    const { name, age, status } = props;
+    return (
+        &amp;lt;h1&amp;gt;
+            Hello, {name} is {age} years old,ohhh and so {status}
+        &amp;lt;/h1&amp;gt;
+    );
 }
 
 //建構包裹的function
-const Warpper = (child) =&amp;gt; (props)=&amp;gt;{
-  //加入物件 status 判斷age 大於18 true=&amp;gt;產生old false =&amp;gt;產生young
-  props = {...props, status: props.age&amp;gt;18?&amp;#39;old&amp;#39;:&amp;#39;young&amp;#39;};
-  return (
-    child({...props})
-  )
-}
+const Warpper = child =&amp;gt; props =&amp;gt; {
+    //加入物件 status 判斷age 大於18 true=&amp;gt;產生old false =&amp;gt;產生young
+    props = { ...props, status: props.age &amp;gt; 18 ? &amp;#39;old&amp;#39; : &amp;#39;young&amp;#39; };
+    return child({ ...props });
+};
 
-const person1 = {name:&amp;#39;ian&amp;#39;,age:28};
+const person1 = { name: &amp;#39;ian&amp;#39;, age: 28 };
 const element = Warpper(Person)(person1);
 
 ReactDOM.render(element, document.getElementById(&amp;#39;root&amp;#39;));&lt;/code&gt;
@@ -8702,42 +8836,44 @@ function debug() {
 &lt;h2 id=&quot;array-sort-範例&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#array-sort-%E7%AF%84%E4%BE%8B&quot; aria-label=&quot;array sort 範例 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Array sort 範例&lt;/h2&gt;
 &lt;p&gt;針對 price 數字 陣列排序&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;let Arr = [{name:&amp;#39;apple&amp;#39;,price:50},
-           {name:&amp;#39;watermelon&amp;#39;,price:30},
-           {name:&amp;#39;mango&amp;#39;,price:90},
-           {name:&amp;#39;banana&amp;#39;,price:10},
-           {name:&amp;#39;peer&amp;#39;,price:10}
-          ];
+          &lt;code slot=&quot;code&quot;&gt;let Arr = [
+    { name: &amp;#39;apple&amp;#39;, price: 50 },
+    { name: &amp;#39;watermelon&amp;#39;, price: 30 },
+    { name: &amp;#39;mango&amp;#39;, price: 90 },
+    { name: &amp;#39;banana&amp;#39;, price: 10 },
+    { name: &amp;#39;peer&amp;#39;, price: 10 }
+];
 let times = 0;
-Arr.sort(function(a,b){
-  times ++; // 紀錄跑幾次
-  return a.price - b.price
-  }); //會針對陣列跑回圈比對
-console.log(Arr)
+Arr.sort(function(a, b) {
+    times++; // 紀錄跑幾次
+    return a.price - b.price;
+}); //會針對陣列跑回圈比對
+console.log(Arr);
 // [{name: &amp;quot;banana&amp;quot;, price: 10},
 // {name: &amp;quot;peer&amp;quot;, price: 20}
 // ......
 // {name: &amp;quot;mango&amp;quot;, price: 90}]
-console.log(times) // 9次&lt;/code&gt;
+console.log(times); // 9次&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;針對字串 name 陣列排序&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;let Arr = [{name:&amp;#39;apple&amp;#39;,price:50},
-           {name:&amp;#39;watermelon&amp;#39;,price:30},
-           {name:&amp;#39;mango&amp;#39;,price:90},
-           {name:&amp;#39;banana&amp;#39;,price:10},
-           {name:&amp;#39;peer&amp;#39;,price:10}
-          ];
-Arr.sort(function(a,b){
-  if(a.name &amp;gt; b.name) {
-    return 1; //a 往右 b往左
-  }else if(a.name &amp;lt; b.name) {
-    return -1; //a 往左 b往右
-  }else {
-    return 0; // 不變順序
-  }
-  });
-console.log(Arr)
+          &lt;code slot=&quot;code&quot;&gt;let Arr = [
+    { name: &amp;#39;apple&amp;#39;, price: 50 },
+    { name: &amp;#39;watermelon&amp;#39;, price: 30 },
+    { name: &amp;#39;mango&amp;#39;, price: 90 },
+    { name: &amp;#39;banana&amp;#39;, price: 10 },
+    { name: &amp;#39;peer&amp;#39;, price: 10 }
+];
+Arr.sort(function(a, b) {
+    if (a.name &amp;gt; b.name) {
+        return 1; //a 往右 b往左
+    } else if (a.name &amp;lt; b.name) {
+        return -1; //a 往左 b往右
+    } else {
+        return 0; // 不變順序
+    }
+});
+console.log(Arr);
 // [{name: &amp;quot;apple&amp;quot;, price: 50},
 // ......
 // {name: &amp;quot;watermelon&amp;quot;, price: 30}]&lt;/code&gt;
@@ -8752,17 +8888,17 @@ console.log(Arr)
 &lt;p&gt;簡單創建多筆經緯度資料，呈現的是搭計程車到地點的價格。&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;//我只標出比較重要部分，其他就codepen點開來看唄
-  var marker = new google.maps.Marker({
-    position: {lat: item.lat, lng: item.lng},
+var marker = new google.maps.Marker({
+    position: { lat: item.lat, lng: item.lng },
     map: map,
     title: item.name,
-    icon:image,
-    data:&amp;#39;Go to &amp;#39;+item.name + &amp;#39;&amp;lt;br/&amp;gt; Taxi price: &amp;#39; +item.price
-  });
-  marker.addListener(&amp;#39;click&amp;#39;, function() {
-    infowindow.setContent( this.data );
+    icon: image,
+    data: &amp;#39;Go to &amp;#39; + item.name + &amp;#39;&amp;lt;br/&amp;gt; Taxi price: &amp;#39; + item.price
+});
+marker.addListener(&amp;#39;click&amp;#39;, function() {
+    infowindow.setContent(this.data);
     infowindow.open(map, this);
-  });&lt;/code&gt;
+});&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;比較特別的是這個寫法，在每個 marker 加入 data 物件，讓 marker 延伸操作性。&lt;br&gt;
 以下圖片實際呼叫 marker 所印出來的資料，可以看到畫線處，出現我們剛剛加入的 data，這樣你就可以利用 marker 來帶一些資料，例如說點擊 marker 可以 call function 然後帶互動，這方法變得方便又輕巧。&lt;br&gt;
@@ -8778,17 +8914,17 @@ ps.可以利用指定某個 marker markerArr[i].setOptions({data=“/change/imag
 &lt;p&gt;首先處理單一個 marker 用的是 MarkerWithLabel，原本呼叫 google.maps.Marker 改成 MarkerWithLabel，然後就搞定了，非常快速簡單，他可以用的 event 滿多的，基本上都可以處理 marker 的互動，甚至也可以像一般的 marker 設定物件上去。&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;//更多變數請點選說明文件，基本上可以用class 搭配 css操作，或是labelStyle 處理icon style
-  var marker = new MarkerWithLabel({
+var marker = new MarkerWithLabel({
     draggable: false,
-        raiseOnDrag: false,
-        map: map,
-        labelContent: &amp;#39;&amp;lt;span&amp;gt;&amp;#39;+ item.name +&amp;#39;&amp;lt;br/&amp;gt;&amp;#39;+ item.price +&amp;#39;&amp;lt;/span&amp;gt;&amp;#39;,
-        labelAnchor: new google.maps.Point(40,32),
-        labelClass: &amp;quot;labels&amp;quot;, // the CSS class for the label
-        labelStyle: {opacity: 1},
-        position: {lat: item.lat, lng: item.lng},
-        data:&amp;#39;Go to &amp;#39;+item.name + &amp;#39;&amp;lt;br/&amp;gt; Taxi price: &amp;#39; +item.price
-  });&lt;/code&gt;
+    raiseOnDrag: false,
+    map: map,
+    labelContent: &amp;#39;&amp;lt;span&amp;gt;&amp;#39; + item.name + &amp;#39;&amp;lt;br/&amp;gt;&amp;#39; + item.price + &amp;#39;&amp;lt;/span&amp;gt;&amp;#39;,
+    labelAnchor: new google.maps.Point(40, 32),
+    labelClass: &amp;#39;labels&amp;#39;, // the CSS class for the label
+    labelStyle: { opacity: 1 },
+    position: { lat: item.lat, lng: item.lng },
+    data: &amp;#39;Go to &amp;#39; + item.name + &amp;#39;&amp;lt;br/&amp;gt; Taxi price: &amp;#39; + item.price
+});&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;實際範例-markerwithlabel&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E5%AF%A6%E9%9A%9B%E7%AF%84%E4%BE%8B-markerwithlabel&quot; aria-label=&quot;實際範例 markerwithlabel permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;實際範例 markerwithlabel&lt;/h2&gt;
 &lt;p data-height=&quot;259&quot; data-theme-id=&quot;light&quot; data-slug-hash=&quot;eyYVJz&quot; data-default-tab=&quot;result&quot; data-user=&quot;chu1228&quot; data-embed-version=&quot;2&quot; data-pen-title=&quot;google map marker cluster (markercluster &amp; markerlabel)&quot; class=&quot;codepen&quot;&gt;See the Pen &lt;a href=&quot;https://codepen.io/chu1228/pen/eyYVJz/&quot;&gt;google map marker cluster (markercluster &amp; markerlabel)&lt;/a&gt; by ianchu (&lt;a href=&quot;https://codepen.io/chu1228&quot;&gt;@chu1228&lt;/a&gt;) on &lt;a href=&quot;https://codepen.io&quot;&gt;CodePen&lt;/a&gt;.&lt;/p&gt;
@@ -8801,13 +8937,13 @@ ps.可以利用指定某個 marker markerArr[i].setOptions({data=“/change/imag
 &lt;p&gt;建立 Cluster 的方法，這個版本無法帶入 className，需要打開.js 檔案，直接在 style.push 區塊修改，我這邊有修改 background-repeat:no-repeat。&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;//arr 是剛剛marker的 array 需要建立帶入 其餘是內建option
-  markerCluster = new MarkerClusterer(map, arr, {
+markerCluster = new MarkerClusterer(map, arr, {
     gridSize: 50,
     maxZoom: 15,
     zoomOnClick: true,
     styles: imgArr,
     imagePath: &amp;#39;https://googlemaps.github.io/js-marker-clusterer/images/m&amp;#39;
-  });&lt;/code&gt;
+});&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;這邊是客製化 Cluster icon 的方法，這個 function 會抓到這個建立中的 cluster 內包含的 marker，會用陣列帶進來，這時候我們就跑迴圈，將 marker 內的資料帶出來，在看你想呈現的方式處理，我這邊是計算裡面的平均價格（這範例下方有 click event 寫法，不過我直接寫進 codepen 導致跑不動)。&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
@@ -8818,7 +8954,7 @@ MarkerClusterer.prototype.calculator_ = function(markers, numStyles) {
     for (var i = 0; i &amp;lt; markers.length; i++) {
         price += Number(markers[i].dataPrice);
     }
-    price = Math.floor(price/count);
+    price = Math.floor(price / count);
     //省略
     return {
         text: count + &amp;#39; 筆&amp;lt;br/&amp;gt;A. NT&amp;#39; + price,

@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Google Analytics 自訂UserId 追蹤數據",
         "datePublished": "June 15, 2019",
-        "dateModified": "2021-05-15T08:26:47.153Z",
+        "dateModified": "2021-05-16T05:03:10.094Z",
         "description": "分享一個google analytics滿好用的功能，設定User Id，可以讓你直接在報表上找出這個使用者的flow，包括停留時間等等詳細數據，假設你搭配會員系統給予id的話，你也能夠跨裝置的追蹤數據。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -291,8 +291,7 @@ void function() {
 <p>接下來就需要定義使用者的 UserId，這邊有時候會用會員編號，不要使用敏感性個資去設定即可，能讓你在報表識別出這個人是誰就可以。</p>
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">// 全域網站代碼的追蹤程式碼 (gtag.js)：
-gtag(&#39;set&#39;, {&#39;user_id&#39;: &#39;USER_ID&#39;}); // 使用已登入的 user_id 設定 User ID。
-
+gtag(&#39;set&#39;, { user_id: &#39;USER_ID&#39; }); // 使用已登入的 user_id 設定 User ID。
 
 // 通用 Analytics (分析) 追蹤程式碼 (analytics.js)：
 ga(&#39;set&#39;, &#39;userId&#39;, &#39;USER_ID&#39;); // 使用已登入的 user_id 設定 User ID。</code>

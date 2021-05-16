@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "JavaScript Closure 你一定有用過的閉包",
         "datePublished": "June 27, 2020",
-        "dateModified": "2021-05-15T08:28:35.479Z",
+        "dateModified": "2021-05-16T05:03:10.839Z",
         "description": "JavsScript 的 closure (閉包) 是什麼？ 假設你有在寫 javascript 的話，你可能每天都在用，但你只是沒特別查覺而已。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -155,7 +155,7 @@ with references to its surrounding state (the lexical environment).</code>
 </ul>
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">var a = { name: &#39;ian&#39; };
-function getValueA(){
+function getValueA() {
     return a;
 }
 var assignA = getValueA();
@@ -180,8 +180,8 @@ console.log(getValueA()); // 2</code>
 </ul>
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">for (var i = 0; i &lt; 3; i++) {
-    setTimeout(function(){
-        console.log(i)
+    setTimeout(function() {
+        console.log(i);
     }, 0);
 }
 // 3
@@ -196,7 +196,7 @@ console.log(getValueA()); // 2</code>
           <code slot="code">for (var i = 0; i &lt; 3; i++) {
     function logI(i) {
         setTimeout(function() {
-            console.log(i)
+            console.log(i);
         }, 0);
     }
     logI(i);

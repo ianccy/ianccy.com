@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Google Map marker cluster 標記使用教學",
         "datePublished": "December 11, 2017",
-        "dateModified": "2021-05-15T08:22:38.518Z",
+        "dateModified": "2021-05-16T05:03:08.335Z",
         "description": "google map下多個marker，再搭配marker的event來互動，以下是打開infowindow的運用。markerwithlabel讓我們更簡單設計不同的marker，例如讓他帶自訂的image，再來是重點 markercluster，它讓我們可以解決marker過多，同時重疊的問題。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -145,17 +145,17 @@ void function() {
 <p>簡單創建多筆經緯度資料，呈現的是搭計程車到地點的價格。</p>
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">//我只標出比較重要部分，其他就codepen點開來看唄
-  var marker = new google.maps.Marker({
-    position: {lat: item.lat, lng: item.lng},
+var marker = new google.maps.Marker({
+    position: { lat: item.lat, lng: item.lng },
     map: map,
     title: item.name,
-    icon:image,
-    data:&#39;Go to &#39;+item.name + &#39;&lt;br/&gt; Taxi price: &#39; +item.price
-  });
-  marker.addListener(&#39;click&#39;, function() {
-    infowindow.setContent( this.data );
+    icon: image,
+    data: &#39;Go to &#39; + item.name + &#39;&lt;br/&gt; Taxi price: &#39; + item.price
+});
+marker.addListener(&#39;click&#39;, function() {
+    infowindow.setContent(this.data);
     infowindow.open(map, this);
-  });</code>
+});</code>
         </deckgo-highlight-code>
 <p>比較特別的是這個寫法，在每個 marker 加入 data 物件，讓 marker 延伸操作性。<br>
 以下圖片實際呼叫 marker 所印出來的資料，可以看到畫線處，出現我們剛剛加入的 data，這樣你就可以利用 marker 來帶一些資料，例如說點擊 marker 可以 call function 然後帶互動，這方法變得方便又輕巧。<br>
@@ -171,17 +171,17 @@ ps.可以利用指定某個 marker markerArr[i].setOptions({data=“/change/imag
 <p>首先處理單一個 marker 用的是 MarkerWithLabel，原本呼叫 google.maps.Marker 改成 MarkerWithLabel，然後就搞定了，非常快速簡單，他可以用的 event 滿多的，基本上都可以處理 marker 的互動，甚至也可以像一般的 marker 設定物件上去。</p>
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">//更多變數請點選說明文件，基本上可以用class 搭配 css操作，或是labelStyle 處理icon style
-  var marker = new MarkerWithLabel({
+var marker = new MarkerWithLabel({
     draggable: false,
-        raiseOnDrag: false,
-        map: map,
-        labelContent: &#39;&lt;span&gt;&#39;+ item.name +&#39;&lt;br/&gt;&#39;+ item.price +&#39;&lt;/span&gt;&#39;,
-        labelAnchor: new google.maps.Point(40,32),
-        labelClass: &quot;labels&quot;, // the CSS class for the label
-        labelStyle: {opacity: 1},
-        position: {lat: item.lat, lng: item.lng},
-        data:&#39;Go to &#39;+item.name + &#39;&lt;br/&gt; Taxi price: &#39; +item.price
-  });</code>
+    raiseOnDrag: false,
+    map: map,
+    labelContent: &#39;&lt;span&gt;&#39; + item.name + &#39;&lt;br/&gt;&#39; + item.price + &#39;&lt;/span&gt;&#39;,
+    labelAnchor: new google.maps.Point(40, 32),
+    labelClass: &#39;labels&#39;, // the CSS class for the label
+    labelStyle: { opacity: 1 },
+    position: { lat: item.lat, lng: item.lng },
+    data: &#39;Go to &#39; + item.name + &#39;&lt;br/&gt; Taxi price: &#39; + item.price
+});</code>
         </deckgo-highlight-code>
 <h2 id="實際範例-markerwithlabel" style="position:relative;"><a href="#%E5%AF%A6%E9%9A%9B%E7%AF%84%E4%BE%8B-markerwithlabel" aria-label="實際範例 markerwithlabel permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>實際範例 markerwithlabel</h2>
 <p data-height="259" data-theme-id="light" data-slug-hash="eyYVJz" data-default-tab="result" data-user="chu1228" data-embed-version="2" data-pen-title="google map marker cluster (markercluster & markerlabel)" class="codepen">See the Pen <a href="https://codepen.io/chu1228/pen/eyYVJz/">google map marker cluster (markercluster & markerlabel)</a> by ianchu (<a href="https://codepen.io/chu1228">@chu1228</a>) on <a href="https://codepen.io">CodePen</a>.</p>
@@ -194,13 +194,13 @@ ps.可以利用指定某個 marker markerArr[i].setOptions({data=“/change/imag
 <p>建立 Cluster 的方法，這個版本無法帶入 className，需要打開.js 檔案，直接在 style.push 區塊修改，我這邊有修改 background-repeat:no-repeat。</p>
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">//arr 是剛剛marker的 array 需要建立帶入 其餘是內建option
-  markerCluster = new MarkerClusterer(map, arr, {
+markerCluster = new MarkerClusterer(map, arr, {
     gridSize: 50,
     maxZoom: 15,
     zoomOnClick: true,
     styles: imgArr,
     imagePath: &#39;https://googlemaps.github.io/js-marker-clusterer/images/m&#39;
-  });</code>
+});</code>
         </deckgo-highlight-code>
 <p>這邊是客製化 Cluster icon 的方法，這個 function 會抓到這個建立中的 cluster 內包含的 marker，會用陣列帶進來，這時候我們就跑迴圈，將 marker 內的資料帶出來，在看你想呈現的方式處理，我這邊是計算裡面的平均價格（這範例下方有 click event 寫法，不過我直接寫進 codepen 導致跑不動)。</p>
 <deckgo-highlight-code language="javascript"  >
@@ -211,7 +211,7 @@ MarkerClusterer.prototype.calculator_ = function(markers, numStyles) {
     for (var i = 0; i &lt; markers.length; i++) {
         price += Number(markers[i].dataPrice);
     }
-    price = Math.floor(price/count);
+    price = Math.floor(price / count);
     //省略
     return {
         text: count + &#39; 筆&lt;br/&gt;A. NT&#39; + price,

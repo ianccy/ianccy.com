@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "React Context API 跨元件傳遞資料",
         "datePublished": "July 28, 2019",
-        "dateModified": "2021-05-15T08:27:17.326Z",
+        "dateModified": "2021-05-16T05:03:10.177Z",
         "description": "React為了解決props 需要傳很多層問題，就在v16.3 更新 context API 的功能，context API 主要功能就是跨元件傳遞資料。利用createContext 建立context，並搭配Provider、Consumer、contexttype、usecontext 跨元件取值。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -210,19 +210,19 @@ export default class Container extends Component {
 <h2 id="consumer-提取-value" style="position:relative;"><a href="#consumer-%E6%8F%90%E5%8F%96-value" aria-label="consumer 提取 value permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Consumer 提取 value</h2>
 <p>Consumer 元件可以獲取 context 資料，假設沒有最接近的 Provider 提供 value，Cosumer 會取到 createContext 的 defaultvalue。若有 Provider 提供值，則是會保持訂閱更新，也就是達到跨元件同步資料，並 update component。</p>
 <deckgo-highlight-code language="javascript"  >
-          <code slot="code">import React from &quot;react&quot;;
-import { MyContext } from &quot;../Container&quot;;
+          <code slot="code">import React from &#39;react&#39;;
+import { MyContext } from &#39;../Container&#39;;
 
 export default function Account() {
-  return (
-    &lt;div className=&quot;account&quot;&gt;
-      &lt;MyContext.Consumer&gt;
-        {({ isLogin }) =&gt; {
-          return isLogin ? &quot;Logout&quot; : &quot;Login&quot;;
-        }}
-      &lt;/MyContext.Consumer&gt;
-    &lt;/div&gt;
-  );
+    return (
+        &lt;div className=&quot;account&quot;&gt;
+            &lt;MyContext.Consumer&gt;
+                {({ isLogin }) =&gt; {
+                    return isLogin ? &#39;Logout&#39; : &#39;Login&#39;;
+                }}
+            &lt;/MyContext.Consumer&gt;
+        &lt;/div&gt;
+    );
 }</code>
         </deckgo-highlight-code>
 <p><a href="https://codesandbox.io/s/relaxed-banzai-su39f" title="Consumer codesandbox">Consumer codesandbox</a></p>
@@ -234,22 +234,22 @@ export default function Account() {
 <h2 id="contexttype-取值" style="position:relative;"><a href="#contexttype-%E5%8F%96%E5%80%BC" aria-label="contexttype 取值 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>contextType 取值</h2>
 <p>contextType 是直接在 react 的 component 的 instance 再加上 context，所以只能用在 class Component，一個元件只能使用一個 context。</p>
 <deckgo-highlight-code language="javascript"  >
-          <code slot="code">import React, { Component } from &quot;react&quot;;
-import MyContext from &quot;../context/MyContext&quot;;
+          <code slot="code">import React, { Component } from &#39;react&#39;;
+import MyContext from &#39;../context/MyContext&#39;;
 
 export default class Account extends Component {
-  static contextType = MyContext;
-  render() {
-    const { isLogin, setLogin } = this.context;
-    return (
-      &lt;div className=&quot;account&quot;&gt;
-        &lt;div&gt;
-          {isLogin ? &quot;Logout&quot; : &quot;Login&quot;}
-          &lt;button onClick={setLogin}&gt;toggleLogin&lt;/button&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    );
-  }
+    static contextType = MyContext;
+    render() {
+        const { isLogin, setLogin } = this.context;
+        return (
+            &lt;div className=&quot;account&quot;&gt;
+                &lt;div&gt;
+                    {isLogin ? &#39;Logout&#39; : &#39;Login&#39;}
+                    &lt;button onClick={setLogin}&gt;toggleLogin&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        );
+    }
 }</code>
         </deckgo-highlight-code>
 <p>我在這邊有遇到一個問題，在 Container component export context，並在 Account 引用 Container export 的 context 時，會發生我取不到值得問題，這是因為循環依賴的關係，在我們 Account 引用 Container 內的 MyContext 時，ES6 只會是 referrence MyContext undefined 狀態，實際在 Container 還尚未建立 createContext，這個 Account 又會再初始化階段就執行 MyContext，導致拿到 empty object。</p>
@@ -300,21 +300,21 @@ export default class Account extends Component {
 <p>Preventing rerenders with React.memo and useContext hook.<br>
 <a href="https://github.com/facebook/react/issues/15156#issuecomment-474590693" title="Preventing rerenders with React.memo and useContext hook.">Preventing rerenders with React.memo and useContext hook.</a></p>
 <deckgo-highlight-code language="javascript"  >
-          <code slot="code">import React, { useContext, useMemo } from &quot;react&quot;;
-import MyContext from &quot;../context/MyContext&quot;;
+          <code slot="code">import React, { useContext, useMemo } from &#39;react&#39;;
+import MyContext from &#39;../context/MyContext&#39;;
 
 export default function Account() {
-  const { isLogin, setLogin } = useContext(MyContext);
-  return useMemo(() =&gt; {
-    return (
-      &lt;div className=&quot;account&quot;&gt;
-        &lt;div&gt;
-          {isLogin ? &quot;Logout&quot; : &quot;Login&quot;}
-          &lt;button onClick={setLogin}&gt;toggleLogin&lt;/button&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    );
-  }, [isLogin, setLogin]);
+    const { isLogin, setLogin } = useContext(MyContext);
+    return useMemo(() =&gt; {
+        return (
+            &lt;div className=&quot;account&quot;&gt;
+                &lt;div&gt;
+                    {isLogin ? &#39;Logout&#39; : &#39;Login&#39;}
+                    &lt;button onClick={setLogin}&gt;toggleLogin&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        );
+    }, [isLogin, setLogin]);
 }</code>
         </deckgo-highlight-code>
 <p><a href="https://codesandbox.io/s/gifted-wood-8ot48" title="useContext with useMemo codesandbox">useContext with useMemo codesandbox</a></p>

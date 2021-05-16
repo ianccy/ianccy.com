@@ -58,7 +58,7 @@
         "@type": "BlogPosting",
         "headline": "Redux multiple dispatch，batch redux-thunk",
         "datePublished": "November 30, 2019",
-        "dateModified": "2021-05-15T08:27:58.421Z",
+        "dateModified": "2021-05-16T05:03:10.522Z",
         "description": "redux 核心流程 dispatch action => reducer => store，當你用 redux 運行多個 dispatch 時，每一個 dispatch 都會獨立更新下去的，如果你的更新資料又彼此關聯，就可能會發生錯誤。",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -165,15 +165,15 @@ void function() {
 <li>batch 使用方法</li>
 </ul>
 <deckgo-highlight-code language="javascript"  >
-          <code slot="code">import { batch } from &#39;react-redux&#39;
+          <code slot="code">import { batch } from &#39;react-redux&#39;;
 function myThunk() {
     return (dispatch, getState) =&gt; {
         // should only result in one combined re-render, not two
         batch(() =&gt; {
-        dispatch(increment())
-        dispatch(increment())
-        })
-    }
+            dispatch(increment());
+            dispatch(increment());
+        });
+    };
 }</code>
         </deckgo-highlight-code>
 <p><a href="https://github.com/reduxjs/redux/blob/a5739d9455afbed663a4ca1fcac002988c885fcb/docs/faq/Performance.md#how-can-i-reduce-the-number-of-store-update-events" title="react redux github batch Q&#x26;A">react redux github batch Q&#x26;A</a></p>
@@ -208,19 +208,19 @@ let foo = () =&gt; 1 + 2;</code>
 <li>Add thunk on redux middleWare</li>
 </ul>
 <deckgo-highlight-code language="javascript"  >
-          <code slot="code">import { createStore, applyMiddleware } from &quot;redux&quot;;
-import thunk from &quot;redux-thunk&quot;;
-import reducers from &quot;../redux/reducers&quot;;
+          <code slot="code">import { createStore, applyMiddleware } from &#39;redux&#39;;
+import thunk from &#39;redux-thunk&#39;;
+import reducers from &#39;../redux/reducers&#39;;
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
 function fetchUser(data) {
-  return (dispatch, getState) =&gt; {
-    dispatch({ type: ADD_USERCOMMENT, payload: data.list });
-    if (data.userInfo) {
-      dispatch({ type: INIT_INFO, payload: data.userInfo });
-    }
-  };
+    return (dispatch, getState) =&gt; {
+        dispatch({ type: ADD_USERCOMMENT, payload: data.list });
+        if (data.userInfo) {
+            dispatch({ type: INIT_INFO, payload: data.userInfo });
+        }
+    };
 }</code>
         </deckgo-highlight-code>
 <p>extraArgument 不用理會，這是新功能讓使用者客製化增加 thunk 的參數，action 會是我們傳入的 action creator，當 action creator 是一個 function，就執行 action creator function，如果不是就執行 next 帶入 action creator，正常的執行 dispatch。</p>
@@ -230,13 +230,13 @@ function fetchUser(data) {
 </ul>
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">function createThunkMiddleware(extraArgument) {
-  return ({ dispatch, getState }) =&gt; next =&gt; action =&gt; {
-    if (typeof action === &quot;function&quot;) {
-      return action(dispatch, getState, extraArgument);
-    }
+    return ({ dispatch, getState }) =&gt; next =&gt; action =&gt; {
+        if (typeof action === &#39;function&#39;) {
+            return action(dispatch, getState, extraArgument);
+        }
 
-    return next(action);
-  };
+        return next(action);
+    };
 }
 
 const thunk = createThunkMiddleware();
@@ -251,26 +251,26 @@ export default thunk;</code>
 <deckgo-highlight-code language="javascript"  >
           <code slot="code">// middlewares argument is pass thunk
 export default function(...middlewares) {
-  return createStore =&gt; (reducers, initialState, enhancer) =&gt; {
-    const store = createStore(reducers, initialState, enhancer);
-    const dispatch = store.dispatch;
-    const chain = [];
-    const middleWareAPI = {
-      getState: store.getState,
-      dispatch: action =&gt; dispatch(action)
-    };
+    return createStore =&gt; (reducers, initialState, enhancer) =&gt; {
+        const store = createStore(reducers, initialState, enhancer);
+        const dispatch = store.dispatch;
+        const chain = [];
+        const middleWareAPI = {
+            getState: store.getState,
+            dispatch: action =&gt; dispatch(action)
+        };
 
-    chain = middlewares.map(middleware =&gt; middleware(middlewareAPI));
-    dispatch = compose(...chain)(store.dispatch); // store.dispatch or dispatch both work
-    // compose will do following thing:
-    /*
-     * a, b, c ==&gt; a(b(c())), indeed, it is just a reduce and store.dispatch will be an initial value
-     */
-    return {
-      ...store,
-      dispatch
+        chain = middlewares.map(middleware =&gt; middleware(middlewareAPI));
+        dispatch = compose(...chain)(store.dispatch); // store.dispatch or dispatch both work
+        // compose will do following thing:
+        /*
+         * a, b, c ==&gt; a(b(c())), indeed, it is just a reduce and store.dispatch will be an initial value
+         */
+        return {
+            ...store,
+            dispatch
+        };
     };
-  };
 }</code>
         </deckgo-highlight-code>
 <p>redux thunk code 很優美，完美的示範如何使用 redux 的 middleWare，邏輯清楚又不複雜。我一定不會說這篇文章是為了分享 redux thunk。</p>
