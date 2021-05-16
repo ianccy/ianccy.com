@@ -140,201 +140,191 @@ void function() {
 <p>目前正在開發新專案，但又要兼顧維運另個舊專案，舊專案是公司核心產品，常常需要改動需求，因為新專案 deadline 緊迫，不大有時間詳細的測試改動，最近疊加太多功能，導致連動出現滿多 bug，因為這事件，更讓我們重視測試的重要性。</p>
 <!--- ![react unit test](../images/reactunittest.png "react unit test") --->
 <p>接下來就來針對 react hooks 做 component testing。</p>
-<h2 id="安裝測試工具-jest" style="position:relative;"><a href="#%E5%AE%89%E8%A3%9D%E6%B8%AC%E8%A9%A6%E5%B7%A5%E5%85%B7-jest" aria-label="安裝測試工具 jest permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>安裝測試工具 Jest</h2>
+<h2>安裝測試工具 Jest</h2>
 <p>Jest 是由 facebook 開源的工具，源自於 Jasmine 延伸開發，設定少、輕巧，官方文件非常清楚，提供斷言庫、mocking data 等，Jest 算是我們 test 的 runner，可以再搭配 enzyme、puppeteer 等等執行，讓 test 能更齊全。</p>
-<deckgo-highlight-code language="javascript"  >
-          <code slot="code">npm install --save-dev jest</code>
-        </deckgo-highlight-code>
+<pre><code class="language-javascript">npm install --save-dev jest
+</code></pre>
 <ul>
 <li>編輯 package.json</li>
 </ul>
-<deckgo-highlight-code language="javascript"  >
-          <code slot="code">  &quot;scripts&quot;: {
+<pre><code class="language-javascript">  "scripts": {
     ...
-    &quot;test&quot;: &quot;jest&quot;,
+    "test": "jest",
     ...
-  }</code>
-        </deckgo-highlight-code>
-<p>執行 Jest 會預設抓取 <code class="language-text">__tests__</code> folder 內 js、ts 檔案，或是 fileName 有 spec、test 的 js ts 檔案 來跑測試， 假設你有用到 babel，或是其他 css 編譯工具，則需要設定 jest config。</p>
+  }
+</code></pre>
+<p>執行 Jest 會預設抓取 <code>__tests__</code> folder 內 js、ts 檔案，或是 fileName 有 spec、test 的 js ts 檔案 來跑測試， 假設你有用到 babel，或是其他 css 編譯工具，則需要設定 jest config。</p>
 <p>規則預設</p>
-<deckgo-highlight-code language="javascript"  >
-          <code slot="code">[&#39;**/__tests__/**/*.[jt]s?(x)&#39;, &#39;**/?(*.)+(spec|test).[jt]s?(x)&#39;];</code>
-        </deckgo-highlight-code>
-<p>官方文件: <a href="https://jestjs.io/docs/en/getting-started" title="Jest starter guide">Jest starter guide</a></p>
+<pre><code class="language-javascript">['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'];
+</code></pre>
+<p>官方文件: <a href="https://jestjs.io/docs/en/getting-started" title="Jest starter guide" target="_blank" rel="nofollow noopener noreferrer">Jest starter guide</a></p>
 <p>Jest 主要依賴幾個 function 執行測試，describe function 可以讓我們對這一個測試做命名，以便後面執行測試追蹤，test function 則是讓我們定義某個 test case，例如範例，我們用 describe 測試包覆多種狀況來測試，expect 則是讓我們丟入 function 做 return，toBe 就是預期測試結果是否符合預期。</p>
-<p>官方文件: <a href="https://jestjs.io/docs/en/using-matchers" title="Jest 斷言方式">Jest 斷言方式</a></p>
+<p>官方文件: <a href="https://jestjs.io/docs/en/using-matchers" title="Jest 斷言方式" target="_blank" rel="nofollow noopener noreferrer">Jest 斷言方式</a></p>
 <ul>
 <li>Jest 使用</li>
 </ul>
-<deckgo-highlight-code language="javascript"  >
-          <code slot="code">describe(&#39;Test sum&#39;, () =&gt; {
-    test(&#39;function return 0&#39;, () =&gt; {
+<pre><code class="language-javascript">describe('Test sum', () => {
+    test('function return 0', () => {
         expect(sum(0)).toBe(0);
     });
-    test(&#39;function sum 0, 1 return 1&#39;, () =&gt; {
+    test('function sum 0, 1 return 1', () => {
         expect(sum(0, 1)).toBe(1);
     });
-});</code>
-        </deckgo-highlight-code>
+});
+</code></pre>
 <p>目前新專案是純倚賴 Jest 來測試，主要規劃會以 function test 以及 end to end 為主，主要先針對最重要的 function 做不同情境測試。</p>
 <p>安裝完成有遇到 react-script start 會有 jest error，依照提示移除 jest、node_modules、package-lock.json，並重新安裝即可解決。</p>
-<h2 id="react-test-renderer-snapshot-testing" style="position:relative;"><a href="#react-test-renderer-snapshot-testing" aria-label="react test renderer snapshot testing permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>react-test-renderer Snapshot Testing</h2>
+<h2>react-test-renderer Snapshot Testing</h2>
 <p>剛好在 react test guide 看到，好奇順便研究一下，react-test-renderer 是 facebook 開發的工具，功能直覺簡單，是用來實現不需要依賴瀏覽器 render component 執行 test，首先會幫你 render compoent，並可讓你執行 toMatchSnapshot 匯出元件 render Snaphot，也可在依照 render component 模擬更新互動，更新後狀態也可匯出 snapshot，另外也可以純取值比較。</p>
 <p>如果你元件經常要更新，可想而知你這份 snapshot testing 會經常需要更新，但如果穩定，就可以直接測試出 component 與資料不同的更新樣貌。</p>
-<p>文件: <a href="https://reactjs.org/docs/test-renderer.html#testrenderer" title="react-test-renderer">react-test-renderer</a></p>
-<p>下面是簡單的元件，主要測試是觸發 <code class="language-text">&lt;span&gt;</code> 的 onClick 讓 state count 更新。</p>
-<deckgo-highlight-code language="javascript"  >
-          <code slot="code">function TodoView() {
+<p>文件: <a href="https://reactjs.org/docs/test-renderer.html#testrenderer" title="react-test-renderer" target="_blank" rel="nofollow noopener noreferrer">react-test-renderer</a></p>
+<p>下面是簡單的元件，主要測試是觸發 <code>&#x3C;span></code> 的 onClick 讓 state count 更新。</p>
+<pre><code class="language-javascript">function TodoView() {
     const inputEl = useRef(null);
     const [todoList, addTodo, deleteToDo] = useTodoList([], inputEl);
     const [count, setCount] = useState(0);
 
     return (
-        &lt;div&gt;
-            &lt;span onClick={() =&gt; setCount(count + 1)}&gt;Counter : {count}&lt;/span&gt;
+        &#x3C;div>
+            &#x3C;span onClick={() => setCount(count + 1)}>Counter : {count}&#x3C;/span>
             ...
-        &lt;/div&gt;
+        &#x3C;/div>
     );
-}</code>
-        </deckgo-highlight-code>
+}
+</code></pre>
 <p>下方為實際使用範例，主要邏輯就是使用 create render component，再把元件資料轉格式匯出 snapshot，並可以用 act 來調用 component function，直接拉 props function 用會有 error warning，主要用起來困難點會是在 selector，還是如何整理 snapshot 匯出格式，幫助我們日後測試。</p>
 <p>目前專案尚未導入 snapshot test，因為專案還在不斷改動中，評估 component test 維運成本過高先略過。</p>
 <ul>
 <li>src/<strong>testSnap</strong>/TodoView.test.js</li>
 </ul>
-<deckgo-highlight-code language="javascript"  >
-          <code slot="code">import React from &#39;react&#39;;
-import { create, act } from &#39;react-test-renderer&#39;;
-import TodoView from &#39;/container/TodoView&#39;;
+<pre><code class="language-javascript">import React from 'react';
+import { create, act } from 'react-test-renderer';
+import TodoView from '/container/TodoView';
 
-describe(&#39;TodoView component&#39;, () =&gt; {
-    test(&#39;it shows the expected text when clicked&#39;, () =&gt; {
+describe('TodoView component', () => {
+    test('it shows the expected text when clicked', () => {
         let component;
-        act(() =&gt; {
-            component = create(&lt;TodoView /&gt;);
+        act(() => {
+            component = create(&#x3C;TodoView />);
         });
         let tree = component.toJSON();
         expect(tree).toMatchSnapshot();
         const instance = component.root;
 
-        const button = instance.findByType(&#39;span&#39;);
-        act(() =&gt; button.props.onClick());
-        expect(button.props.children.join()).toBe(&#39;Counter : ,1&#39;);
+        const button = instance.findByType('span');
+        act(() => button.props.onClick());
+        expect(button.props.children.join()).toBe('Counter : ,1');
         expect(button.props.children).toMatchSnapshot();
     });
-});</code>
-        </deckgo-highlight-code>
-<h2 id="component-testing-testing-libraryreact" style="position:relative;"><a href="#component-testing-testing-libraryreact" aria-label="component testing testing libraryreact permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Component Testing @testing-library/react</h2>
+});
+</code></pre>
+<h2>Component Testing @testing-library/react</h2>
 <p>React 官方範例是可以依賴內部 function act 去 render component，並依賴 dispatch event 去觸發事件，但若是複雜，官方更推薦使用 @testing-library/react，這是一套專注於測試 user interactive 的工具，可以讓我們模擬 select component -> click，有別於 enzyme 依賴執行 function trigger 更新 component。</p>
 <p>這套工具是同事推薦的，react testing library 專注的方向符合我們的需要，更能貼近使用者實際的互動。</p>
 <ul>
 <li>React 官方 test note</li>
 </ul>
-<deckgo-highlight-code language="javascript"  >
-          <code slot="code">We recommend using React Testing Library which is designed to
+<pre><code class="language-javascript">We recommend using React Testing Library which is designed to
 enable and encourage writing tests that use your components
 as the end users do.
 
 Alternatively, Airbnb has released a testing utility called Enzyme,
 which makes it easy to assert, manipulate, and traverse your
-React Components’ output.</code>
-        </deckgo-highlight-code>
+React Components’ output.
+</code></pre>
 <p>下方為 TypeInInput 的元件，預期當我們 pass text 會 render 出字串，並觸發 onChange event 傳遞 value，再來比較 input 內的 value 是否符合，接下來就來測試這個情境。</p>
 <p>@testing-library/react 主要依賴 render 來 render component，fireEvent 則讓我們可以觸發事件(click、change、dispatch Event)。</p>
 <p>主要流程大致為 render component，並接受返回的 function，各種 selector 都會在這時候取得，目前寫起來最順手是利用 getByTestId 搭配 data-testid，以往再寫 react component，會比較少寫 class or id，利用 tag 或是 string 來做選擇，難度更是麻煩，這些更常會因為需求更新。</p>
 <ul>
 <li>TypeInInput Component</li>
 </ul>
-<deckgo-highlight-code language="javascript"  >
-          <code slot="code">import React, { useState } from &#39;react&#39;;
-import { render, fireEvent } from &#39;@testing-library/react&#39;;
+<pre><code class="language-javascript">import React, { useState } from 'react';
+import { render, fireEvent } from '@testing-library/react';
 
 function TypeInInput({ text }) {
-    const [value, setValue] = useState(&#39;&#39;);
-    const onChangeValue = e =&gt; {
+    const [value, setValue] = useState('');
+    const onChangeValue = e => {
         setValue(e.target.value);
     };
     return (
-        &lt;div&gt;
-            &lt;label&gt;{text}&lt;/label&gt;
-            &lt;input data-testid=&quot;typeIn&quot; value={value} onChange={onChangeValue} /&gt;
-        &lt;/div&gt;
+        &#x3C;div>
+            &#x3C;label>{text}&#x3C;/label>
+            &#x3C;input data-testid="typeIn" value={value} onChange={onChangeValue} />
+        &#x3C;/div>
     );
 }
 
-describe(&#39;Test TypeInInput&#39;, () =&gt; {
-    const text = &#39;email&#39;;
-    test(&#39;change event&#39;, () =&gt; {
-        const { getByText } = render(&lt;TypeInInput text={text} /&gt;);
+describe('Test TypeInInput', () => {
+    const text = 'email';
+    test('change event', () => {
+        const { getByText } = render(&#x3C;TypeInInput text={text} />);
         const title = getByText(/email/);
         expect(title.textContent).toEqual(text);
     });
-    test(&#39;change event&#39;, () =&gt; {
-        const { getByTestId } = render(&lt;TypeInInput text={text} /&gt;);
-        const typeInElem = getByTestId(&#39;typeIn&#39;);
-        const test = &#39;emample@gmail.com&#39;;
+    test('change event', () => {
+        const { getByTestId } = render(&#x3C;TypeInInput text={text} />);
+        const typeInElem = getByTestId('typeIn');
+        const test = 'emample@gmail.com';
         fireEvent.change(typeInElem, { target: { value: test } });
         expect(typeInElem.value).toEqual(test);
     });
-});</code>
-        </deckgo-highlight-code>
+});
+</code></pre>
 <p>至於比較複雜的 async function api 的操作，記得要修改 babel config 執行非同步，以及安裝 @testing-library/jest-dom 執行 toHaveTextContent，讓斷言能更靈活。</p>
 <ul>
 <li>babel.config.js</li>
 </ul>
-<deckgo-highlight-code language="javascript"  >
-          <code slot="code">[
-    &#39;@babel/preset-env&#39;,
+<pre><code class="language-javascript">[
+    '@babel/preset-env',
     {
         targets: {
-            node: &#39;current&#39;
+            node: 'current'
         }
     }
-];</code>
-        </deckgo-highlight-code>
+];
+</code></pre>
 <p>Fetch 接受 url、axios (模擬 api call) 兩個 prop。Component 內用到 state、useCallback、建立 function fetchData，</p>
 <p>Component 預期狀態</p>
 <p>useEffect 會在元件 render 傳入 url 以及 apiCall function，並執行 click element 觸發 fetchData 調用 apiCall 更新 state。</p>
-<deckgo-highlight-code language="javascript"  >
-          <code slot="code">import React, { useState, useCallback } from &#39;react&#39;;
-import axios from &#39;axios&#39;;
-import { render, fireEvent, waitForElement } from &#39;@testing-library/react&#39;;
+<pre><code class="language-javascript">import React, { useState, useCallback } from 'react';
+import axios from 'axios';
+import { render, fireEvent, waitForElement } from '@testing-library/react';
 
-import &#39;@testing-library/jest-dom/extend-expect&#39;;
+import '@testing-library/jest-dom/extend-expect';
 
 function Fetch({ url, apiCall }) {
     const [data, setDate] = useState();
-    const fetchData = useCallback(async () =&gt; {
+    const fetchData = useCallback(async () => {
         const response = await apiCall.get(url);
         setDate(response.data);
     }, [apiCall, url]);
     return (
-        &lt;div&gt;
-            &lt;button onClick={fetchData}&gt;Fetch&lt;/button&gt;
-            {data ? &lt;span data-testid=&quot;fetch&quot;&gt;{data.test}&lt;/span&gt; : null}
-        &lt;/div&gt;
+        &#x3C;div>
+            &#x3C;button onClick={fetchData}>Fetch&#x3C;/button>
+            {data ? &#x3C;span data-testid="fetch">{data.test}&#x3C;/span> : null}
+        &#x3C;/div>
     );
 }
 
-test(&#39;Fetch makes an API call and displays the greeting&#39;, async () =&gt; {
+test('Fetch makes an API call and displays the greeting', async () => {
     const fakeAxios = {
-        get: jest.fn(() =&gt; Promise.resolve({ data: { test: &#39;hello world&#39; } }))
+        get: jest.fn(() => Promise.resolve({ data: { test: 'hello world' } }))
     };
-    const url = &#39;https://example.com/get-hello-there&#39;;
-    const { getByText, getByTestId } = render(&lt;Fetch url={url} apiCall={fakeAxios} /&gt;);
+    const url = 'https://example.com/get-hello-there';
+    const { getByText, getByTestId } = render(&#x3C;Fetch url={url} apiCall={fakeAxios} />);
     fireEvent.click(getByText(/fetch/i));
 
-    const fetchNode = await waitForElement(() =&gt; getByTestId(&#39;fetch&#39;));
+    const fetchNode = await waitForElement(() => getByTestId('fetch'));
 
-    expect(fetchNode).toHaveTextContent(&#39;hello world&#39;);
-});</code>
-        </deckgo-highlight-code>
+    expect(fetchNode).toHaveTextContent('hello world');
+});
+</code></pre>
 <p>更複雜例子也可以查閱作者在 codesandbox 寫的各種 sample code，</p>
-<p>作者範例: <a href="https://codesandbox.io/s/github/kentcdodds/react-testing-library-examples" title="kentcdodds codesandbox">kentcdodds codesandbox</a></p>
-<h2 id="心得" style="position:relative;"><a href="#%E5%BF%83%E5%BE%97" aria-label="心得 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>心得</h2>
+<p>作者範例: <a href="https://codesandbox.io/s/github/kentcdodds/react-testing-library-examples" title="kentcdodds codesandbox" target="_blank" rel="nofollow noopener noreferrer">kentcdodds codesandbox</a></p>
+<h2>心得</h2>
 <p>單元測試在我剛寫程式時，認為測試 case 是自己預期的，還主觀的認為沒什麼用，因為開發者所預期的測試一定充滿盲點，沒太大用處。但我在實際寫幾個測試後，發現最大的功用在於程式的 clear，當你在寫某個功能時，能更專注在預期判斷 input output，也有助於你思考 function 架構更清楚。</p>
 <p>你可能會說每次測試都沒抓到真實發生的 bug，這時就要換個角度思考，為什麼測試 case 沒測試到，是不是情境 case 太過簡單、理想，是不是需要再擴展更多 case。</p>
-<p>新專案不幸的重構了大概兩次左右…，還是最重要的資料更新，運氣很好的在改動中有在測試階段發現問題，我大概被抓到兩次問題，當時心想這個 testing case 的時間成本回本了 XDD，不斷讓我佩服 unit test 發揮做用。</p>
-<p>內文這些實際範例，寫起來最卡的部分在環境設定，非同步測試…、編譯錯誤等等，還有熟悉 selector 與斷言方式，不像是 enzyme 有 cherrio 支援類似 jquery 的語法，剩下就是各種使用測試技巧，這個寫更多案例後會更熟悉。後續有 react-testing-library 實際導入專案會再多寫相關內容。</p>
+<p>新專案不幸的重構了大概兩次左右...，還是最重要的資料更新，運氣很好的在改動中有在測試階段發現問題，我大概被抓到兩次問題，當時心想這個 testing case 的時間成本回本了 XDD，不斷讓我佩服 unit test 發揮做用。</p>
+<p>內文這些實際範例，寫起來最卡的部分在環境設定，非同步測試...、編譯錯誤等等，還有熟悉 selector 與斷言方式，不像是 enzyme 有 cherrio 支援類似 jquery 的語法，剩下就是各種使用測試技巧，這個寫更多案例後會更熟悉。後續有 react-testing-library 實際導入專案會再多寫相關內容。</p>
 <p>以上若有錯誤，歡迎留言提醒，</p>
 <p>感謝閱讀。</p></article><div></div><div class="tags-container"><div><a class="post-tag-link" href="/tags/react_js"><span class="tag-item">react.js</span></a>·</div><div><a class="post-tag-link" href="/tags/testing"><span class="tag-item">testing</span></a></div></div><div class="related-container"><div class="prev"><a rel="prev" href="/gacrossdomain/">← <!-- -->GA跨網域追蹤 google analytics cross-domain tracking</a></div><div class="next"><a rel="next" href="/reduxdispatch/">Redux multiple dispatch，batch redux-thunk<!-- --> →</a></div></div></div></div></div></main><footer class="site-foot">© <!-- -->2021<!-- --> <a href="/">Ian Chu</a> — Built with<!-- --> <a href="https://gatsbyjs.org" target="_blank" rel="noopener noreferrer">Gatsby</a></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/jestunit/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-8144845a3fa1d7a266b8.js"],"app":["/app-d5b9aca024349eae3e87.js"],"component---node-modules-gatsby-plugin-offline-app-shell-js":["/component---node-modules-gatsby-plugin-offline-app-shell-js-0f40d706ebc58d78c1f6.js"],"component---src-pages-404-js":["/component---src-pages-404-js-1d12d7fdd3929d81a1d8.js"],"component---src-pages-about-js":["/component---src-pages-about-js-ea85305dc80ba679d881.js"],"component---src-pages-index-js":["/component---src-pages-index-js-ed5690b1eeacea006b64.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-4cfecf0ed27fedd3abf5.js"],"component---src-templates-categories-js":["/component---src-templates-categories-js-149eefd974b7fbf9e011.js"],"component---src-templates-tags-js":["/component---src-templates-tags-js-f36dc90993ea16d12440.js"],"polyfills-dom":["/polyfills-dom-93064dd2f9b42a28a028.js"],"polyfills-core-js":["/polyfills-core-js-1de895427238521d7919.js"]};/*]]>*/</script><script src="/polyfill-8144845a3fa1d7a266b8.js" nomodule=""></script><script src="/component---src-templates-blog-post-js-4cfecf0ed27fedd3abf5.js" async=""></script><script src="/f166fee4b8a5e6cf51e927ad4aee62aa8efcc029-429e744feca01fa99340.js" async=""></script><script src="/styles-e9d24b1846c7d6eb9685.js" async=""></script><script src="/app-d5b9aca024349eae3e87.js" async=""></script><script src="/framework-58f863d6aa18c11a521f.js" async=""></script><script src="/webpack-runtime-2924526964d7634a027f.js" async=""></script></body></html>
