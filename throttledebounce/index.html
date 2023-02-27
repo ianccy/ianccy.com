@@ -123,14 +123,14 @@
 <ul>
 <li>問題發生流程</li>
 </ul>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">// input 輸入 `ba`
-fetch /query?name=ba
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// input 輸入 `ba`</span>
+fetch <span class="token operator">/</span>query<span class="token operator">?</span>name<span class="token operator">=</span>ba
 
-// input 輸入 `bana`
-fetch /query?name=bana
+<span class="token comment">// input 輸入 `bana`</span>
+fetch <span class="token operator">/</span>query<span class="token operator">?</span>name<span class="token operator">=</span>bana
 
-// input 輸入 `banana`
-fetch /query?name=banana</code></pre></div>
+<span class="token comment">// input 輸入 `banana`</span>
+fetch <span class="token operator">/</span>query<span class="token operator">?</span>name<span class="token operator">=</span>banana</code></pre></div>
 <h2 id="解決-api-response-相互覆蓋問題" style="position:relative;"><a href="#%E8%A7%A3%E6%B1%BA-api-response-%E7%9B%B8%E4%BA%92%E8%A6%86%E8%93%8B%E5%95%8F%E9%A1%8C" aria-label="解決 api response 相互覆蓋問題 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>解決 api response 相互覆蓋問題</h2>
 <p>講了問題當然就要來討論怎麼解決這些問題，有幾種做法，可以處理掉。</p>
 <p>第一種可以取消上一個 api request，fetch、axois 或是 xhrHttpRequest 都可以收回請求，同一隻 api 每次有新的請求，都嘗試去 cancel last request。</p>
@@ -139,19 +139,19 @@ fetch /query?name=banana</code></pre></div>
 <ul>
 <li>debounce</li>
 </ul>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">// setting debounce callback 1 sec
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// setting debounce callback 1 sec</span>
 
-| o------- 0.6 sec
-// 輸入 ba
-// 計時一秒後送出查詢
-                   o ------- 0.5 sec
-                   // 0.6 秒後持續輸入 na
-                   // 再度延長計時一秒
-                                    o ----------------- |
-                                    // 0.5 秒後持續輸入 na
-                                    // ( 完成輸入 banana)
-                                    // 再度延長計時一秒
-                                                        //  一秒後送出查詢！</code></pre></div>
+<span class="token operator">|</span> o<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span> <span class="token number">0.6</span> sec
+<span class="token comment">// 輸入 ba</span>
+<span class="token comment">// 計時一秒後送出查詢</span>
+                   o <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span> <span class="token number">0.5</span> sec
+                   <span class="token comment">// 0.6 秒後持續輸入 na</span>
+                   <span class="token comment">// 再度延長計時一秒</span>
+                                    o <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span> <span class="token operator">|</span>
+                                    <span class="token comment">// 0.5 秒後持續輸入 na</span>
+                                    <span class="token comment">// ( 完成輸入 banana)</span>
+                                    <span class="token comment">// 再度延長計時一秒</span>
+                                                        <span class="token comment">//  一秒後送出查詢！</span></code></pre></div>
 <p>至於用哪種方法是沒有絕對對錯，也可以都處理，兩者都有各自適合的場景，api cancel 可能會因為使用者打到一半，api 又剛好回傳很快，然後讓頁面有不必要的更新，debounce 就需要時間等待 callback，如果需求不予許等待時間，那就前者做法好一點，那這邊就先不要浪費太多時間去深究各自問題了。</p>
 <p>然後如果有其他方法歡迎留言跟我說，感恩。</p>
 <h2 id="實現-debounce" style="position:relative;"><a href="#%E5%AF%A6%E7%8F%BE-debounce" aria-label="實現 debounce permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>實現 debounce</h2>
@@ -161,48 +161,48 @@ fetch /query?name=banana</code></pre></div>
 <ul>
 <li>使用範例</li>
 </ul>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">const debounceSearch = debounce((queryStr)=>{
-    fetch(`https://jsonplaceholder.typicode.com/todos/1?${queryStr}`)
-}, 1000);
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> debounceSearch <span class="token operator">=</span> <span class="token function">debounce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">queryStr</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">{</span>
+    <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">https://jsonplaceholder.typicode.com/todos/1?</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>queryStr<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-function handleSearch(queryStr){
-    debounceSearch(queryStr);
-}</code></pre></div>
+<span class="token keyword">function</span> <span class="token function">handleSearch</span><span class="token punctuation">(</span><span class="token parameter">queryStr</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">debounceSearch</span><span class="token punctuation">(</span>queryStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
 <h3 id="開始實現-debounce" style="position:relative;"><a href="#%E9%96%8B%E5%A7%8B%E5%AF%A6%E7%8F%BE-debounce" aria-label="開始實現 debounce permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>開始實現 debounce</h3>
 <p>首先思考的是，這個時間，我們要怎麼透過每一次 callback 後，都延長計時，很直覺想到就是用 setTimeout，這也是 javascript 僅能用的 timer，大概思路就是 set 一個 timer，如果今天有再度被調用的話，就 clear timer，重新再來計時一次，於是，我們就這樣就解決了最魔法的部分了，</p>
 <ul>
 <li>handle time</li>
 </ul>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">function debounce(x, time){
-    const timer = setTimeout(function(){}, time);
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">debounce</span><span class="token punctuation">(</span><span class="token parameter">x<span class="token punctuation">,</span> time</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">const</span> timer <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> time<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    clearTimeout(timer);
-}</code></pre></div>
+    <span class="token function">clearTimeout</span><span class="token punctuation">(</span>timer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>接下來就是處理 callback function 的部分，這邊比較麻煩應該就是要怎麼傳遞參數進去，就直接利用 return function，再透過這邊帶入參數。</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">function debounce(callback, time){
-    return function(...args) {
-        setTimeout(function(){
-            callback(...args);
-        }, time);
-    }</code></pre></div>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">debounce</span><span class="token punctuation">(</span><span class="token parameter">callback<span class="token punctuation">,</span> time</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token function">callback</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> time<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span></code></pre></div>
 <p>我們就快大功告成了，算是完成核心兩個 input callback 以及 time 的部分，剩下就要處理 clearTimer 的時機點。</p>
 <p>首先一定要在執行 callback 的時候順便 clearTimer，所以勢必得塞進去 return function 執行緒裡面，那比較困擾的是，要怎樣才能清除上一個 timer，答案就是依賴 closure。</p>
 <p>我們先建立一個變數 memoryTimer，寫在外層讓他的記憶體位置一直被保留著，並在執行過一次 callback 後，就讓它 reassign 成為 timer， <code class="language-text">let memoryTimer;</code> 代表會是 undefined falsely condition，那執行過後再判斷是否為 true，如果為 true 就把 timer 清除掉，就可以收回上一個 setTimeout 了。</p>
 <ul>
 <li>完成 debounce</li>
 </ul>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">function debounce(callback, time){
-    // closure will let memoryTimer memory position
-    let memoryTimer;
-    return function(...args) {
-        if(memoryTimer){
-            clearTimeout(timer);
-        }
-        memoryTimer = setTimeout(function(){
-            callback(...args);
-        }, time);
-    }
-}</code></pre></div>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">debounce</span><span class="token punctuation">(</span><span class="token parameter">callback<span class="token punctuation">,</span> time</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// closure will let memoryTimer memory position</span>
+    <span class="token keyword">let</span> memoryTimer<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>memoryTimer<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token function">clearTimeout</span><span class="token punctuation">(</span>timer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        memoryTimer <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token function">callback</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> time<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
 <h2 id="實現-throttle" style="position:relative;"><a href="#%E5%AF%A6%E7%8F%BE-throttle" aria-label="實現 throttle permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>實現 throttle</h2>
 <p>都已經完成 debounce 了，就來順手寫一下它的好兄弟 throttle 吧 XDD。throttle 被稱之為節流閥，在指定的時間內，只能被一次性的 callback，像是保護 callback 在一定時間內只允許執行一次。</p>
 <h3 id="throttle-的功能" style="position:relative;"><a href="#throttle-%E7%9A%84%E5%8A%9F%E8%83%BD" aria-label="throttle 的功能 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>throttle 的功能</h3>
@@ -211,31 +211,31 @@ function handleSearch(queryStr){
 <p>一樣先想一下 throttle 的功能，聽起來跟 debounce 87% 像，就只要注意要怎樣在時間內卡住 callback 不要再被執行。</p>
 <p>就反向思考 debounce 來看，debounce 是不斷延長 timer，throttle 反而是依賴 timer，卡住新的 callback，於是我們就一樣看 timer 有沒有存在，存在就完全不做事情，於是就把 condition 換成 <code class="language-text">if(!memoryTimer){</code> 來執行 setTimeout。</p>
 <p>這邊我是直接 copy paste debounce code，就不贅述 input 那些細節了，邏輯都是一樣的。</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">function throttle(callback, time){
-    // closure will let memoryTimer memory position
-    let memoryTimer;
-    return function(...args) {
-        if(!memoryTimer){
-            memoryTimer = setTimeout(function(){
-                callback(...args);
-            }, time);
-        }
-    }
-}</code></pre></div>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">throttle</span><span class="token punctuation">(</span><span class="token parameter">callback<span class="token punctuation">,</span> time</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// closure will let memoryTimer memory position</span>
+    <span class="token keyword">let</span> memoryTimer<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>memoryTimer<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            memoryTimer <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token function">callback</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span> time<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>但這邊就會發現另一個問題了，<code class="language-text">memoryTimer</code> 在 setTimeout 執行完之後，還是依舊會是 timer，就會導致直接卡死沒辦法繼續執行，那就想辦法讓<code class="language-text">memoryTimer</code> 可以再度變成 falsely 的狀態，就可以再度重複使用了。</p>
 <p>ps. 這邊我原本是寫 <code class="language-text">clearTimeout(memoryTimer);</code> ，以為可以就這樣讓 <code class="language-text">memoryTimer</code> 變成 falsely，結果是無法，他依舊會是一個 timer。</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">function throttle(callback, time){
-    // closure will let memoryTimer memory position
-    let memoryTimer;
-    return function(...args) {
-        if(!memoryTimer){
-            memoryTimer = setTimeout(function(){
-                callback(...args);
-                memoryTimer = undefined;
-            }, time);
-        }
-    }
-}</code></pre></div>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">throttle</span><span class="token punctuation">(</span><span class="token parameter">callback<span class="token punctuation">,</span> time</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// closure will let memoryTimer memory position</span>
+    <span class="token keyword">let</span> memoryTimer<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>memoryTimer<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            memoryTimer <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token function">callback</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                memoryTimer <span class="token operator">=</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span> time<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
 <h2 id="心得" style="position:relative;"><a href="#%E5%BF%83%E5%BE%97" aria-label="心得 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>心得</h2>
 <p>以下心得都跟 debounce throttle 無關，純屬個人 murmur。</p>
 <p>這篇文章其實是很久很久以前寫到一半的，今天才一口氣補完的。因緣際會在某個面試場合，被面試官稱讚 blog 內容，鼓勵我可以繼續寫文章，說實在當下滿感人的，對方還提出滿多篇內容跟我討論研究，還給我一些更多的解法，真痛哭流涕。</p>

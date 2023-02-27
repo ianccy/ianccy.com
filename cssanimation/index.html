@@ -83,15 +83,15 @@
 <div class="gatsby-resp-iframe-wrapper" style="padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden; margin-bottom: 1.0725rem" > <iframe src="https://www.youtube.com/embed/_SzGQkI-IwM?start=19" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" style=" position: absolute; top: 0; left: 0; width: 100%; height: 100%; "></iframe> </div>
 <h2 id="避免使用過於負擔的-css-style" style="position:relative;"><a href="#%E9%81%BF%E5%85%8D%E4%BD%BF%E7%94%A8%E9%81%8E%E6%96%BC%E8%B2%A0%E6%93%94%E7%9A%84-css-style" aria-label="避免使用過於負擔的 css style permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>避免使用過於負擔的 css style</h2>
 <p>一個頁面效果的更新，通常會有五個 thread， javascript 觸發變化，接下來會在執行 Style 計算，後面會執行 Layout 計算，再來執行 Paint 收集需要繪製的部分，最後會執行 Composite，如果前面有需要更新 paint，都收集起來更新到畫面上。</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">JavaScript: 利用 javasScript 執行促使畫面產生變化，例如 onClick slide，或是拖拉 element
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token literal-property property">JavaScript</span><span class="token operator">:</span> 利用 javasScript 執行促使畫面產生變化，例如 onClick slide，或是拖拉 element
 
-style: 透過 browser selector ( 例如 .article-content p )，計算出 element 最後應用的 css style。
+<span class="token literal-property property">style</span><span class="token operator">:</span> 透過 browser <span class="token function">selector</span> <span class="token punctuation">(</span> 例如 <span class="token punctuation">.</span>article<span class="token operator">-</span>content p <span class="token punctuation">)</span>，計算出 element 最後應用的 css style。
 
-Layout: 計算 element 因為 style 套用，而可能產生的位移，並且找出相互影響的 element，或是 dom tree 變化等等。
+<span class="token literal-property property">Layout</span><span class="token operator">:</span> 計算 element 因為 style 套用，而可能產生的位移，並且找出相互影響的 element，或是 dom tree 變化等等。
 
-Paint: 搜集 element 所應用的 style，並且運算出 style 結果。
+<span class="token literal-property property">Paint</span><span class="token operator">:</span> 搜集 element 所應用的 style，並且運算出 style 結果。
 
-Composite: 將各個 layer 做組合，並渲染更新到畫面上。</code></pre></div>
+<span class="token literal-property property">Composite</span><span class="token operator">:</span> 將各個 layer 做組合，並渲染更新到畫面上。</code></pre></div>
 <p>google 教學: <a href="https://developers.google.com/web/fundamentals/performance/rendering" title="performance rendering">performance rendering</a></p>
 <p><figure class="gatsby-resp-image-figure" style="margin: 2vw 0;">
     <span

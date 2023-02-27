@@ -68,31 +68,31 @@
 <ul>
 <li>useEffect 參數</li>
 </ul>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">useEffect(
-  callback();
-  return () => cleanCallback();
-,[arg1, ....])
-// dependency array, dependency array is depending on shallow equal compare</code></pre></div>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token function">useEffect</span><span class="token punctuation">(</span>
+  <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">cleanCallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">,</span><span class="token punctuation">[</span>arg1<span class="token punctuation">,</span> <span class="token operator">...</span><span class="token punctuation">.</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment">// dependency array, dependency array is depending on shallow equal compare</span></code></pre></div>
 <ul>
 <li>useEffect 執行順序</li>
 </ul>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">* React mounts the component.
-    * Effect effects are created
-* React update the component. if arg1 compared the previous is true.
-    * Effect cleanCallback code runs and callback runs.
-* React unmounts the component.
-    * Effect cleanCallback code runs.</code></pre></div>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token operator">*</span> React mounts the component<span class="token punctuation">.</span>
+    <span class="token operator">*</span> Effect effects are created
+<span class="token operator">*</span> React update the component<span class="token punctuation">.</span> <span class="token keyword">if</span> arg1 compared the previous is <span class="token boolean">true</span><span class="token punctuation">.</span>
+    <span class="token operator">*</span> Effect cleanCallback code runs and callback runs<span class="token punctuation">.</span>
+<span class="token operator">*</span> React unmounts the component<span class="token punctuation">.</span>
+    <span class="token operator">*</span> Effect cleanCallback code runs<span class="token punctuation">.</span></code></pre></div>
 <h2 id="react-18-simulates-useeffect" style="position:relative;"><a href="#react-18-simulates-useeffect" aria-label="react 18 simulates useeffect permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>React 18 simulates useEffect</h2>
 <p>順道提一開始的問題，為什麼 useEffect 會執行兩次吧，下方是 React useEffect 在 React 18 strict mode 下，useEffect 是如何被調用的。</p>
 <ul>
 <li>Component render step on strict mode react 18</li>
 </ul>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">* React mounts the component.
-    * Effect effects are created.
-* React simulates effects being destroyed on a mounted component.
-    * Effects are destroyed.
-* React simulates effects being re-created on a mounted component.
-    * Effect setup code runs</code></pre></div>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token operator">*</span> React mounts the component<span class="token punctuation">.</span>
+    <span class="token operator">*</span> Effect effects are created<span class="token punctuation">.</span>
+<span class="token operator">*</span> React simulates effects being destroyed on a mounted component<span class="token punctuation">.</span>
+    <span class="token operator">*</span> Effects are destroyed<span class="token punctuation">.</span>
+<span class="token operator">*</span> React simulates effects being re<span class="token operator">-</span>created on a mounted component<span class="token punctuation">.</span>
+    <span class="token operator">*</span> Effect setup code runs</code></pre></div>
 <p>這個 flow 只會在 development 下開啟 strict mode 執行，react 希望透過快速的執行 useEffect cleanup，並且 重新使用新的 state，這是為了確保我們有正確的回收 component useEffect，</p>
 <p>React Document: <a href="https://reactjs.org/docs/strict-mode.html#ensuring-reusable-state" title="ensuring-reusable-state">ensuring-reusable-state</a></p>
 <p>React github issue: <a href="https://github.com/facebook/react/issues/24502#issuecomment-1118867879" title="dan abramov reply">dan abramov reply</a></p>
@@ -103,15 +103,15 @@
 <ul>
 <li>unmounted and stop setState</li>
 </ul>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">useEffect(() => {
-  let stop = false;
-  fetch(url).then(res => {
-    if (!stop) {
-      setList(res);
-    }
-  })
-  return () => { stop = true }
-}, []);</code></pre></div>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> stop <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  <span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>stop<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">setList</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span> stop <span class="token operator">=</span> <span class="token boolean">true</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>但我個人是認為，我自己是會視而不見，因為在開發時，就應該完全清楚知道整個的 data flow、component unmounted 的時機點，以及 state 是會在什麼時機被回收的。開發上要注意重複 callback 會不會有問題即可。</p>
 <p><figure class="gatsby-resp-image-figure" style="margin: 2vw 0;">
     <span
@@ -163,71 +163,71 @@
 <ul>
 <li>you-might-not-need-an-effect recaps (中文是我翻譯的，很直翻…)</li>
 </ul>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">- If you can calculate something during render, you don’t need an Effect.
-( 如果你可以在 render 時，計算出某些值，那你不需要 Effect。 )
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token operator">-</span> If you can calculate something during render<span class="token punctuation">,</span> you don’t need an Effect<span class="token punctuation">.</span>
+<span class="token punctuation">(</span> 如果你可以在 render 時，計算出某些值，那你不需要 Effect。 <span class="token punctuation">)</span>
 
-- To cache expensive calculations, add useMemo instead of useEffect.
-( 當你需要快取耗費效能的計算，請使用 useMemo 而不是 useEffect )
+<span class="token operator">-</span> To cache expensive calculations<span class="token punctuation">,</span> add useMemo instead <span class="token keyword">of</span> useEffect<span class="token punctuation">.</span>
+<span class="token punctuation">(</span> 當你需要快取耗費效能的計算，請使用 useMemo 而不是 useEffect <span class="token punctuation">)</span>
 
-- To reset the state of an entire component tree, pass a different key to it.
-( 要重置這個 component tree 中的 state，傳遞 key 到 component 來達到 )
+<span class="token operator">-</span> To reset the state <span class="token keyword">of</span> an entire component tree<span class="token punctuation">,</span> pass a different key to it<span class="token punctuation">.</span>
+<span class="token punctuation">(</span> 要重置這個 component tree 中的 state，傳遞 key 到 component 來達到 <span class="token punctuation">)</span>
 
-- To reset a particular bit of state in response to a prop change, set it during rendering.
-( 要重置特定的 prop 改變來自 response 特定的 state，那就設定這個 state 在 rendering 時。 )
+<span class="token operator">-</span> To reset a particular bit <span class="token keyword">of</span> state <span class="token keyword">in</span> response to a prop change<span class="token punctuation">,</span> <span class="token keyword">set</span> it during rendering<span class="token punctuation">.</span>
+<span class="token punctuation">(</span> 要重置特定的 prop 改變來自 response 特定的 state，那就設定這個 state 在 rendering 時。 <span class="token punctuation">)</span>
 
-- Code that needs to run because a component was displayed should be in Effects, the rest should be in events.
-( code 需要執行，是因為來自顯示時的副作用，那會需要用 Effect，其餘都會是在 event。 )
+<span class="token operator">-</span> Code that needs to run because a component was displayed should be <span class="token keyword">in</span> Effects<span class="token punctuation">,</span> the rest should be <span class="token keyword">in</span> events<span class="token punctuation">.</span>
+<span class="token punctuation">(</span> code 需要執行，是因為來自顯示時的副作用，那會需要用 Effect，其餘都會是在 event。 <span class="token punctuation">)</span>
 
-- If you need to update the state of several components, it’s better to do it during a single event.
-( 如果需要更新 state 是在各個不同的 components 時，比較好的做法是在單一 event 處理 )
+<span class="token operator">-</span> If you need to update the state <span class="token keyword">of</span> several components<span class="token punctuation">,</span> it’s better to <span class="token keyword">do</span> it during a single event<span class="token punctuation">.</span>
+<span class="token punctuation">(</span> 如果需要更新 state 是在各個不同的 components 時，比較好的做法是在單一 event 處理 <span class="token punctuation">)</span>
 
-- Whenever you try to synchronize state variables in different components, consider lifting state up.
-( 不論你是不是要嘗試在不同 components 同步 state，考慮把 state 拉到上層。 )
+<span class="token operator">-</span> Whenever you <span class="token keyword">try</span> to synchronize state variables <span class="token keyword">in</span> different components<span class="token punctuation">,</span> consider lifting state up<span class="token punctuation">.</span>
+<span class="token punctuation">(</span> 不論你是不是要嘗試在不同 components 同步 state，考慮把 state 拉到上層。 <span class="token punctuation">)</span>
 
-- You can fetch data with Effects, but you need to implement cleanup to avoid race conditions.
-( 你可以使用 useEffect fetch 資料，但你需要處理回收邏輯，來避免 race condition。 )</code></pre></div>
+<span class="token operator">-</span> You can fetch data <span class="token keyword">with</span> Effects<span class="token punctuation">,</span> but you need to implement cleanup to avoid race conditions<span class="token punctuation">.</span>
+<span class="token punctuation">(</span> 你可以使用 useEffect fetch 資料，但你需要處理回收邏輯，來避免 race condition。 <span class="token punctuation">)</span></code></pre></div>
 <p>我自己收斂的結論是，頁面的 render event 皆用 useEffect，類似 <code class="language-text">ga track</code>、 <code class="language-text">websocket</code>，剩下就盡量使用 event 處理，當你發現 event 不符合 DRY 邏輯，可能就是要搬移到 useEffect。</p>
 <p>文中很多在強調請先不要用 useEffect、不過度優化效能，真的有出現問題才回頭考慮用 useEffect。</p>
 <ul>
 <li>unnecessary Effect</li>
 </ul>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">function Form() {
-  const [firstName, setFirstName] = useState('Taylor');
-  const [lastName, setLastName] = useState('Swift');
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">Form</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>firstName<span class="token punctuation">,</span> setFirstName<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token string">'Taylor'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>lastName<span class="token punctuation">,</span> setLastName<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token string">'Swift'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  // Avoid: redundant state and unnecessary Effect
-  const [fullName, setFullName] = useState('');
-  useEffect(() => {
-    setFullName(firstName + ' ' + lastName);
-  }, [firstName, lastName]);
-  // ...
-}</code></pre></div>
+  <span class="token comment">// Avoid: redundant state and unnecessary Effect</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>fullName<span class="token punctuation">,</span> setFullName<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token function">setFullName</span><span class="token punctuation">(</span>firstName <span class="token operator">+</span> <span class="token string">' '</span> <span class="token operator">+</span> lastName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>firstName<span class="token punctuation">,</span> lastName<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span></code></pre></div>
 <h2 id="use-case-typing-search-input" style="position:relative;"><a href="#use-case-typing-search-input" aria-label="use case typing search input permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Use case: typing search input</h2>
 <p>內文我覺得最棒的例子，是一個關於 <code class="language-text">page</code>、<code class="language-text">search</code> 的更新，我們直接看 sample code 比較快。</p>
 <ul>
 <li>useEffect handle page and query</li>
 </ul>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">function SearchResults({ query }) {
-  const [results, setResults] = useState([]);
-  const [page, setPage] = useState(1);
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">SearchResults</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> query <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>results<span class="token punctuation">,</span> setResults<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>page<span class="token punctuation">,</span> setPage<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  useEffect(() => {
-    let ignore = false;
-    fetchResults(query, page).then(json => {
-      if (!ignore) {
-        setResults(json);
-      }
-    });
-    return () => {
-      ignore = true;
-    };
-  }, [query, page]);
+  <span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> ignore <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token function">fetchResults</span><span class="token punctuation">(</span>query<span class="token punctuation">,</span> page<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">json</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>ignore<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">setResults</span><span class="token punctuation">(</span>json<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+      ignore <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>query<span class="token punctuation">,</span> page<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  function handleNextPageClick() {
-    setPage(page + 1);
-  }
-  // ...
-}</code></pre></div>
+  <span class="token keyword">function</span> <span class="token function">handleNextPageClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">setPage</span><span class="token punctuation">(</span>page <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>假設你只用 event 處理更新列表的話，你在 載入頁面、上一頁、下一頁，一樣也要用 useEffect 處理 fetch 資料，還可以在這邊針對每次的 fetch response callback 做控制。</p>
 <p>為什麼我們會需要 ignore 來判斷 setResult，這是因為有可能會出現 race condition 的問題，當你今天連續的更新 query，</p>
 <p>假設 query 可以透過 input 更新，當快速的輸入 input，就會觸發多次 fetch，假設今天前面的請求比後面還慢，那就代表我們 前面的 setState 執行會慢於後面的，就導致資料對不上當前 input 的 query。</p>
@@ -235,13 +235,13 @@
 <ul>
 <li>race condition ( if user want to query apple )</li>
 </ul>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">1. typing `app`.
-2. fetch api with `app` and waiting api response.
-3. continue typing `apple`.
-4. fetch api with `apple` and waiting api response.Somehow fetch api `apple` response faster than before.
-6. setState as `apple` response.
-7. fetch api `app` response.
-8. setState as app response.</code></pre></div>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token number">1.</span> typing <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">app</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">.</span>
+<span class="token number">2.</span> fetch api <span class="token keyword">with</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">app</span><span class="token template-punctuation string">`</span></span> and waiting api response<span class="token punctuation">.</span>
+<span class="token number">3.</span> <span class="token keyword">continue</span> typing <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">apple</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">.</span>
+<span class="token number">4.</span> fetch api <span class="token keyword">with</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">apple</span><span class="token template-punctuation string">`</span></span> and waiting api response<span class="token punctuation">.</span>Somehow fetch api <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">apple</span><span class="token template-punctuation string">`</span></span> response faster than before<span class="token punctuation">.</span>
+<span class="token number">6.</span> setState <span class="token keyword">as</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">apple</span><span class="token template-punctuation string">`</span></span> response<span class="token punctuation">.</span>
+<span class="token number">7.</span> fetch api <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">app</span><span class="token template-punctuation string">`</span></span> response<span class="token punctuation">.</span>
+<span class="token number">8.</span> setState <span class="token keyword">as</span> app response<span class="token punctuation">.</span></code></pre></div>
 <h2 id="結論" style="position:relative;"><a href="#%E7%B5%90%E8%AB%96" aria-label="結論 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>結論</h2>
 <p>開發時不要預想用 useEffect 處理，但如果 code 難以閱讀、管理，或是要避免每次 update 都執行的 function，那才來考慮使用 useEffect，如果還是聽不懂我在說啥毀，可以回上面的 <a href="/useeffectintro/#when-we-should-use-useeffect" title="recap">recap</a> 再看一遍，又或是把 React 18 的文章看一看吧。</p>
 <h2 id="心得" style="position:relative;"><a href="#%E5%BF%83%E5%BE%97" aria-label="心得 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>心得</h2>
